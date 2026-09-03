@@ -17,6 +17,8 @@ import { WeatherBadge } from '@/components/events/WeatherBadge';
 import { SaveButton } from '@/components/events/SaveButton';
 import { directionsHref } from '@/components/events/EventActions';
 import { SessionProgress } from '@/components/f1/SessionProgress';
+import { WatchButton } from '@/components/f1/WatchButton';
+import { HOUR_MS } from '@/utils/dates';
 
 // Circuit geometry ships with the F1 chunk; load it lazily so Home's first paint stays small.
 const CircuitOutline = lazy(() => import('@/components/f1/CircuitOutline').then((m) => ({ default: m.CircuitOutline })));
@@ -40,6 +42,7 @@ export function NextUp({ item, now, weather }: NextUpProps) {
     const { race, session } = item;
     const watch = getWatchability(item.start);
     const meta = getCircuitMeta(race.circuitId, race.country);
+    const imminent = !live && item.start.getTime() - now.getTime() < 2 * HOUR_MS;
     return (
       <section className="nextup" aria-labelledby="nextup-title">
         <div className="nextup__main">
@@ -89,6 +92,7 @@ export function NextUp({ item, now, weather }: NextUpProps) {
           <StatusPill tone={watch.tone} label={watch.label} shortLabel={watch.shortLabel} title={watch.note} />
         </div>
         <div className="nextup__actions">
+          {(live || imminent) && <WatchButton live={live} size="sm" showTiming={false} />}
           <Link to="/f1" className="btn btn--sm">
             F1 weekend
           </Link>

@@ -6,6 +6,8 @@ import { formatMonthDay, formatTime, formatWeekday, localTimeZoneName } from '@/
 import { CircuitOutline, getCircuitRecord } from './CircuitOutline';
 import { Countdown } from './Countdown';
 import { SessionProgress } from './SessionProgress';
+import { WatchButton } from './WatchButton';
+import { HOUR_MS } from '@/utils/dates';
 import { Flag } from './Flag';
 import { WeatherBadge } from '@/components/events/WeatherBadge';
 
@@ -28,6 +30,7 @@ export function NextGrandPrix({ race, now, status, totalRounds }: NextGrandPrixP
   const raceStart = new Date(race.raceStart);
   const current = findCurrentSession(race, now);
   const live = current ? isSessionLive(current, now) : false;
+  const imminent = !!current && !live && new Date(current.start).getTime() - now.getTime() < 2 * HOUR_MS;
   const raceWeather = usePointWeather(
     race.latitude != null && race.longitude != null ? { latitude: race.latitude, longitude: race.longitude } : undefined,
     raceStart,
@@ -97,6 +100,11 @@ export function NextGrandPrix({ race, now, status, totalRounds }: NextGrandPrixP
               </>
             ) : (
               <Countdown target={new Date(current.start)} now={now} size="md" />
+            )}
+            {(live || imminent) && (
+              <div className="btn-row" style={{ marginTop: 8 }}>
+                <WatchButton live={live} />
+              </div>
             )}
           </div>
         )}

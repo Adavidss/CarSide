@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { appConfig } from '@/config/appConfig';
 import { useSettings } from '@/hooks/useSettings';
 import { useSaved } from '@/hooks/useSaved';
-import type { Density, ThemePreference } from '@/models/settings';
+import type { Density, ThemePreference, WatchProviderId } from '@/models/settings';
+import { WATCH_PROVIDERS, getWatchProvider } from '@/services/f1/watch';
 import { clearAllCaches } from '@/services/cache';
 import { providers } from '@/services/events/registry';
 import { curatedFeed } from '@/services/events/providers/curated';
@@ -12,6 +13,7 @@ import { Segmented } from '@/components/ui/Segmented';
 import { Switch } from '@/components/ui/Switch';
 
 const RADIUS_OPTIONS = appConfig.radiusOptions.map((miles) => ({ value: miles, label: `${miles} mi` }));
+const WATCH_OPTIONS: Array<{ value: WatchProviderId; label: string }> = WATCH_PROVIDERS.map((p) => ({ value: p.id, label: p.name }));
 const DENSITY_OPTIONS: Array<{ value: Density; label: string }> = [
   { value: 'comfortable', label: 'Comfortable' },
   { value: 'compact', label: 'Compact' },
@@ -23,7 +25,8 @@ const THEME_OPTIONS: Array<{ value: ThemePreference; label: string }> = [
 ];
 
 export function SettingsPage() {
-  const { settings, setRadius, setAvoidSpoilers, setTheme, setDensity, resetSettings } = useSettings();
+  const { settings, setRadius, setAvoidSpoilers, setTheme, setDensity, setWatch, resetSettings } = useSettings();
+  const watchProvider = getWatchProvider(settings.watch.provider);
   const { saved } = useSaved();
   const [cleared, setCleared] = useState<number | null>(null);
 
@@ -60,6 +63,34 @@ export function SettingsPage() {
           <Switch checked={settings.avoidSpoilers} onChange={setAvoidSpoilers} label="Avoid spoilers" describedBy="spoiler-hint" />
           <p id="spoiler-hint" className="settings__hint">
             Hides race results and championship standings until you tap Reveal. Session times and schedules stay visible.
+          </p>
+          <div>
+            <p className="label" style={{ marginBottom: 6 }}>
+              Where you watch
+            </p>
+            <div className="filter-scroll">
+              <Segmented options={WATCH_OPTIONS} value={settings.watch.provider} onChange={(provider) => setWatch({ ...settings.watch, provider })} ariaLabel="Where you watch" size="sm" />
+            </div>
+          </div>
+          {settings.watch.provider === 'custom' && (
+            <div className="field">
+              <label htmlFor="watch-url" className="label">
+                Stream link
+              </label>
+              <input
+                id="watch-url"
+                className="input"
+                type="url"
+                inputMode="url"
+                placeholder="https://…"
+                value={settings.watch.customUrl ?? ''}
+                onChange={(e) => setWatch({ ...settings.watch, customUrl: e.target.value })}
+              />
+            </div>
+          )}
+          <p className="settings__hint">
+            {watchProvider.note} When a session is live or about to start, Home and the F1 page show a one-tap Watch button that opens it. Race
+            video is exclusively licensed, so CarSide links to your service rather than embedding a stream.
           </p>
         </div>
       </section>
@@ -112,7 +143,7 @@ export function SettingsPage() {
           </div>
           <div className="settings__row">
             <span>
-              Reset location, radius, spoiler, density and appearance settings
+              Reset location, radius, spoiler, watch, density and appearance settings
               <span className="settings__hint" style={{ display: 'block' }}>
                 Saved events ({saved.length}) are kept.
               </span>
