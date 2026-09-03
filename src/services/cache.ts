@@ -78,7 +78,7 @@ export interface LoadOptions<T> {
   ttlMs: number;
   fetcher: () => Promise<T>;
   /** Bundled data used only when there is neither fresh nor stale cache. */
-  fallback?: () => T | undefined;
+  fallback?: () => T | undefined | Promise<T | undefined>;
   /** Refuse stale cache older than this (default: unlimited). */
   staleMaxAgeMs?: number;
 }
@@ -101,7 +101,7 @@ export async function loadWithCache<T>(options: LoadOptions<T>): Promise<Loaded<
     if (cached && now - cached.savedAt < staleMaxAgeMs) {
       return { data: cached.value, updatedAt: cached.savedAt, source: 'stale-cache', stale: true, error: message };
     }
-    const fallbackData = fallback?.();
+    const fallbackData = await fallback?.();
     if (fallbackData !== undefined) {
       return { data: fallbackData, updatedAt: null, source: 'fallback', stale: true, error: message };
     }

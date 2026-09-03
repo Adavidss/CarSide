@@ -6,7 +6,7 @@ import type { ThemePreference } from '@/models/settings';
 import { clearAllCaches } from '@/services/cache';
 import { providers } from '@/services/events/registry';
 import { curatedFeed } from '@/services/events/providers/curated';
-import { circuitAttribution } from '@/components/f1/CircuitOutline';
+import { circuitAttribution } from '@/services/f1/attribution';
 import { LocationForm } from '@/components/location/LocationForm';
 import { Segmented } from '@/components/ui/Segmented';
 import { Switch } from '@/components/ui/Switch';

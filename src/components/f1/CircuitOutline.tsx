@@ -45,5 +45,3 @@ export function CircuitOutline({ geoId, className, pad = 6 }: CircuitOutlineProp
     </svg>
   );
 }
-
-export const circuitAttribution = circuitData.attribution;

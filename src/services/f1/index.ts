@@ -15,7 +15,6 @@ import type {
 } from '@/models/f1';
 import { HOUR_MS } from '@/utils/dates';
 import { loadWithCache, type Loaded } from '@/services/cache';
-import fallbackSchedule from '@/data/f1-schedule-fallback.json';
 import {
   fetchConstructorStandings,
   fetchDriverStandings,
@@ -27,9 +26,11 @@ import { normalizeRace } from './normalize';
 
 const SEASON = appConfig.f1.season;
 
-function bundledSchedule(): F1Race[] | undefined {
+/** Loaded on demand — the snapshot only matters when the API is down and nothing is cached. */
+async function bundledSchedule(): Promise<F1Race[] | undefined> {
   const currentYear = String(new Date().getFullYear());
   const targetSeason = SEASON === 'current' ? currentYear : SEASON;
+  const { default: fallbackSchedule } = await import('@/data/f1-schedule-fallback.json');
   if (fallbackSchedule.season !== targetSeason) return undefined;
   return (fallbackSchedule.races as JolpicaRace[]).map(normalizeRace);
 }

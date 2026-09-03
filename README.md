@@ -96,7 +96,7 @@ interface EventProvider {
 - Results are normalised to `CarEvent`, de-duplicated (`dedupe.ts`: same day + matching title + within 3 miles; a dated entry beats an occurrence generated from a recurrence rule), distance-annotated with the Haversine formula, and filtered by radius.
 - Providers shipped today:
   - **`curated`** — `src/data/events.json`, bundled at build time.
-  - **`feed:<host>`** — the same JSON schema fetched at runtime from URLs listed in `appConfig.eventFeeds` (e.g. a raw GitHub or Gist URL you can edit without redeploying). Empty by default.
+  - **`feed:<host>`** — the same JSON schema fetched at runtime from the feeds listed in `appConfig.eventFeeds`. CarSide ships with one: a GitHub Gist you can edit to publish events without redeploying (see [Adding events without redeploying](#adding-events-without-redeploying-gist-feed)).
 - Adding a real API later means one new file under `src/services/events/providers/` and one line in the registry. The UI does not change.
 
 **Limits to be clear about:** the list is only as complete as its curation; recurring meets follow the organiser's *usual* pattern and can be cancelled or moved (rows are marked *Recurring · confirm date*); distances are straight-line; race-night start times are shown as *TBA* when the track hasn't published them. Every listing links to its source so you can check before driving out.
@@ -168,6 +168,10 @@ Field notes:
 - A dated entry with the same title on the same day as a recurring rule replaces that occurrence — that's how the themed Morrisville dates carry their own subtitle.
 - Bump `"updated"` at the top of the file; it's shown on the Nearby page.
 
+### Adding events without redeploying (Gist feed)
+
+`appConfig.eventFeeds` points at a GitHub Gist — [carside-events.json](https://gist.github.com/Adavidss/26a1057481009287a63eb96bd44cc96d) — that uses the same schema as `src/data/events.json`. Edit the Gist, save, and the new entries show up in the app within about an hour (feeds are cached for 60 minutes and the Gist's raw URL always serves the latest revision). Entries that duplicate a bundled event (same title, same day, within 3 miles) are merged, so it is safe to list an event in both places. To use a different feed, change the entry in `src/config/appConfig.ts`; any host that sends CORS headers works, and raw GitHub URLs and Gists do.
+
 ---
 
 ## Changing defaults
@@ -178,7 +182,7 @@ Everything lives in [`src/config/appConfig.ts`](src/config/appConfig.ts):
 defaultLocation: { label: 'Morrisville, NC 27560', latitude: 35.8235, longitude: -78.8256 },
 defaultRadiusMiles: 50,
 radiusOptions: [10, 25, 50, 75, 100, 150],
-eventFeeds: [],          // extra curated JSON feed URLs (must allow CORS)
+eventFeeds: [{ name: 'CarSide Gist feed', url: 'https://gist.githubusercontent.com/…/raw/carside-events.json' }],
 f1: { season: 'current' },
 ```
 
@@ -243,7 +247,7 @@ Concretely, the system in `src/styles/tokens.css` is:
 ## Accessibility & performance notes
 
 - Semantic landmarks, skip link, labelled controls, `aria-pressed`/`role="switch"` on toggles, `role="timer"` countdowns with readable labels, visible `:focus-visible` rings, 44 px touch targets in the mobile nav, and `prefers-reduced-motion` support.
-- One JS bundle (~125 KB gzipped, React + Router included), self-hosted latin-subset fonts, no image assets, network calls batched and cached in `localStorage`, and a service worker for the app shell.
+- A ~100 KB gzipped main bundle (React + Router + Home and Nearby) with the F1, Saved, Settings and event-detail screens code-split and prefetched once the app is idle; self-hosted latin-subset fonts, no image assets, network calls batched and cached in `localStorage`, and a service worker for the app shell.
 
 ---
 

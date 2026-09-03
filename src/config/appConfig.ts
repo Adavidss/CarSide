@@ -22,10 +22,16 @@ export const appConfig = {
   nearbyLookaheadDays: 30,
 
   /**
-   * Extra curated event feeds (JSON files using the same schema as src/data/events.json).
-   * They are fetched in the browser, so the host must allow CORS (raw GitHub / Gist URLs do).
+   * Remote curated event feeds (JSON files using the same schema as src/data/events.json),
+   * fetched in the browser at runtime — so the host must allow CORS (raw GitHub and Gist URLs do).
+   * The default is a GitHub Gist: edit it to publish events without redeploying.
    */
-  eventFeeds: [] as string[],
+  eventFeeds: [
+    {
+      name: 'CarSide Gist feed',
+      url: 'https://gist.githubusercontent.com/Adavidss/26a1057481009287a63eb96bd44cc96d/raw/carside-events.json',
+    },
+  ] as ReadonlyArray<{ name: string; url: string }>,
 
   /** Weather is only meaningful for events inside the forecast horizon. */
   weatherForecastDays: 16,

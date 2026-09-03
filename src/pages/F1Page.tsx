@@ -14,7 +14,7 @@ import { SectionHeading } from '@/components/ui/SectionHeading';
 import { Skeleton } from '@/components/ui/Skeleton';
 import { Freshness } from '@/components/ui/Freshness';
 import { IconEye } from '@/components/icons/Icons';
-import { circuitAttribution } from '@/components/f1/CircuitOutline';
+import { circuitAttribution } from '@/services/f1/attribution';
 
 export function F1Page() {
   const now = useNow(1000);
