@@ -26,7 +26,11 @@
       "setting": "outdoor",
       "description": "Large themed monthly meet on the first Saturday of every month, year-round, in the Imperial Center business park off Page Road. All makes and models of cars, trucks and motorcycles are welcome; each month has a theme and a featured charity.",
       "url": "https://www.carsandcoffeemorrisville.com/events",
-      "source": { "id": "carsandcoffeemorrisville", "name": "Cars & Coffee Morrisville (official)", "url": "https://www.carsandcoffeemorrisville.com/events" },
+      "source": {
+        "id": "carsandcoffeemorrisville",
+        "name": "Cars & Coffee Morrisville (official)",
+        "url": "https://www.carsandcoffeemorrisville.com/events"
+      },
       "confirmWithOrganizer": true,
       "verifiedOn": "2026-09-02",
       "notes": "Organizer confirms first Saturday, 8–11 AM, at Page Road. Themed dates for 2026 are listed separately."
@@ -49,7 +53,11 @@
       "setting": "outdoor",
       "description": "September edition of the first-Saturday Cars and Coffee Morrisville meet. This month's theme is Motorcycle Day, with Childhood Cancer Awareness as the featured charity.",
       "url": "https://www.carsandcoffeemorrisville.com/events",
-      "source": { "id": "carsandcoffeemorrisville", "name": "Cars & Coffee Morrisville (official)", "url": "https://www.carsandcoffeemorrisville.com/events" },
+      "source": {
+        "id": "carsandcoffeemorrisville",
+        "name": "Cars & Coffee Morrisville (official)",
+        "url": "https://www.carsandcoffeemorrisville.com/events"
+      },
       "verifiedOn": "2026-09-02"
     },
     {
@@ -70,7 +78,11 @@
       "setting": "outdoor",
       "description": "October edition of Cars and Coffee Morrisville. Theme is Classic Car Day for 1979-and-older vehicles, with Breast Cancer Awareness as the featured charity.",
       "url": "https://www.carsandcoffeemorrisville.com/events",
-      "source": { "id": "carsandcoffeemorrisville", "name": "Cars & Coffee Morrisville (official)", "url": "https://www.carsandcoffeemorrisville.com/events" },
+      "source": {
+        "id": "carsandcoffeemorrisville",
+        "name": "Cars & Coffee Morrisville (official)",
+        "url": "https://www.carsandcoffeemorrisville.com/events"
+      },
       "verifiedOn": "2026-09-02"
     },
     {
@@ -91,7 +103,11 @@
       "setting": "outdoor",
       "description": "November edition of Cars and Coffee Morrisville: People's Choice Day, featuring right-hand-drive vehicles.",
       "url": "https://www.carsandcoffeemorrisville.com/events",
-      "source": { "id": "carsandcoffeemorrisville", "name": "Cars & Coffee Morrisville (official)", "url": "https://www.carsandcoffeemorrisville.com/events" },
+      "source": {
+        "id": "carsandcoffeemorrisville",
+        "name": "Cars & Coffee Morrisville (official)",
+        "url": "https://www.carsandcoffeemorrisville.com/events"
+      },
       "verifiedOn": "2026-09-02"
     },
     {
@@ -112,7 +128,11 @@
       "setting": "outdoor",
       "description": "December edition of Cars and Coffee Morrisville: Tuner Car Day for modified vehicles. The last date currently posted by the organizer.",
       "url": "https://www.carsandcoffeemorrisville.com/events",
-      "source": { "id": "carsandcoffeemorrisville", "name": "Cars & Coffee Morrisville (official)", "url": "https://www.carsandcoffeemorrisville.com/events" },
+      "source": {
+        "id": "carsandcoffeemorrisville",
+        "name": "Cars & Coffee Morrisville (official)",
+        "url": "https://www.carsandcoffeemorrisville.com/events"
+      },
       "verifiedOn": "2026-09-02"
     },
     {
@@ -138,7 +158,11 @@
       "setting": "outdoor",
       "description": "Monthly meet on the fourth Sunday since 2017 — classics, exotics, hot rods, vendors and food trucks. The venue rotates around the Triangle; the organizer posts each month's location on Facebook and Instagram.",
       "url": "https://carsandcoffeeraleigh.org/",
-      "source": { "id": "carsandcoffeeraleigh", "name": "Cars and Coffee Raleigh (official)", "url": "https://carsandcoffeeraleigh.org/" },
+      "source": {
+        "id": "carsandcoffeeraleigh",
+        "name": "Cars and Coffee Raleigh (official)",
+        "url": "https://carsandcoffeeraleigh.org/"
+      },
       "confirmWithOrganizer": true,
       "verifiedOn": "2026-09-02",
       "notes": "Organizer confirms fourth Sunday, 8–11 AM. Glenwood Place is the venue listed for Sep 27 and Oct 25, 2026 — confirm on the organizer's social channels before attending."
@@ -161,7 +185,11 @@
       "setting": "outdoor",
       "description": "September fourth-Sunday edition of Cars and Coffee Raleigh, listed at Glenwood Place. Family-friendly meet with classics, exotics, everyday drivers and hot rods.",
       "url": "https://raleighcarshows.com/events/cars-and-coffee-raleigh-glenwood-2026-09-27/",
-      "source": { "id": "raleighcarshows", "name": "Raleigh Car Shows (listing)", "url": "https://raleighcarshows.com/events/cars-and-coffee-raleigh-glenwood-2026-09-27/" },
+      "source": {
+        "id": "raleighcarshows",
+        "name": "Raleigh Car Shows (listing)",
+        "url": "https://raleighcarshows.com/events/cars-and-coffee-raleigh-glenwood-2026-09-27/"
+      },
       "confirmWithOrganizer": true,
       "verifiedOn": "2026-09-02",
       "notes": "Venue can rotate — confirm on the organizer's Facebook or Instagram."
@@ -184,7 +212,11 @@
       "setting": "outdoor",
       "description": "October fourth-Sunday edition of Cars and Coffee Raleigh, listed at Glenwood Place.",
       "url": "https://raleighcarshows.com/events/cars-and-coffee-raleigh-glenwood-2026-10-25/",
-      "source": { "id": "raleighcarshows", "name": "Raleigh Car Shows (listing)", "url": "https://raleighcarshows.com/" },
+      "source": {
+        "id": "raleighcarshows",
+        "name": "Raleigh Car Shows (listing)",
+        "url": "https://raleighcarshows.com/"
+      },
       "confirmWithOrganizer": true,
       "verifiedOn": "2026-09-02",
       "notes": "Venue can rotate — confirm on the organizer's Facebook or Instagram."
@@ -212,7 +244,11 @@
       "setting": "outdoor",
       "description": "Second-Saturday Cars & Coffee hosted by Porsche Cary with coffee, tech talks and demonstrations alongside enthusiast-owned classics and new Porsches. All marques welcome.",
       "url": "https://cary.porsche.com/en/cars-and-coffee",
-      "source": { "id": "raleighcarshows", "name": "Raleigh Car Shows (listing)", "url": "https://raleighcarshows.com/events/porsche-cary-cars-and-coffee-2026-09-12/" },
+      "source": {
+        "id": "raleighcarshows",
+        "name": "Raleigh Car Shows (listing)",
+        "url": "https://raleighcarshows.com/events/porsche-cary-cars-and-coffee-2026-09-12/"
+      },
       "confirmWithOrganizer": true,
       "verifiedOn": "2026-09-02",
       "notes": "Pattern verified via the Raleigh Car Shows listing (next dates Sep 12 and Oct 10, 2026); the dealer page could not be reached at verification time."
@@ -240,7 +276,11 @@
       "setting": "outdoor",
       "description": "Free last-Saturday outdoor meet at Triangle Town Center with 200-plus cars of every style — modern exotics, muscle, classics, tuners — plus food trucks. All makes and models welcome.",
       "url": "https://raleighcarshows.com/events/caffeine-and-machines-2026-09-26/",
-      "source": { "id": "raleighcarshows", "name": "Raleigh Car Shows (listing)", "url": "https://raleighcarshows.com/events/caffeine-and-machines-2026-09-26/" },
+      "source": {
+        "id": "raleighcarshows",
+        "name": "Raleigh Car Shows (listing)",
+        "url": "https://raleighcarshows.com/events/caffeine-and-machines-2026-09-26/"
+      },
       "confirmWithOrganizer": true,
       "verifiedOn": "2026-09-02",
       "notes": "Next confirmed dates Sep 26 and Oct 31, 2026."
@@ -268,7 +308,11 @@
       "setting": "outdoor",
       "description": "Monthly exotic and collector car show at the Carolina Exotic Car Club. Proceeds support the Ride of Your Life Foundation, which gives children and adults with disabilities rides in exotic cars.",
       "url": "https://raleighcarshows.com/events/cecc-exotic-car-show-2026-09-26/",
-      "source": { "id": "raleighcarshows", "name": "Raleigh Car Shows (listing)", "url": "https://raleighcarshows.com/events/cecc-exotic-car-show-2026-09-26/" },
+      "source": {
+        "id": "raleighcarshows",
+        "name": "Raleigh Car Shows (listing)",
+        "url": "https://raleighcarshows.com/events/cecc-exotic-car-show-2026-09-26/"
+      },
       "confirmWithOrganizer": true,
       "verifiedOn": "2026-09-02",
       "notes": "Listed as monthly; the last-Saturday pattern is inferred from the Sep 26 and Oct 31, 2026 dates."
@@ -295,7 +339,11 @@
       "setting": "outdoor",
       "description": "Informal weekly Sunday-morning gathering in the Park West Village parking area — described by a regional directory as the only weekly Cars & Coffee in the Triangle.",
       "url": "https://www.carsandcoffeedirectory.com/blog/cars-and-coffee-raleigh-durham-2026-guide",
-      "source": { "id": "carsandcoffeedirectory", "name": "Cars & Coffee Directory (third-party)", "url": "https://www.carsandcoffeedirectory.com/blog/cars-and-coffee-raleigh-durham-2026-guide" },
+      "source": {
+        "id": "carsandcoffeedirectory",
+        "name": "Cars & Coffee Directory (third-party)",
+        "url": "https://www.carsandcoffeedirectory.com/blog/cars-and-coffee-raleigh-durham-2026-guide"
+      },
       "confirmWithOrganizer": true,
       "verifiedOn": "2026-09-02",
       "notes": "Third-party listing only — no organizer page found. Check Park West Village's calendar or Facebook before relying on it."
@@ -317,7 +365,11 @@
       "setting": "outdoor",
       "description": "Charity show welcoming muscle cars, street rods, classics, imports, exotics and trucks, with trophies by decade and Best in Show, a 50/50 drawing, concessions, DJ and raffles. Proceeds benefit Wake Forest Community Partners.",
       "url": "https://www.wakeforestcommunitypartners.org/events.html",
-      "source": { "id": "wakeforestcommunitypartners", "name": "Wake Forest Community Partners (organizer)", "url": "https://www.wakeforestcommunitypartners.org/events.html" },
+      "source": {
+        "id": "wakeforestcommunitypartners",
+        "name": "Wake Forest Community Partners (organizer)",
+        "url": "https://www.wakeforestcommunitypartners.org/events.html"
+      },
       "verifiedOn": "2026-09-02"
     },
     {
@@ -336,7 +388,11 @@
       "setting": "outdoor",
       "description": "Inaugural farm-site car and truck show: registration 8 AM – 1 PM, awards around 4 PM, Top 30 plus Best Of awards, 50/50, raffles and food trucks, with 150-plus vehicles expected.",
       "url": "https://raleighcarshows.com/events/sunset-on-the-farm-car-and-truck-show-2026-09-19/",
-      "source": { "id": "raleighcarshows", "name": "Raleigh Car Shows (listing)", "url": "https://raleighcarshows.com/events/sunset-on-the-farm-car-and-truck-show-2026-09-19/" },
+      "source": {
+        "id": "raleighcarshows",
+        "name": "Raleigh Car Shows (listing)",
+        "url": "https://raleighcarshows.com/events/sunset-on-the-farm-car-and-truck-show-2026-09-19/"
+      },
       "confirmWithOrganizer": true,
       "verifiedOn": "2026-09-02",
       "notes": "Organizer listed as SunSet Eastern NC; no official page found. Map pin is approximate (Old Drug Store Road)."
@@ -358,7 +414,11 @@
       "setting": "mixed",
       "description": "Antique car show on the grounds of the N.C. Transportation Museum, sponsored by the Furnitureland Chapter of the AACA and limited to AACA members' vehicles of all makes and models.",
       "url": "https://www.nctransportationmuseum.org/auto-shows/",
-      "source": { "id": "nctransportationmuseum", "name": "N.C. Transportation Museum", "url": "https://www.nctransportationmuseum.org/auto-shows/" },
+      "source": {
+        "id": "nctransportationmuseum",
+        "name": "N.C. Transportation Museum",
+        "url": "https://www.nctransportationmuseum.org/auto-shows/"
+      },
       "verifiedOn": "2026-09-02"
     },
     {
@@ -378,7 +438,11 @@
       "setting": "mixed",
       "description": "Jeep-only show at the N.C. Transportation Museum, from classic Willys to trail-ready Wranglers and custom builds.",
       "url": "https://www.nctransportationmuseum.org/auto-shows/",
-      "source": { "id": "nctransportationmuseum", "name": "N.C. Transportation Museum", "url": "https://www.nctransportationmuseum.org/auto-shows/" },
+      "source": {
+        "id": "nctransportationmuseum",
+        "name": "N.C. Transportation Museum",
+        "url": "https://www.nctransportationmuseum.org/auto-shows/"
+      },
       "verifiedOn": "2026-09-02"
     },
     {
@@ -398,7 +462,11 @@
       "setting": "outdoor",
       "description": "Touring modified night at the 3/8-mile Orange County Speedway with the SMART Modified Tour plus Carolina Crate Mods, VA Mini Cup and the OCS Charger, Pure Stock and MOD4 divisions. Grandstands open 5:30 PM, qualifying 6:00 PM, green flag 7:00 PM.",
       "url": "https://www.ocstrack.net/schedule",
-      "source": { "id": "ocstrack", "name": "Orange County Speedway (official)", "url": "https://www.ocstrack.net/" },
+      "source": {
+        "id": "ocstrack",
+        "name": "Orange County Speedway (official)",
+        "url": "https://www.ocstrack.net/"
+      },
       "verifiedOn": "2026-09-02",
       "notes": "End time is an estimate. Track notes the schedule is subject to change."
     },
@@ -419,7 +487,11 @@
       "setting": "outdoor",
       "description": "Saturday-night double points race for the Late Model, Charger, Pure Stock, MOD4 and Vintage divisions.",
       "url": "https://www.ocstrack.net/schedule",
-      "source": { "id": "ocstrack", "name": "Orange County Speedway (official)", "url": "https://www.ocstrack.net/schedule" },
+      "source": {
+        "id": "ocstrack",
+        "name": "Orange County Speedway (official)",
+        "url": "https://www.ocstrack.net/schedule"
+      },
       "verifiedOn": "2026-09-02",
       "notes": "Gate and green-flag times not posted yet. Admission shown is standard general admission."
     },
@@ -441,7 +513,11 @@
       "setting": "outdoor",
       "description": "Make-up race night running Late Model, Charger, Pure Stock, MOD4 and Vintage divisions plus the Crown Vic Outlaw Super Series and Legends.",
       "url": "https://www.ocstrack.net/schedule",
-      "source": { "id": "ocstrack", "name": "Orange County Speedway (official)", "url": "https://www.ocstrack.net/schedule" },
+      "source": {
+        "id": "ocstrack",
+        "name": "Orange County Speedway (official)",
+        "url": "https://www.ocstrack.net/schedule"
+      },
       "verifiedOn": "2026-09-02",
       "notes": "Times not posted yet. Admission shown is standard general admission."
     },
@@ -462,7 +538,11 @@
       "setting": "outdoor",
       "description": "Orange County Speedway's season-ending Late Model Stock Car special — 125 laps, $10,000 to win under NASCAR LMSC rules — with Charger, Vintage and touring divisions on the card.",
       "url": "https://www.ocstrack.net/schedule",
-      "source": { "id": "ocstrack", "name": "Orange County Speedway (official)", "url": "https://www.ocstrack.net/" },
+      "source": {
+        "id": "ocstrack",
+        "name": "Orange County Speedway (official)",
+        "url": "https://www.ocstrack.net/"
+      },
       "verifiedOn": "2026-09-02",
       "notes": "Spectator pricing and times for this special were not posted (standard GA is $20)."
     },
@@ -482,7 +562,11 @@
       "setting": "outdoor",
       "description": "Friday-night NASCAR regional race night at the quarter-mile Wake County Speedway with Mini Stock, Late Model, Bombers/Any Car, Legends, Bandoleros, Champ Kart and Beginner divisions.",
       "url": "https://www.myracepass.com/tracks/2800/schedule",
-      "source": { "id": "wcspeedway", "name": "Wake County Speedway (official schedule via MyRacePass)", "url": "https://www.myracepass.com/tracks/2800/schedule" },
+      "source": {
+        "id": "wcspeedway",
+        "name": "Wake County Speedway (official schedule via MyRacePass)",
+        "url": "https://www.myracepass.com/tracks/2800/schedule"
+      },
       "verifiedOn": "2026-09-02",
       "notes": "Start time and ticket prices are not published online — check the track's Facebook page."
     },
@@ -502,7 +586,11 @@
       "setting": "outdoor",
       "description": "Friday-night NASCAR regional race night at Wake County Speedway with Charger, Bombers/Any Car, Legends, Bandoleros, Vintage Modifieds, Champ Kart and Beginner divisions.",
       "url": "https://www.myracepass.com/tracks/2800/schedule",
-      "source": { "id": "wcspeedway", "name": "Wake County Speedway (official schedule via MyRacePass)", "url": "https://www.myracepass.com/tracks/2800/schedule" },
+      "source": {
+        "id": "wcspeedway",
+        "name": "Wake County Speedway (official schedule via MyRacePass)",
+        "url": "https://www.myracepass.com/tracks/2800/schedule"
+      },
       "verifiedOn": "2026-09-02",
       "notes": "Start time and ticket prices are not published online."
     },
@@ -523,7 +611,11 @@
       "setting": "outdoor",
       "description": "Make-up date for the postponed August 21 race night: Mini Stock, Late Model, Bombers/Any Car, Legends, Bandoleros and Beginner divisions.",
       "url": "https://www.myracepass.com/tracks/2800/schedule",
-      "source": { "id": "wcspeedway", "name": "Wake County Speedway (official schedule via MyRacePass)", "url": "https://www.myracepass.com/tracks/2800/schedule" },
+      "source": {
+        "id": "wcspeedway",
+        "name": "Wake County Speedway (official schedule via MyRacePass)",
+        "url": "https://www.myracepass.com/tracks/2800/schedule"
+      },
       "verifiedOn": "2026-09-02"
     },
     {
@@ -543,7 +635,11 @@
       "setting": "outdoor",
       "description": "Make-up date for the postponed August 28 race night — Mini Stock, Late Model, Bombers/Any Car, Legends and Bandoleros — and the last 2026 date currently posted.",
       "url": "https://www.myracepass.com/tracks/2800/schedule",
-      "source": { "id": "wcspeedway", "name": "Wake County Speedway (official schedule via MyRacePass)", "url": "https://www.myracepass.com/tracks/2800/schedule" },
+      "source": {
+        "id": "wcspeedway",
+        "name": "Wake County Speedway (official schedule via MyRacePass)",
+        "url": "https://www.myracepass.com/tracks/2800/schedule"
+      },
       "verifiedOn": "2026-09-02"
     },
     {
@@ -562,7 +658,11 @@
       "setting": "outdoor",
       "description": "Saturday race night at the 4/10-mile Southern National Motorsports Park with Chargers, Legends, Bandoleros, Any Cars, SNMP Vintage and Allison Legacy divisions; an INEX oval national qualifier.",
       "url": "https://snmpark.com/snmp-schedule/",
-      "source": { "id": "snmpark", "name": "Southern National Motorsports Park (official)", "url": "https://snmpark.com/snmp-schedule/" },
+      "source": {
+        "id": "snmpark",
+        "name": "Southern National Motorsports Park (official)",
+        "url": "https://snmpark.com/snmp-schedule/"
+      },
       "verifiedOn": "2026-09-02",
       "notes": "Times and prices not posted."
     },
@@ -582,7 +682,11 @@
       "setting": "outdoor",
       "description": "Halloween-night race with Late Model Stock Cars, Chargers, Any Cars, SNMP Vintage and ECFH divisions.",
       "url": "https://snmpark.com/snmp-schedule/",
-      "source": { "id": "snmpark", "name": "Southern National Motorsports Park (official)", "url": "https://snmpark.com/snmp-schedule/" },
+      "source": {
+        "id": "snmpark",
+        "name": "Southern National Motorsports Park (official)",
+        "url": "https://snmpark.com/snmp-schedule/"
+      },
       "verifiedOn": "2026-09-02",
       "notes": "Times and prices not posted."
     },
@@ -602,7 +706,11 @@
       "setting": "outdoor",
       "description": "Annual modified showdown with Tour-Type Modifieds, 602 Modifieds, Chargers, Legends and Any Cars. Practice day Friday, November 6.",
       "url": "https://snmpark.com/snmp-schedule/",
-      "source": { "id": "snmpark", "name": "Southern National Motorsports Park (official)", "url": "https://snmpark.com/snmp-schedule/" },
+      "source": {
+        "id": "snmpark",
+        "name": "Southern National Motorsports Park (official)",
+        "url": "https://snmpark.com/snmp-schedule/"
+      },
       "verifiedOn": "2026-09-02",
       "notes": "Times and prices not posted."
     },
@@ -624,7 +732,11 @@
       "setting": "outdoor",
       "description": "Southern National's signature Thanksgiving-weekend Late Model Stock Car event, now in its 26th year, drawing top short-track drivers from across the Southeast.",
       "url": "https://snmpark.com/snmp-schedule/",
-      "source": { "id": "snmpark", "name": "Southern National Motorsports Park (official)", "url": "https://snmpark.com/snmp-schedule/" },
+      "source": {
+        "id": "snmpark",
+        "name": "Southern National Motorsports Park (official)",
+        "url": "https://snmpark.com/snmp-schedule/"
+      },
       "verifiedOn": "2026-09-02",
       "notes": "Daily times, divisions and ticket prices not posted yet."
     },
@@ -645,7 +757,11 @@
       "setting": "outdoor",
       "description": "NHRA Mission Foods Drag Racing Series national event returning professional drag racing to Rockingham Dragway — Top Fuel, Funny Car, Pro Stock, Pro Stock Motorcycle, Pro Mod and sportsman classes.",
       "url": "https://www.rockinghamdragway.com/schedule/2026/nhra-nationals",
-      "source": { "id": "nhra", "name": "NHRA / Rockingham Dragway (official)", "url": "https://www.nhra.com/schedule/2026/nhra-mission-foods-drag-racing-series/nhra-nationals-rock" },
+      "source": {
+        "id": "nhra",
+        "name": "NHRA / Rockingham Dragway (official)",
+        "url": "https://www.nhra.com/schedule/2026/nhra-mission-foods-drag-racing-series/nhra-nationals-rock"
+      },
       "verifiedOn": "2026-09-02",
       "notes": "Tickets via nhra.evenue.net; daily run schedule not yet posted. Map pin is approximate."
     },
@@ -666,7 +782,11 @@
       "setting": "outdoor",
       "description": "Friday Truck Series race opening Charlotte Motor Speedway's fall NASCAR weekend, which returns to the 1.5-mile oval in 2026.",
       "url": "https://www.charlottemotorspeedway.com/events/bank-of-america-roval-400-2026/",
-      "source": { "id": "charlottemotorspeedway", "name": "Charlotte Motor Speedway (official)", "url": "https://www.charlottemotorspeedway.com/events/bank-of-america-roval-400-2026/" },
+      "source": {
+        "id": "charlottemotorspeedway",
+        "name": "Charlotte Motor Speedway (official)",
+        "url": "https://www.charlottemotorspeedway.com/events/bank-of-america-roval-400-2026/"
+      },
       "verifiedOn": "2026-09-02",
       "notes": "Start time and ticket prices not shown on the speedway page."
     },
@@ -687,7 +807,11 @@
       "setting": "outdoor",
       "description": "Saturday O'Reilly Auto Parts Series race during Charlotte Motor Speedway's October NASCAR playoff weekend on the 1.5-mile oval.",
       "url": "https://www.charlottemotorspeedway.com/events/bank-of-america-roval-400-2026/",
-      "source": { "id": "charlottemotorspeedway", "name": "Charlotte Motor Speedway (official)", "url": "https://www.charlottemotorspeedway.com/events/bank-of-america-roval-400-2026/" },
+      "source": {
+        "id": "charlottemotorspeedway",
+        "name": "Charlotte Motor Speedway (official)",
+        "url": "https://www.charlottemotorspeedway.com/events/bank-of-america-roval-400-2026/"
+      },
       "verifiedOn": "2026-09-02",
       "notes": "Start time and ticket prices not shown on the speedway page."
     },
@@ -708,7 +832,11 @@
       "setting": "outdoor",
       "description": "NASCAR Cup Series playoff race, run on the 1.5-mile oval in the fall for the first time since 2017 after eight years on the ROVAL. Race-day bundles include pre-race track access and a concert.",
       "url": "https://www.charlottemotorspeedway.com/events/bank-of-america-roval-400-2026/",
-      "source": { "id": "charlottemotorspeedway", "name": "Charlotte Motor Speedway (official)", "url": "https://www.charlottemotorspeedway.com/events/bank-of-america-roval-400-2026/" },
+      "source": {
+        "id": "charlottemotorspeedway",
+        "name": "Charlotte Motor Speedway (official)",
+        "url": "https://www.charlottemotorspeedway.com/events/bank-of-america-roval-400-2026/"
+      },
       "verifiedOn": "2026-09-02",
       "notes": "Green flag 3:00 PM per the speedway; end time is an estimate."
     },
@@ -730,7 +858,11 @@
       "setting": "outdoor",
       "description": "Four-day vintage and historic racing weekend on VIR's 3.27-mile road course, presented by Racing America and billed as a celebration of the track's history.",
       "url": "https://virnow.com/events/",
-      "source": { "id": "virnow", "name": "VIRginia International Raceway (official)", "url": "https://virnow.com/events/" },
+      "source": {
+        "id": "virnow",
+        "name": "VIRginia International Raceway (official)",
+        "url": "https://virnow.com/events/"
+      },
       "verifiedOn": "2026-09-02",
       "notes": "Spectator ticket prices not shown."
     },
@@ -752,7 +884,11 @@
       "setting": "outdoor",
       "description": "Operation Motorsport's endurance racing weekend honoring military veterans, held over Veterans Day weekend at VIR in an expanded eight-hour format.",
       "url": "https://virnow.com/events/",
-      "source": { "id": "virnow", "name": "VIRginia International Raceway (official)", "url": "https://virnow.com/events/" },
+      "source": {
+        "id": "virnow",
+        "name": "VIRginia International Raceway (official)",
+        "url": "https://virnow.com/events/"
+      },
       "verifiedOn": "2026-09-02"
     },
     {
@@ -773,7 +909,11 @@
       "setting": "outdoor",
       "description": "Fundraiser day where you pay $25 to drive your own car on VIR's 3.27-mile Full Course for a 15–20 minute touring session, benefiting Victory Junction.",
       "url": "https://virnow.com/events/",
-      "source": { "id": "virnow", "name": "VIRginia International Raceway (official)", "url": "https://virnow.com/events/" },
+      "source": {
+        "id": "virnow",
+        "name": "VIRginia International Raceway (official)",
+        "url": "https://virnow.com/events/"
+      },
       "verifiedOn": "2026-09-02",
       "notes": "Session times not posted."
     },
@@ -793,7 +933,11 @@
       "setting": "outdoor",
       "description": "Two-day Tarheel Sports Car Club rallycross weekend (timed runs on dirt and grass) at Jasper's Farm near Yanceyville. Entries via MotorsportReg; spectators welcome at the club's discretion.",
       "url": "https://www.thscc.com/",
-      "source": { "id": "thscc", "name": "Tarheel Sports Car Club (official)", "url": "https://www.thscc.com/" },
+      "source": {
+        "id": "thscc",
+        "name": "Tarheel Sports Car Club (official)",
+        "url": "https://www.thscc.com/"
+      },
       "confirmWithOrganizer": true,
       "verifiedOn": "2026-09-02",
       "notes": "Street address, run times and entry fees not posted. Map pin is the town of Yanceyville, not the farm."
@@ -816,7 +960,11 @@
       "setting": "outdoor",
       "description": "Two-day Tarheel Sports Car Club autocross weekend at the NCCAR test facility, run as points events #7 and #8 and part of the Beast of the East series. Entries via MotorsportReg.",
       "url": "https://www.thscc.com/",
-      "source": { "id": "thscc", "name": "Tarheel Sports Car Club (official)", "url": "https://www.thscc.com/" },
+      "source": {
+        "id": "thscc",
+        "name": "Tarheel Sports Car Club (official)",
+        "url": "https://www.thscc.com/"
+      },
       "confirmWithOrganizer": true,
       "verifiedOn": "2026-09-02",
       "notes": "Run times and entry fees not posted."
@@ -839,7 +987,11 @@
       "setting": "outdoor",
       "description": "Season-closing two-day Tarheel Sports Car Club autocross weekend at NCCAR, run as points events #9 and #10. Entries via MotorsportReg.",
       "url": "https://www.thscc.com/",
-      "source": { "id": "thscc", "name": "Tarheel Sports Car Club (official)", "url": "https://www.thscc.com/" },
+      "source": {
+        "id": "thscc",
+        "name": "Tarheel Sports Car Club (official)",
+        "url": "https://www.thscc.com/"
+      },
       "confirmWithOrganizer": true,
       "verifiedOn": "2026-09-02",
       "notes": "Run times and entry fees not posted."
@@ -861,9 +1013,637 @@
       "setting": "indoor",
       "description": "Indoor auto show with dozens of gas, hybrid and electric brands plus custom builds and performance displays. Thu–Fri noon–9 PM, Sat 10 AM–9 PM, Sun 10 AM–6 PM, with a preview night Wednesday, November 18, 6:30–9 PM.",
       "url": "https://www.charlotteautoshow.com/show-info/dates-hours",
-      "source": { "id": "charlotteautoshow", "name": "Charlotte Auto Show (official)", "url": "https://www.charlotteautoshow.com/show-info/dates-hours" },
+      "source": {
+        "id": "charlotteautoshow",
+        "name": "Charlotte Auto Show (official)",
+        "url": "https://www.charlotteautoshow.com/show-info/dates-hours"
+      },
       "verifiedOn": "2026-09-02",
       "notes": "Ticket prices not shown on the show's dates page."
+    },
+    {
+      "id": "seans-shack-cruise-in-2026-09-20",
+      "title": "Sean's Shack Cruise-In",
+      "subtitle": "Monthly 3rd-Sunday cruise-in · weather permitting",
+      "type": "meet",
+      "recurrence": {
+        "freq": "monthly",
+        "weekday": "SU",
+        "ordinal": 3,
+        "startTime": "13:00",
+        "endTime": "17:00",
+        "timezone": "America/New_York"
+      },
+      "venue": "Sean's Shack",
+      "address": "2840 E Millbrook Rd, Raleigh, NC 27604",
+      "city": "Raleigh",
+      "region": "NC",
+      "country": "US",
+      "latitude": 35.8490687,
+      "longitude": -78.5838274,
+      "admission": "Free",
+      "setting": "outdoor",
+      "description": "Monthly third-Sunday cruise-in in the Sean's Shack parking lot on E. Millbrook Road with classic cars, burgers and shakes. Runs 1–5 pm, weather permitting; no burnouts.",
+      "url": "https://raleighcarshows.com/events/seans-shack-cruise-in-2026-09-20/",
+      "source": {
+        "id": "raleigh-car-shows",
+        "name": "Raleigh Car Shows",
+        "url": "https://raleighcarshows.com/events/seans-shack-cruise-in-2026-09-20/"
+      },
+      "confirmWithOrganizer": true,
+      "verifiedOn": "2026-09-02",
+      "notes": "Listed as a monthly third-Sunday cruise-in; only Sep 20 is explicitly dated, and it runs weather permitting. No burnouts."
+    },
+    {
+      "id": "cars-and-coffee-greensboro",
+      "title": "Cars & Coffee Greensboro",
+      "subtitle": "4th Saturday, March–October · General Greene Chapter AACA",
+      "type": "cars-and-coffee",
+      "recurrence": {
+        "freq": "monthly",
+        "weekday": "SA",
+        "ordinal": 4,
+        "startTime": "08:00",
+        "endTime": "10:00",
+        "timezone": "America/New_York",
+        "seasonEnd": "2026-10-31"
+      },
+      "venue": "UNCG parking lot at W. Gate City Blvd & Chapman St (diagonally across from the Coliseum)",
+      "address": "1720 W Gate City Blvd, Greensboro, NC 27403",
+      "city": "Greensboro",
+      "region": "NC",
+      "country": "US",
+      "latitude": 36.0646596,
+      "longitude": -79.7959954,
+      "admission": "Free",
+      "setting": "outdoor",
+      "description": "Free monthly gathering run by the General Greene Chapter of the AACA in the UNCG lot across from the Greensboro Coliseum; gates open 7:30 am, cars 8–10 am, lot cleared by 10:30 am.",
+      "url": "https://carsandcoffeegso.com/",
+      "source": {
+        "id": "cars-coffee-greensboro-carsandcoffeegso-com",
+        "name": "Cars & Coffee Greensboro (carsandcoffeegso.com)",
+        "url": "https://carsandcoffeegso.com/"
+      },
+      "verifiedOn": "2026-09-02",
+      "notes": "Fourth Saturday, March through October. Gates open 7:30 AM and the lot is cleared by 10:30 AM; schedule changes are posted on the group's Facebook page."
+    },
+    {
+      "id": "rockingham-sandhills-bracket-championship-2026",
+      "title": "3rd Annual Sandhills Bracket Championship",
+      "subtitle": "Labor Day weekend bracket racing at The Rock",
+      "type": "drag-racing",
+      "start": "2026-09-05T00:00:00-04:00",
+      "end": "2026-09-07T23:59:59-04:00",
+      "allDay": true,
+      "timeTbd": true,
+      "venue": "Rockingham Dragway",
+      "address": "2153 US Highway 1 N, Rockingham, NC 28379",
+      "city": "Rockingham",
+      "region": "NC",
+      "country": "US",
+      "latitude": 34.9745,
+      "longitude": -79.6105,
+      "setting": "outdoor",
+      "description": "Three-day (Sat–Mon) bracket-racing championship on Rockingham Dragway's 2026 schedule.",
+      "url": "https://www.rockinghamdragway.com/schedule",
+      "source": {
+        "id": "rockingham-dragway-2026-schedule",
+        "name": "Rockingham Dragway 2026 schedule",
+        "url": "https://www.rockinghamdragway.com/schedule"
+      },
+      "confirmWithOrganizer": true,
+      "verifiedOn": "2026-09-02",
+      "notes": "Three-day bracket-racing weekend (Sat–Mon). Times and admission are not posted on the track's schedule page; Friday Sep 4 is a test-and-tune day."
+    },
+    {
+      "id": "rockingham-super-chevy-show-2026-09-19",
+      "title": "Super Chevy Show",
+      "subtitle": "Chevrolet weekend at The Rock",
+      "type": "drag-racing",
+      "start": "2026-09-19T00:00:00-04:00",
+      "timeTbd": true,
+      "venue": "Rockingham Dragway",
+      "address": "2153 US Highway 1 N, Rockingham, NC 28379",
+      "city": "Rockingham",
+      "region": "NC",
+      "country": "US",
+      "latitude": 34.9745,
+      "longitude": -79.6105,
+      "setting": "outdoor",
+      "description": "Chevrolet-themed event listed for Saturday, Sept. 19 on Rockingham Dragway's 2026 schedule; program details are not on the schedule page.",
+      "url": "https://www.rockinghamdragway.com/schedule",
+      "source": {
+        "id": "rockingham-dragway-2026-schedule",
+        "name": "Rockingham Dragway 2026 schedule",
+        "url": "https://www.rockinghamdragway.com/schedule"
+      },
+      "confirmWithOrganizer": true,
+      "verifiedOn": "2026-09-02",
+      "notes": "Only the name and date are on the track's schedule page; check the track for the program and admission."
+    },
+    {
+      "id": "rockingham-jim-mcclure-all-harley-world-finals-2026",
+      "title": "35th Annual Jim McClure All-Harley World Finals",
+      "subtitle": "Top Fuel Harleys + full AMRA championship lineup",
+      "type": "drag-racing",
+      "start": "2026-10-16T00:00:00-04:00",
+      "end": "2026-10-18T23:59:59-04:00",
+      "allDay": true,
+      "timeTbd": true,
+      "venue": "Rockingham Dragway",
+      "address": "2153 US Highway 1 N, Rockingham, NC 28379",
+      "city": "Rockingham",
+      "region": "NC",
+      "country": "US",
+      "latitude": 34.9745,
+      "longitude": -79.6105,
+      "admission": "Single day $25 (military $15); Sat–Sun $40; Fri–Sun $50; Thu–Sun $60",
+      "setting": "outdoor",
+      "description": "Top Fuel Harleys and the full American Motorcycle Racing Association championship lineup return to The Rock for what the track bills as the world's biggest Harley drag-racing event of the year.",
+      "url": "https://www.rockinghamdragway.com/schedule/2026/oct16-18",
+      "source": {
+        "id": "rockingham-dragway",
+        "name": "Rockingham Dragway",
+        "url": "https://www.rockinghamdragway.com/schedule/2026/oct16-18"
+      },
+      "verifiedOn": "2026-09-02",
+      "notes": "Thursday–Sunday passes are sold, so expect Thursday activity too. Gate times are not posted."
+    },
+    {
+      "id": "rockingham-nhra-lucas-oil-double-divisional-2026",
+      "title": "NHRA Lucas Oil Double Divisional",
+      "subtitle": "NHRA Lucas Oil Drag Racing Series divisional weekend",
+      "type": "drag-racing",
+      "start": "2026-10-22T00:00:00-04:00",
+      "end": "2026-10-25T23:59:59-04:00",
+      "allDay": true,
+      "timeTbd": true,
+      "venue": "Rockingham Dragway",
+      "address": "2153 US Highway 1 N, Rockingham, NC 28379",
+      "city": "Rockingham",
+      "region": "NC",
+      "country": "US",
+      "latitude": 34.9745,
+      "longitude": -79.6105,
+      "setting": "outdoor",
+      "description": "Four-day (Thu–Sun) NHRA Lucas Oil Drag Racing Series event billed as a 'Double Divisional' on Rockingham Dragway's 2026 schedule.",
+      "url": "https://www.rockinghamdragway.com/schedule",
+      "source": {
+        "id": "rockingham-dragway-2026-schedule",
+        "name": "Rockingham Dragway 2026 schedule",
+        "url": "https://www.rockinghamdragway.com/schedule"
+      },
+      "confirmWithOrganizer": true,
+      "verifiedOn": "2026-09-02",
+      "notes": "Four-day NHRA divisional (Thu–Sun). Times and admission are not posted on the schedule page."
+    },
+    {
+      "id": "rockingham-mopars-at-the-rock-fall-2026-11-14",
+      "title": "MOPARS at The ROCK – Fall",
+      "subtitle": "Same weekend as the Modern Street HEMI Shootout (Nov 14–15)",
+      "type": "drag-racing",
+      "start": "2026-11-14T00:00:00-05:00",
+      "timeTbd": true,
+      "venue": "Rockingham Dragway",
+      "address": "2153 US Highway 1 N, Rockingham, NC 28379",
+      "city": "Rockingham",
+      "region": "NC",
+      "country": "US",
+      "latitude": 34.9745,
+      "longitude": -79.6105,
+      "setting": "outdoor",
+      "description": "Mopar-themed event on Rockingham Dragway's 2026 schedule, paired with the Modern Street HEMI Shootout (hemirace.com) running Nov 14–15.",
+      "url": "https://www.rockinghamdragway.com/schedule",
+      "source": {
+        "id": "rockingham-dragway-2026-schedule",
+        "name": "Rockingham Dragway 2026 schedule",
+        "url": "https://www.rockinghamdragway.com/schedule"
+      },
+      "confirmWithOrganizer": true,
+      "verifiedOn": "2026-09-02",
+      "notes": "Runs alongside the Modern Street HEMI Shootout (Nov 14–15). Times and admission are not posted; Friday Nov 13 is a test-and-tune day."
+    },
+    {
+      "id": "rockingham-import-mania-2026-11-22",
+      "title": "Import Mania",
+      "subtitle": "Import-themed event at The Rock",
+      "type": "drag-racing",
+      "start": "2026-11-22T00:00:00-05:00",
+      "timeTbd": true,
+      "venue": "Rockingham Dragway",
+      "address": "2153 US Highway 1 N, Rockingham, NC 28379",
+      "city": "Rockingham",
+      "region": "NC",
+      "country": "US",
+      "latitude": 34.9745,
+      "longitude": -79.6105,
+      "setting": "outdoor",
+      "description": "Import-themed event listed for Sunday, Nov. 22 on Rockingham Dragway's 2026 schedule; no details link is provided on the schedule page.",
+      "url": "https://www.rockinghamdragway.com/schedule",
+      "source": {
+        "id": "rockingham-dragway-2026-schedule",
+        "name": "Rockingham Dragway 2026 schedule",
+        "url": "https://www.rockinghamdragway.com/schedule"
+      },
+      "confirmWithOrganizer": true,
+      "verifiedOn": "2026-09-02",
+      "notes": "Only the name and date are on the track's schedule page; format, time and admission are unconfirmed."
+    },
+    {
+      "id": "thscc-rallycross-wilson-2026-10-17",
+      "title": "THSCC RallyCross Wilson Points Event #10",
+      "subtitle": "Tarheel Sports Car Club RallyCross",
+      "type": "autocross",
+      "start": "2026-10-17T00:00:00-04:00",
+      "timeTbd": true,
+      "venue": "Wilson County Fairgrounds",
+      "city": "Wilson",
+      "region": "NC",
+      "country": "US",
+      "latitude": 35.7059114,
+      "longitude": -77.9175714,
+      "setting": "outdoor",
+      "description": "Tarheel Sports Car Club RallyCross points event at the Wilson County Fairgrounds; driver registration open on thscc.com.",
+      "url": "https://www.thscc.com/events",
+      "source": {
+        "id": "tarheel-sports-car-club",
+        "name": "Tarheel Sports Car Club",
+        "url": "https://www.thscc.com/events"
+      },
+      "confirmWithOrganizer": true,
+      "verifiedOn": "2026-09-02",
+      "notes": "Participant event — drivers register through THSCC; ask the club about spectating. Map pin is the town of Wilson, not the fairgrounds."
+    },
+    {
+      "id": "thscc-hpde-track-day-nccar-2026-11-07",
+      "title": "THSCC HPDE/Track Day at NCCAR",
+      "subtitle": "High-performance driving event · NCCAR road course",
+      "type": "track-day",
+      "start": "2026-11-07T00:00:00-05:00",
+      "end": "2026-11-08T23:59:59-05:00",
+      "allDay": true,
+      "timeTbd": true,
+      "venue": "NCCAR (North Carolina Center for Automotive Research)",
+      "address": "310 Technology Dr, Garysburg, NC 27831",
+      "city": "Garysburg",
+      "region": "NC",
+      "country": "US",
+      "latitude": 36.47463,
+      "longitude": -77.58216,
+      "setting": "outdoor",
+      "description": "Two-day Tarheel Sports Car Club high-performance driving event / track day on the NCCAR road course in Garysburg; registration open on thscc.com.",
+      "url": "https://www.thscc.com/events",
+      "source": {
+        "id": "tarheel-sports-car-club",
+        "name": "Tarheel Sports Car Club",
+        "url": "https://www.thscc.com/events"
+      },
+      "confirmWithOrganizer": true,
+      "verifiedOn": "2026-09-02",
+      "notes": "Participant event with registration through THSCC; cost, daily schedule and spectator access are not posted."
+    },
+    {
+      "id": "thscc-rallycross-wilson-2026-11-14",
+      "title": "THSCC RallyCross Wilson Points Events #11 & #12",
+      "subtitle": "Tarheel Sports Car Club RallyCross · season-closing double",
+      "type": "autocross",
+      "start": "2026-11-14T00:00:00-05:00",
+      "end": "2026-11-15T23:59:59-05:00",
+      "allDay": true,
+      "timeTbd": true,
+      "venue": "Wilson County Fairgrounds",
+      "city": "Wilson",
+      "region": "NC",
+      "country": "US",
+      "latitude": 35.7059114,
+      "longitude": -77.9175714,
+      "setting": "outdoor",
+      "description": "Two-day Tarheel Sports Car Club RallyCross points weekend (events #11 and #12) at the Wilson County Fairgrounds; driver registration open on thscc.com.",
+      "url": "https://www.thscc.com/events",
+      "source": {
+        "id": "tarheel-sports-car-club",
+        "name": "Tarheel Sports Car Club",
+        "url": "https://www.thscc.com/events"
+      },
+      "confirmWithOrganizer": true,
+      "verifiedOn": "2026-09-02",
+      "notes": "Season-closing double points weekend; participant event with registration through THSCC. Map pin is the town of Wilson, not the fairgrounds."
+    },
+    {
+      "id": "ncr-scca-ta-warp-2026",
+      "title": "2026 TA Warp",
+      "subtitle": "NCR SCCA Time Attack / track weekend at NCCAR",
+      "type": "track-day",
+      "start": "2026-10-10T00:00:00-04:00",
+      "end": "2026-10-11T23:59:59-04:00",
+      "allDay": true,
+      "timeTbd": true,
+      "venue": "NCCAR (North Carolina Center for Automotive Research)",
+      "address": "310 Technology Dr, Garysburg, NC 27831",
+      "city": "Garysburg",
+      "region": "NC",
+      "country": "US",
+      "latitude": 36.47463,
+      "longitude": -77.58216,
+      "setting": "outdoor",
+      "description": "North Carolina Region SCCA Time Attack event at the NCCAR road course; registration via MotorsportReg (msreg.com/26TAWarp).",
+      "url": "https://ncrscca.com/calendar/",
+      "source": {
+        "id": "ncr-scca-calendar",
+        "name": "NCR SCCA calendar",
+        "url": "https://ncrscca.com/calendar/"
+      },
+      "confirmWithOrganizer": true,
+      "verifiedOn": "2026-09-02",
+      "notes": "Time-attack weekend with registration through MotorsportReg (msreg.com/26TAWarp); times, cost and spectator access are not posted."
+    },
+    {
+      "id": "charlotte-autofair-spring-2027",
+      "title": "Charlotte AutoFair",
+      "subtitle": "Spring show at Charlotte Motor Speedway · club displays, vendors, flea market",
+      "type": "car-show",
+      "start": "2027-04-08T00:00:00-04:00",
+      "end": "2027-04-10T23:59:59-04:00",
+      "allDay": true,
+      "timeTbd": true,
+      "venue": "Charlotte Motor Speedway",
+      "address": "5555 Concord Pkwy S, Concord, NC 28027",
+      "city": "Concord",
+      "region": "NC",
+      "country": "US",
+      "latitude": 35.3517,
+      "longitude": -80.683,
+      "setting": "outdoor",
+      "description": "Three-day spring AutoFair that turns Charlotte Motor Speedway into a large automotive showcase with car-club displays, specialty vehicles, vendor displays and a flea market.",
+      "url": "https://www.charlottemotorspeedway.com/events/autofair/",
+      "source": {
+        "id": "charlotte-motor-speedway",
+        "name": "Charlotte Motor Speedway",
+        "url": "https://www.charlottemotorspeedway.com/events/autofair/"
+      },
+      "verifiedOn": "2026-09-02",
+      "notes": "Dates confirmed on the speedway's event page; daily hours and ticket prices had not been posted when checked."
+    },
+    {
+      "id": "cars-and-coffee-holly-springs",
+      "title": "Cars & Coffee Holly Springs",
+      "subtitle": "2nd Saturday mornings at Grand Hill Place",
+      "type": "cars-and-coffee",
+      "recurrence": {
+        "freq": "monthly",
+        "weekday": "SA",
+        "ordinal": 2,
+        "startTime": "09:00",
+        "endTime": "11:00",
+        "timezone": "America/New_York"
+      },
+      "venue": "Grand Hill Place",
+      "address": "324 Grand Hill Pl, Holly Springs, NC 27540",
+      "city": "Holly Springs",
+      "region": "NC",
+      "country": "US",
+      "latitude": 35.6672655,
+      "longitude": -78.8432348,
+      "description": "Community cars-and-coffee meet at the Grand Hill Place shopping center in Holly Springs, 9–11 am; next listed date is Saturday, Sept. 12, 2026.",
+      "url": "https://www.getoutgarage.com/events/cars-and-coffee/NC/holly-springs",
+      "source": {
+        "id": "getoutgarage",
+        "name": "GetOutGarage",
+        "url": "https://www.getoutgarage.com/events/cars-and-coffee/NC/holly-springs"
+      },
+      "confirmWithOrganizer": true,
+      "verifiedOn": "2026-09-02",
+      "notes": "Second-Saturday pattern inferred from the 2026 dates listed; the organizer posts updates on Facebook (Cars and Coffee HS). Cost not listed."
+    },
+    {
+      "id": "carbs-and-carburetors-hillsborough-2026-09-12",
+      "title": "Carbs & Carburetors",
+      "subtitle": "Coffee, donuts and collector cars at Leland Little",
+      "type": "cars-and-coffee",
+      "start": "2026-09-12T09:00:00-04:00",
+      "end": "2026-09-12T12:00:00-04:00",
+      "venue": "Leland Little",
+      "address": "602 Cornerstone Ct, Hillsborough, NC 27278",
+      "city": "Hillsborough",
+      "region": "NC",
+      "country": "US",
+      "latitude": 36.0620768,
+      "longitude": -79.0867344,
+      "admission": "Free (RSVP requested, not required)",
+      "description": "Informal Saturday-morning gathering hosted by Leland Little with coffee, donuts and collector cars; attendees can browse or bring their own car to display.",
+      "url": "https://www.eventbrite.com/e/carbs-carburetors-tickets-1997774550459",
+      "source": {
+        "id": "eventbrite-organizer-leland-little",
+        "name": "Eventbrite (organizer: Leland Little)",
+        "url": "https://www.eventbrite.com/e/carbs-carburetors-tickets-1997774550459"
+      },
+      "verifiedOn": "2026-09-02",
+      "notes": "Hosted by Leland Little; an RSVP on Eventbrite is requested but not required."
+    },
+    {
+      "id": "pop-the-frunk-ev-car-meet-2026-09-12",
+      "title": "\"Pop The Frunk\" Official EV Car Meet",
+      "subtitle": "Electric-vehicle meet · 21+",
+      "type": "meet",
+      "start": "2026-09-12T12:00:00-04:00",
+      "venue": "Lynnwood Grill & Brewing Company",
+      "address": "4821 Grove Barton Rd, Raleigh, NC 27613",
+      "city": "Raleigh",
+      "region": "NC",
+      "country": "US",
+      "latitude": 35.8706037,
+      "longitude": -78.7162399,
+      "description": "EV-only car meet at Lynnwood Grill & Brewing Company in northwest Raleigh, billed as 'the Ultimate EV Car Meet for the coolest electric rides'; free parking, 21+.",
+      "url": "https://www.eventbrite.com/e/pop-the-frunk-official-ev-car-meet-tickets-1987832107344",
+      "source": {
+        "id": "eventbrite",
+        "name": "Eventbrite",
+        "url": "https://www.eventbrite.com/e/pop-the-frunk-official-ev-car-meet-tickets-1987832107344"
+      },
+      "confirmWithOrganizer": true,
+      "verifiedOn": "2026-09-02",
+      "notes": "Date and noon start from Eventbrite's Raleigh listing; end time and ticket price were not shown. 21 and over."
+    },
+    {
+      "id": "fayetteville-2nd-annual-classic-car-show-2026-09-05",
+      "title": "2nd Annual Classic Car Show",
+      "subtitle": "E.E. Miller Recreation Center, Fayetteville",
+      "type": "classic",
+      "start": "2026-09-05T12:00:00-04:00",
+      "end": "2026-09-05T16:00:00-04:00",
+      "venue": "E.E. Miller Recreation Center",
+      "address": "1347 Rim Rd, Fayetteville, NC 28314",
+      "city": "Fayetteville",
+      "region": "NC",
+      "country": "US",
+      "latitude": 35.0537232,
+      "longitude": -79.0451441,
+      "description": "Community classic car show with food trucks, games, music and family activities at the E.E. Miller Recreation Center.",
+      "url": "https://www.eventbrite.com/e/2nd-annual-classic-car-show-tickets-1994720354276",
+      "source": {
+        "id": "eventbrite-organizer-joe-rivera",
+        "name": "Eventbrite (organizer: Joe Rivera)",
+        "url": "https://www.eventbrite.com/e/2nd-annual-classic-car-show-tickets-1994720354276"
+      },
+      "confirmWithOrganizer": true,
+      "verifiedOn": "2026-09-02",
+      "notes": "Admission and registration cost are not listed on the Eventbrite page."
+    },
+    {
+      "id": "south-boston-speedway-nascar-weekly-championship-night-2026-09-12",
+      "title": "NASCAR Weekly Series Championship Night",
+      "subtitle": "South Boston Speedway · Late Model Stock Cars, Limited Sportsman, Pure Stocks, Hornets",
+      "type": "motorsport",
+      "start": "2026-09-12T19:00:00-04:00",
+      "venue": "South Boston Speedway",
+      "address": "1188 James D. Hagood Hwy, South Boston, VA 24592",
+      "city": "South Boston",
+      "region": "VA",
+      "country": "US",
+      "latitude": 36.712386,
+      "longitude": -78.8744455,
+      "admission": "Advance $12 / gate $15; suites $40; seniors 65+, military & students $12 at gate; kids 12 & under free",
+      "setting": "outdoor",
+      "description": "Championship night for South Boston Speedway's four NASCAR Weekly Series divisions (Late Model Stock Cars, Limited Sportsman, Pure Stocks, Hornets); green flag 7 pm.",
+      "url": "https://www.southbostonspeedway.com/post/tickets-on-sale-now-for-2026-south-boston-speedway-events",
+      "source": {
+        "id": "south-boston-speedway",
+        "name": "South Boston Speedway",
+        "url": "https://www.southbostonspeedway.com/post/tickets-on-sale-now-for-2026-south-boston-speedway-events"
+      },
+      "verifiedOn": "2026-09-02",
+      "notes": "Time shown is the 7 PM green flag; gates open earlier. About an hour north of the Triangle."
+    },
+    {
+      "id": "south-boston-speedway-zmax-cars-tour-championship-2026-10-17",
+      "title": "zMAX CARS Tour Championship",
+      "subtitle": "CARS Late Model Stock Car Tour & CARS Pro Late Model Tour season finale",
+      "type": "motorsport",
+      "start": "2026-10-17T19:00:00-04:00",
+      "venue": "South Boston Speedway",
+      "address": "1188 James D. Hagood Hwy, South Boston, VA 24592",
+      "city": "South Boston",
+      "region": "VA",
+      "country": "US",
+      "latitude": 36.712386,
+      "longitude": -78.8744455,
+      "admission": "Advance $25 / gate $30; suites $50; seniors 65+, military, healthcare workers & students $25 at gate; kids 12 & under free",
+      "setting": "outdoor",
+      "description": "Season-ending zMAX CARS Tour championship event featuring the CARS Late Model Stock Car Tour and CARS Pro Late Model Tour; green flag 7 pm.",
+      "url": "https://www.southbostonspeedway.com/post/tickets-on-sale-now-for-2026-south-boston-speedway-events",
+      "source": {
+        "id": "south-boston-speedway",
+        "name": "South Boston Speedway",
+        "url": "https://www.southbostonspeedway.com/post/tickets-on-sale-now-for-2026-south-boston-speedway-events"
+      },
+      "verifiedOn": "2026-09-02",
+      "notes": "Time shown is the 7 PM green flag; gates open earlier. Last 2026 event on the track's calendar."
+    },
+    {
+      "id": "ace-speedway-race-night-2026-09-18",
+      "title": "Ace Speedway Race Night",
+      "subtitle": "Asphalt Limited Late Models, Mini Stocks, Small Block Modifieds",
+      "type": "motorsport",
+      "start": "2026-09-18T00:00:00-04:00",
+      "timeTbd": true,
+      "venue": "Ace Speedway",
+      "city": "Altamahaw",
+      "region": "NC",
+      "country": "US",
+      "latitude": 36.1939811,
+      "longitude": -79.4996998,
+      "setting": "outdoor",
+      "description": "Friday-night short-track racing at Ace Speedway in Altamahaw with Asphalt Limited Late Models, Mini Stocks and Small Block Modifieds, per the track's 2026 MyRacePass schedule.",
+      "url": "https://www.myracepass.com/tracks/1012/schedule",
+      "source": {
+        "id": "myracepass-ace-speedway-2026-schedule",
+        "name": "MyRacePass (Ace Speedway 2026 schedule)",
+        "url": "https://www.myracepass.com/tracks/1012/schedule"
+      },
+      "confirmWithOrganizer": true,
+      "verifiedOn": "2026-09-02",
+      "notes": "Start time and ticket prices are not posted on the MyRacePass schedule; the track's own website was offline when checked."
+    },
+    {
+      "id": "ace-speedway-lms-twins-2026-10-09",
+      "title": "LMS Twins",
+      "subtitle": "Late Models, Limited Late Models, Mini Stocks, Small Block Modifieds",
+      "type": "motorsport",
+      "start": "2026-10-09T00:00:00-04:00",
+      "timeTbd": true,
+      "venue": "Ace Speedway",
+      "city": "Altamahaw",
+      "region": "NC",
+      "country": "US",
+      "latitude": 36.1939811,
+      "longitude": -79.4996998,
+      "setting": "outdoor",
+      "description": "'LMS Twins' Friday-night event at Ace Speedway (Late Model Stock twin features, per the name) with Late Models, Limited Late Models, Mini Stocks and Small Block Modifieds, per the track's 2026 MyRacePass schedule.",
+      "url": "https://www.myracepass.com/tracks/1012/schedule",
+      "source": {
+        "id": "myracepass-ace-speedway-2026-schedule",
+        "name": "MyRacePass (Ace Speedway 2026 schedule)",
+        "url": "https://www.myracepass.com/tracks/1012/schedule"
+      },
+      "confirmWithOrganizer": true,
+      "verifiedOn": "2026-09-02",
+      "notes": "Start time and ticket prices are not posted on the MyRacePass schedule; the track's own website was offline when checked."
+    },
+    {
+      "id": "ace-speedway-race-night-2026-10-23",
+      "title": "Ace Speedway Race Night",
+      "subtitle": "Late Models, Limited Late Models, Mini Stocks, Small Block Modifieds",
+      "type": "motorsport",
+      "start": "2026-10-23T00:00:00-04:00",
+      "timeTbd": true,
+      "venue": "Ace Speedway",
+      "city": "Altamahaw",
+      "region": "NC",
+      "country": "US",
+      "latitude": 36.1939811,
+      "longitude": -79.4996998,
+      "setting": "outdoor",
+      "description": "Friday-night short-track racing at Ace Speedway with Late Models, Limited Late Models, Mini Stocks and Small Block Modifieds; the last 2026 date shown on the track's MyRacePass schedule.",
+      "url": "https://www.myracepass.com/tracks/1012/schedule",
+      "source": {
+        "id": "myracepass-ace-speedway-2026-schedule",
+        "name": "MyRacePass (Ace Speedway 2026 schedule)",
+        "url": "https://www.myracepass.com/tracks/1012/schedule"
+      },
+      "confirmWithOrganizer": true,
+      "verifiedOn": "2026-09-02",
+      "notes": "Start time and ticket prices are not posted on the MyRacePass schedule; the track's own website was offline when checked."
+    },
+    {
+      "id": "cars-and-coffee-fayetteville",
+      "title": "Cars and Coffee Fayetteville",
+      "subtitle": "2nd Saturday, year-round · Millstone Towne Centre",
+      "type": "cars-and-coffee",
+      "recurrence": {
+        "freq": "monthly",
+        "weekday": "SA",
+        "ordinal": 2,
+        "startTime": "09:00",
+        "endTime": "12:00",
+        "timezone": "America/New_York"
+      },
+      "venue": "Millstone Towne Centre",
+      "address": "5943 Camden Rd, Fayetteville, NC 28306",
+      "city": "Fayetteville",
+      "region": "NC",
+      "country": "US",
+      "latitude": 34.9799888,
+      "longitude": -78.9737134,
+      "description": "Monthly all-makes meet (classics, modern, muscle, import, exotic, off-road) on the second Saturday of every month, year-round, 9 am–noon at Millstone Towne Centre.",
+      "url": "https://carsandcoffeefaync.wixsite.com/candcfayettevillenc",
+      "source": {
+        "id": "cars-and-coffee-fayetteville-nc-organizer-site",
+        "name": "Cars and Coffee Fayetteville, NC (organizer site)",
+        "url": "https://carsandcoffeefaync.wixsite.com/candcfayettevillenc"
+      },
+      "confirmWithOrganizer": true,
+      "verifiedOn": "2026-09-02",
+      "notes": "The organizer states the second-Saturday rule but does not list dates; updates are posted on the group's Facebook page. Cost not stated."
     }
   ]
 }
