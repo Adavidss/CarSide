@@ -1,4 +1,44 @@
+import type { ComponentType, SVGProps } from 'react';
 import type { EventType } from '@/models/events';
+import {
+  IconCar,
+  IconCheckerFlag,
+  IconCoffee,
+  IconCone,
+  IconDragTree,
+  IconGavel,
+  IconMeet,
+  IconMuseum,
+  IconPennant,
+  IconStar,
+  IconTrackLoop,
+} from '@/components/icons/Icons';
+
+type Glyph = ComponentType<SVGProps<SVGSVGElement> & { size?: number }>;
+
+const GLYPHS: Record<EventType, Glyph> = {
+  'cars-and-coffee': IconCoffee,
+  'car-show': IconCar,
+  classic: IconCar,
+  exotic: IconCar,
+  jdm: IconCar,
+  european: IconCar,
+  concours: IconStar,
+  museum: IconMuseum,
+  autocross: IconCone,
+  'track-day': IconTrackLoop,
+  motorsport: IconCheckerFlag,
+  'drag-racing': IconDragTree,
+  festival: IconPennant,
+  meet: IconMeet,
+  auction: IconGavel,
+  other: IconPennant,
+};
+
+/** Small line glyph for an event type — a scanning cue, not decoration. */
+export function eventTypeIcon(type: EventType): Glyph {
+  return GLYPHS[type] ?? IconPennant;
+}
 
 const LABELS: Record<EventType, string> = {
   'cars-and-coffee': 'Cars & Coffee',

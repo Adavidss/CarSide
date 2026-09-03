@@ -10,8 +10,14 @@ interface ConstructorTableProps {
   standings: Standings<ConstructorStanding>;
 }
 
+function Meter({ points, max, color }: { points: number; max: number; color?: string }) {
+  if (max <= 0) return null;
+  return <span className="srow__meter" style={{ width: `${Math.max(1, (points / max) * 100)}%`, background: color ?? 'var(--fg-3)' }} aria-hidden="true" />;
+}
+
 export function DriverStandingsTable({ standings, limit }: DriverTableProps) {
   const rows = limit ? standings.entries.slice(0, limit) : standings.entries;
+  const max = standings.entries[0]?.points ?? 0;
   return (
     <ol aria-label="Drivers' championship standings">
       <li className="srow srow--head" aria-hidden="true">
@@ -38,6 +44,7 @@ export function DriverStandingsTable({ standings, limit }: DriverTableProps) {
             {d.points}
             {d.wins > 0 && <small>{d.wins} {d.wins === 1 ? 'win' : 'wins'}</small>}
           </span>
+          <Meter points={d.points} max={max} color={teamColor(d.constructorId)} />
         </li>
       ))}
     </ol>
@@ -45,6 +52,7 @@ export function DriverStandingsTable({ standings, limit }: DriverTableProps) {
 }
 
 export function ConstructorStandingsTable({ standings }: ConstructorTableProps) {
+  const max = standings.entries[0]?.points ?? 0;
   return (
     <ol aria-label="Constructors' championship standings">
       <li className="srow srow--head" aria-hidden="true">
@@ -63,6 +71,7 @@ export function ConstructorStandingsTable({ standings }: ConstructorTableProps) 
             {c.points}
             {c.wins > 0 && <small>{c.wins} {c.wins === 1 ? 'win' : 'wins'}</small>}
           </span>
+          <Meter points={c.points} max={max} color={teamColor(c.constructorId)} />
         </li>
       ))}
     </ol>

@@ -1524,3 +1524,310 @@
   width: 32px;
   min-height: 32px;
 }
+
+/* ============================================================================
+   Visual layer: glyphs, weather icons, meters, progress, radar map
+   ========================================================================== */
+
+.glyph {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-1);
+  color: var(--fg-2);
+  background: var(--bg-elev);
+}
+
+.glyph .icon {
+  width: 14px;
+  height: 14px;
+  stroke-width: 1.6;
+}
+
+.glyph--lg {
+  width: 30px;
+  height: 30px;
+}
+
+.glyph--lg .icon {
+  width: 18px;
+  height: 18px;
+}
+
+[data-density='compact'] .glyph {
+  width: 18px;
+  height: 18px;
+}
+
+[data-density='compact'] .glyph .icon {
+  width: 12px;
+  height: 12px;
+}
+
+.wx__icon {
+  width: 15px;
+  height: 15px;
+  stroke-width: 1.7;
+  color: var(--fg-2);
+}
+
+.wx--ok .wx__icon {
+  color: var(--ok);
+}
+
+.wx--warn .wx__icon {
+  color: var(--warn);
+}
+
+.wx--bad .wx__icon {
+  color: var(--bad);
+}
+
+[data-density='compact'] .trow__status .wx__icon {
+  display: inline-block;
+}
+
+/* Points meters under standings rows */
+.srow {
+  position: relative;
+}
+
+.srow__meter {
+  position: absolute;
+  left: 42px;
+  bottom: -1px;
+  height: 2px;
+  max-width: calc(100% - 42px);
+  opacity: 0.75;
+  pointer-events: none;
+}
+
+/* Live session progress */
+.progress {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 160px;
+}
+
+.progress__track {
+  height: 3px;
+  background: var(--rule);
+  border-radius: 1px;
+  overflow: hidden;
+}
+
+.progress__fill {
+  display: block;
+  height: 100%;
+  background: var(--accent);
+  transition: width 1s linear;
+}
+
+.progress__meta {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--s3);
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fg-3);
+}
+
+/* Mini circuit outline in Next Up */
+.nextup__circuit {
+  display: block;
+  width: 96px;
+  color: var(--fg-3);
+}
+
+.nextup__circuit .circuit {
+  max-height: 72px;
+}
+
+.nextup__circuit .circuit__path {
+  stroke-width: 1.75;
+}
+
+[data-density='compact'] .nextup__circuit {
+  display: none;
+}
+
+@media (min-width: 720px) {
+  .nextup__circuit {
+    width: 120px;
+  }
+}
+
+/* Radar map */
+.radar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s3);
+  align-items: center;
+}
+
+.radar__svg {
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+  font-family: var(--font-display);
+}
+
+.radar__ring {
+  fill: none;
+  stroke: var(--rule);
+  stroke-width: 1;
+}
+
+.radar__ring-label,
+.radar__cardinal {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  fill: var(--fg-3);
+  text-transform: uppercase;
+}
+
+.radar__cardinal {
+  text-anchor: middle;
+  fill: var(--fg-2);
+}
+
+.radar__axis {
+  stroke: var(--rule-soft);
+  stroke-width: 1;
+  stroke-dasharray: 2 4;
+}
+
+.radar__home circle {
+  fill: var(--bg);
+  stroke: var(--fg);
+  stroke-width: 2;
+}
+
+.radar__dot {
+  cursor: pointer;
+}
+
+.radar__hit {
+  fill: transparent;
+}
+
+.radar__marker {
+  stroke-width: 1.75;
+  transition: transform 120ms ease;
+}
+
+.radar__dot--meets .radar__marker {
+  fill: var(--accent);
+  stroke: var(--accent);
+}
+
+.radar__dot--shows .radar__marker {
+  fill: var(--fg);
+  stroke: var(--fg);
+}
+
+.radar__dot--motorsport .radar__marker {
+  fill: var(--bg);
+  stroke: var(--fg);
+}
+
+.radar__dot--track .radar__marker {
+  fill: var(--bg);
+  stroke: var(--accent);
+}
+
+.radar__dot.is-selected .radar__marker {
+  transform: scale(1.6);
+}
+
+.radar__dot:focus-visible {
+  outline: none;
+}
+
+.radar__dot:focus-visible .radar__marker {
+  stroke: var(--focus);
+  stroke-width: 3;
+}
+
+.radar__legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--s2) var(--s4);
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fg-3);
+}
+
+.radar__key {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.radar__swatch {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  border: 1.5px solid var(--fg);
+  background: var(--fg);
+}
+
+.radar__key--meets .radar__swatch {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.radar__key--motorsport .radar__swatch {
+  background: transparent;
+}
+
+.radar__key--track .radar__swatch {
+  background: transparent;
+  border-color: var(--accent);
+}
+
+.radar__caption {
+  width: 100%;
+  max-width: 420px;
+  min-height: 56px;
+  padding: var(--s3) 0;
+  border-top: 1px solid var(--rule);
+  text-align: center;
+}
+
+.radar__pick {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+}
+
+.radar__pick-title {
+  font-weight: 600;
+}
+
+.segmented__btn--icon {
+  padding: 0 8px;
+}
+
+.segmented__btn--icon .icon {
+  width: 16px;
+  height: 16px;
+}
+
+.filters__right {
+  display: flex;
+  gap: var(--s2);
+  align-items: center;
+}

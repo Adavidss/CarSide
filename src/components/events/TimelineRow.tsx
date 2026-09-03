@@ -3,7 +3,7 @@ import type { TimelineItem } from '@/utils/timeline';
 import type { EventWeather } from '@/hooks/useWeather';
 import { formatMonthDay, formatTime, isSameDay } from '@/utils/dates';
 import { formatMiles } from '@/utils/distance';
-import { eventTypeLabel, settingLabel } from '@/utils/eventTypes';
+import { eventTypeIcon, eventTypeLabel, settingLabel } from '@/utils/eventTypes';
 import { getWatchability } from '@/utils/watchability';
 import { downloadSessionIcs } from '@/utils/calendar';
 import { isLive } from '@/utils/timeline';
@@ -97,11 +97,15 @@ export function TimelineRow({ item, now, weather, compact = false, extraAction }
 
   const { event } = item;
   const detailPath = `/nearby/${encodeURIComponent(event.id)}`;
+  const Glyph = eventTypeIcon(event.type);
   return (
     <li className={`trow trow--event${past ? ' trow--past' : ''}`}>
       <TimeCell item={item} />
       <div className="trow__body">
         <div className="trow__title">
+          <span className="glyph" aria-hidden="true">
+            <Glyph />
+          </span>
           <Link to={detailPath}>{event.title}</Link>
           {item.ongoing && <span className="tag">In progress</span>}
         </div>

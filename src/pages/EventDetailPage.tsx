@@ -4,7 +4,7 @@ import { usePointWeather } from '@/hooks/useWeather';
 import { useNow } from '@/hooks/useNow';
 import { formatDateLong, formatDateSpan, formatMonthDay, formatTimeRange, formatWeekday, isSameDay, HOUR_MS } from '@/utils/dates';
 import { formatMiles } from '@/utils/distance';
-import { eventTypeLabel, settingLabel } from '@/utils/eventTypes';
+import { eventTypeIcon, eventTypeLabel, settingLabel } from '@/utils/eventTypes';
 import { openStreetMapUrl } from '@/utils/maps';
 import { EventActions } from '@/components/events/EventActions';
 import { WeatherBadge } from '@/components/events/WeatherBadge';
@@ -55,6 +55,7 @@ export function EventDetailPage() {
     );
   }
 
+  const Glyph = eventTypeIcon(event.type);
   const multiDay = end && !isSameDay(start, end);
   const past = (end ?? start).getTime() < now.getTime() && !(dateOnly && isSameDay(start, now));
   const whenLine = multiDay
@@ -82,6 +83,9 @@ export function EventDetailPage() {
           </div>
           <div>
             <div className="row" style={{ gap: 8 }}>
+              <span className="glyph glyph--lg" aria-hidden="true">
+                <Glyph />
+              </span>
               <span className="tag tag--accent">{eventTypeLabel(event.type)}</span>
               {event.recurring && <span className="tag">Recurring</span>}
               {past && <span className="tag">Past</span>}

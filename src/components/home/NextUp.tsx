@@ -1,10 +1,11 @@
+import { Suspense, lazy } from 'react';
 import { Link } from 'react-router-dom';
 import type { TimelineItem } from '@/utils/timeline';
 import type { EventWeather } from '@/hooks/useWeather';
 import { isLive } from '@/utils/timeline';
 import { formatDateSpan, formatMonthDay, formatTime, formatWeekday, isSameDay, localTimeZoneName } from '@/utils/dates';
 import { formatMiles } from '@/utils/distance';
-import { eventTypeLabel } from '@/utils/eventTypes';
+import { eventTypeIcon, eventTypeLabel } from '@/utils/eventTypes';
 import { getWatchability } from '@/utils/watchability';
 import { downloadSessionIcs } from '@/utils/calendar';
 import { Countdown } from '@/components/f1/Countdown';
@@ -15,6 +16,10 @@ import { getCircuitMeta } from '@/services/f1/circuitMeta';
 import { WeatherBadge } from '@/components/events/WeatherBadge';
 import { SaveButton } from '@/components/events/SaveButton';
 import { directionsHref } from '@/components/events/EventActions';
+import { SessionProgress } from '@/components/f1/SessionProgress';
+
+// Circuit geometry ships with the F1 chunk; load it lazily so Home's first paint stays small.
+const CircuitOutline = lazy(() => import('@/components/f1/CircuitOutline').then((m) => ({ default: m.CircuitOutline })));
 
 interface NextUpProps {
   item: TimelineItem;
@@ -62,10 +67,18 @@ export function NextUp({ item, now, weather }: NextUpProps) {
           </p>
         </div>
         <div className="nextup__aside">
+          {meta.geo && (
+            <Suspense fallback={null}>
+              <span className="nextup__circuit" aria-hidden="true">
+                <CircuitOutline geoId={meta.geo} pad={8} />
+              </span>
+            </Suspense>
+          )}
           {live ? (
             <>
               <span className="label">Session under way</span>
               <span className="nextup__big">Ends ~{formatTime(item.end)}</span>
+              <SessionProgress start={item.start} end={item.end} now={now} />
             </>
           ) : (
             <>
@@ -92,6 +105,7 @@ export function NextUp({ item, now, weather }: NextUpProps) {
   const detailPath = `/nearby/${encodeURIComponent(event.id)}`;
   const directions = directionsHref(event);
   const multiDay = item.end && !isSameDay(item.start, item.end);
+  const Glyph = eventTypeIcon(event.type);
 
   return (
     <section className="nextup" aria-labelledby="nextup-title">
@@ -99,6 +113,9 @@ export function NextUp({ item, now, weather }: NextUpProps) {
         <div className="nextup__label">
           {live ? <span className="live-dot" aria-hidden="true" /> : null}
           <span className="label label--accent">{live ? 'Happening now' : 'Next up'}</span>
+          <span className="glyph" aria-hidden="true">
+            <Glyph />
+          </span>
           <span className="tag">{eventTypeLabel(event.type)}</span>
         </div>
         <h2 id="nextup-title" className="nextup__title">

@@ -15,6 +15,8 @@ import { SectionHeading } from '@/components/ui/SectionHeading';
 import { Segmented } from '@/components/ui/Segmented';
 import { Skeleton } from '@/components/ui/Skeleton';
 import { LocationLine } from '@/components/location/LocationLine';
+import { NearbyRadar } from '@/components/events/NearbyRadar';
+import { IconList, IconRadar } from '@/components/icons/Icons';
 
 type Range = 'weekend' | 'next' | '30' | '90';
 
@@ -56,6 +58,7 @@ export function NearbyPage() {
   const [params, setParams] = useSearchParams();
   const range = (RANGE_OPTIONS.some((o) => o.value === params.get('range')) ? params.get('range') : '30') as Range;
   const group = (EVENT_GROUP_OPTIONS.some((o) => o.value === params.get('type')) ? params.get('type') : 'all') as EventGroup;
+  const view = params.get('view') === 'map' ? 'map' : 'list';
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const window = useMemo(() => rangeWindow(range, now), [range, todayKey]);
@@ -92,8 +95,16 @@ export function NearbyPage() {
         <div className="filter-scroll">
           <Segmented options={EVENT_GROUP_OPTIONS} value={group} onChange={(v) => update('type', v)} ariaLabel="Event type" size="sm" />
         </div>
-        <div className="filter-scroll">
+        <div className="filter-scroll filters__right">
           <Segmented options={RANGE_OPTIONS} value={range} onChange={(v) => update('range', v)} ariaLabel="Date range" size="sm" />
+          <div className="segmented segmented--sm" role="group" aria-label="View">
+            <button type="button" className={`segmented__btn segmented__btn--icon${view === 'list' ? ' is-active' : ''}`} aria-pressed={view === 'list'} aria-label="List view" onClick={() => update('view', 'list')}>
+              <IconList />
+            </button>
+            <button type="button" className={`segmented__btn segmented__btn--icon${view === 'map' ? ' is-active' : ''}`} aria-pressed={view === 'map'} aria-label="Map view" onClick={() => update('view', 'map')}>
+              <IconRadar />
+            </button>
+          </div>
         </div>
       </div>
 
@@ -105,7 +116,11 @@ export function NearbyPage() {
         {events.status === 'loading' ? (
           <Skeleton variant="row" count={5} label="Finding events" />
         ) : items.length > 0 ? (
-          <Timeline items={items} now={now} weather={weather} />
+          view === 'map' ? (
+            <NearbyRadar events={filtered} center={settings.location} radiusMiles={settings.radiusMiles} />
+          ) : (
+            <Timeline items={items} now={now} weather={weather} />
+          )
         ) : (
           <div className="empty">
             <h3 className="empty__title">Nothing nearby yet</h3>

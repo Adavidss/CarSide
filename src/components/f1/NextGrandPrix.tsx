@@ -5,6 +5,7 @@ import { usePointWeather } from '@/hooks/useWeather';
 import { formatMonthDay, formatTime, formatWeekday, localTimeZoneName } from '@/utils/dates';
 import { CircuitOutline, getCircuitRecord } from './CircuitOutline';
 import { Countdown } from './Countdown';
+import { SessionProgress } from './SessionProgress';
 import { Flag } from './Flag';
 import { WeatherBadge } from '@/components/events/WeatherBadge';
 
@@ -89,7 +90,14 @@ export function NextGrandPrix({ race, now, status, totalRounds }: NextGrandPrixP
             <span className="label label--accent">
               {live ? `${current.label} — live now` : `${current.label} starts in`}
             </span>
-            {live ? <span className="nextup__big">Ends ~{formatTime(new Date(current.end))}</span> : <Countdown target={new Date(current.start)} now={now} size="md" />}
+            {live ? (
+              <>
+                <span className="nextup__big">Ends ~{formatTime(new Date(current.end))}</span>
+                <SessionProgress start={new Date(current.start)} end={new Date(current.end)} now={now} />
+              </>
+            ) : (
+              <Countdown target={new Date(current.start)} now={now} size="md" />
+            )}
           </div>
         )}
       </div>
