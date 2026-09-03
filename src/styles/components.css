@@ -2290,3 +2290,369 @@
 .locform__row--wrap .input {
   flex: 1 1 200px;
 }
+
+/* ============================================================================
+   Photographs — editorial, square-cornered, credited
+   ========================================================================== */
+
+.photo {
+  margin: var(--s4) 0 0;
+}
+
+.photo__frame {
+  width: 100%;
+  background: var(--bg-sunken);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-1);
+  overflow: hidden;
+}
+
+.photo__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.photo__caption {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-top: var(--s2);
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: var(--s2);
+}
+
+.photo__text {
+  font-size: var(--text-sm);
+  color: var(--fg-2);
+  line-height: 1.4;
+}
+
+.photo__credit {
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fg-3);
+}
+
+.photo__credit a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.photo__credit a:hover {
+  color: var(--fg);
+}
+
+.photo--portrait {
+  margin-top: 0;
+  max-width: 320px;
+}
+
+.frame .photo {
+  margin-top: var(--s2);
+}
+
+[data-density='compact'] .frame {
+  display: none;
+}
+
+/* ---------- lap chart ---------- */
+
+.lapchart__wrap {
+  display: grid;
+  gap: var(--s2);
+}
+
+.lapchart {
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-2);
+  background: var(--bg-elev);
+  font-family: var(--font-display);
+}
+
+.lapchart__tick {
+  stroke: var(--rule);
+  stroke-width: 1;
+  stroke-dasharray: 2 4;
+}
+
+.lapchart__axis {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  fill: var(--fg-3);
+}
+
+.lapchart__now {
+  stroke: var(--accent);
+  stroke-width: 1.5;
+}
+
+.lapchart__line {
+  fill: none;
+  stroke-width: 1.6;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  opacity: 0.85;
+  transition: opacity 120ms ease;
+}
+
+.lapchart__series.is-fav .lapchart__line {
+  stroke-width: 3;
+  opacity: 1;
+}
+
+.lapchart__series.is-dim .lapchart__line {
+  opacity: 0.12;
+}
+
+.lapchart__series.is-dim .lapchart__code {
+  opacity: 0.3;
+}
+
+.lapchart__code {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  fill: var(--fg-2);
+}
+
+/* ---------- strategy ---------- */
+
+.strategy {
+  border-top: 1px solid var(--rule-strong);
+}
+
+.strategy__row {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr);
+  align-items: center;
+  gap: var(--s3);
+  padding: 4px 0;
+  border-bottom: 1px solid var(--rule);
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.strategy__track {
+  position: relative;
+  display: block;
+  height: 16px;
+  background: var(--bg-sunken);
+  border-radius: 1px;
+  overflow: hidden;
+}
+
+.strategy__stint {
+  position: absolute;
+  top: 2px;
+  bottom: 2px;
+  display: flex;
+  align-items: center;
+  padding-left: 4px;
+  box-sizing: border-box;
+  border-right: 1px solid var(--bg);
+  font-size: 9.5px;
+  letter-spacing: 0.06em;
+  color: #17181a;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.strategy__pit {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--fg);
+  opacity: 0.8;
+}
+
+.strategy__now {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--accent);
+}
+
+.lrow--pit {
+  grid-template-columns: 44px 3px 44px minmax(64px, 1fr) minmax(84px, 1fr);
+  min-width: 0;
+}
+
+.lrow--future {
+  opacity: 0.4;
+}
+
+.replay__views {
+  display: flex;
+  justify-content: flex-start;
+}
+
+/* ---------- round & driver pages ---------- */
+
+.circuit-grid {
+  display: grid;
+  gap: var(--s4);
+}
+
+@media (min-width: 720px) {
+  .circuit-grid {
+    grid-template-columns: minmax(220px, 300px) minmax(0, 1fr);
+    gap: var(--s6);
+    align-items: start;
+  }
+}
+
+.winners {
+  border-top: 1px solid var(--rule-strong);
+}
+
+.winner {
+  display: grid;
+  grid-template-columns: 48px 3px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--s3);
+  padding: 7px 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.winner__season {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--fg-2);
+}
+
+.winner__name {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  font-weight: 600;
+}
+
+.winner__name a:hover,
+.srow__link:hover,
+.round__link:hover,
+.gp__link:hover {
+  color: var(--accent-text);
+}
+
+.winner__time {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  color: var(--fg-3);
+}
+
+.driver-grid {
+  display: grid;
+  gap: var(--s4);
+}
+
+@media (min-width: 720px) {
+  .driver-grid {
+    grid-template-columns: 280px minmax(0, 1fr);
+    gap: var(--s6);
+    align-items: start;
+  }
+}
+
+.driver__number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  height: 32px;
+  padding: 0 8px;
+  border: 2px solid var(--rule);
+  border-radius: var(--radius-2);
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.gp__facts--tight {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
+}
+
+.form {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(44px, 1fr));
+  gap: 6px;
+}
+
+.form__cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 6px 0;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-1);
+  font-family: var(--font-display);
+  font-weight: 700;
+}
+
+.form__round {
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  color: var(--fg-3);
+}
+
+.form__pos {
+  font-size: 14px;
+}
+
+.form__cell--win {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.form__cell--win .form__round {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.form__cell--podium {
+  background: var(--fg);
+  border-color: var(--fg);
+  color: var(--bg);
+}
+
+.form__cell--podium .form__round {
+  color: var(--bg);
+  opacity: 0.7;
+}
+
+.form__cell--points {
+  border-color: var(--fg-3);
+}
+
+.form__cell--none {
+  color: var(--fg-3);
+}
+
+.form__cell--out {
+  color: var(--fg-3);
+  border-style: dashed;
+}
+
+.form__cell--hidden {
+  color: var(--fg-3);
+  background: var(--bg-sunken);
+}
+
+.grid-list {
+  border-top: 1px solid var(--rule-strong);
+}

@@ -67,6 +67,7 @@ export function normalizeRace(race: JolpicaRace): F1Race {
     latitude: Number.isFinite(lat) ? lat : undefined,
     longitude: Number.isFinite(lng) ? lng : undefined,
     wikipediaUrl: race.url,
+    circuitUrl: race.Circuit.url,
     sessions,
     raceStart: raceSession.start,
     raceEnd: raceSession.end,

@@ -5,6 +5,8 @@ interface CircuitRecord {
   name: string;
   location: string;
   lengthM: number;
+  opened?: number | string;
+  firstGp?: number | string;
   width: number;
   height: number;
   start: [number, number];

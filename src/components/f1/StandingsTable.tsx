@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import type { ConstructorStanding, DriverStanding, Standings } from '@/models/f1';
 import { teamColor } from '@/services/f1/teamColors';
 
@@ -35,7 +36,9 @@ export function DriverStandingsTable({ standings, limit, favoriteId }: DriverTab
             <span className="srow__code">{d.code}</span>
             <span style={{ minWidth: 0 }}>
               <span className="srow__driver" style={{ display: 'block' }}>
-                {d.givenName} {d.familyName}
+                <Link to={`/f1/driver/${d.driverId}`} className="srow__link">
+                  {d.givenName} {d.familyName}
+                </Link>
               </span>
               <span className="srow__team" style={{ display: 'block' }}>
                 {d.constructorName}

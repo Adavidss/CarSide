@@ -7,7 +7,90 @@ import { IconPause, IconPlay } from '@/components/icons/Icons';
 import { Segmented } from '@/components/ui/Segmented';
 import { Skeleton } from '@/components/ui/Skeleton';
 import { TrackMapSvg } from './TrackMapSvg';
-import { FLAG_LABEL, Tyre } from './LiveTiming';
+import { COMPOUND, FLAG_LABEL, Tyre } from './LiveTiming';
+
+type ReplayView = 'track' | 'chart' | 'strategy' | 'pits';
+
+const VIEWS: Array<{ value: ReplayView; label: string }> = [
+  { value: 'track', label: 'Track' },
+  { value: 'chart', label: 'Lap chart' },
+  { value: 'strategy', label: 'Strategy' },
+  { value: 'pits', label: 'Pit stops' },
+];
+
+function positionAt(model: ReplayModel, driver: number, t: number): number | null {
+  const pos = model.positions[driver];
+  if (!pos?.length) return null;
+  let i = pos.length - 1;
+  while (i > 0 && pos[i][0] > t) i -= 1;
+  return pos[i][0] <= t ? pos[i][1] : pos[0][1];
+}
+
+interface LapSeries {
+  driver: ReplayModel['drivers'][number];
+  points: Array<[number, number]>;
+  final: number;
+}
+
+/** Position after every lap, per driver, for the lap chart. */
+function buildLapChart(model: ReplayModel): LapSeries[] {
+  return model.drivers
+    .map((driver) => {
+      const laps = model.laps[driver.number];
+      const points: Array<[number, number]> = [];
+      const grid = positionAt(model, driver.number, model.start - 1_000);
+      if (grid) points.push([0, grid]);
+      if (laps) {
+        for (let k = 0; k < laps.starts.length; k++) {
+          const p = positionAt(model, driver.number, laps.starts[k] + laps.durations[k]);
+          if (p) points.push([k + 1, p]);
+        }
+      }
+      return { driver, points, final: points[points.length - 1]?.[1] ?? 99 };
+    })
+    .sort((a, b) => a.final - b.final);
+}
+
+const CHART = { w: 720, h: 400, left: 44, right: 50, top: 14, bottom: 26 };
+
+function LapChart({ series, totalLaps, currentLap, focus, favoriteCode, onFocus }: { series: LapSeries[]; totalLaps: number; currentLap: number; focus: number | null; favoriteCode?: string; onFocus: (n: number | null) => void }) {
+  const { w, h, left, right, top, bottom } = CHART;
+  const count = Math.max(2, series.length);
+  const x = (lap: number) => left + (lap / Math.max(1, totalLaps)) * (w - left - right);
+  const y = (pos: number) => top + ((pos - 1) / (count - 1)) * (h - top - bottom);
+  const ticks = [];
+  for (let lap = 10; lap < totalLaps; lap += 10) ticks.push(lap);
+  return (
+    <svg className="lapchart" viewBox={`0 0 ${w} ${h}`} role="img" aria-label="Position by lap for every driver">
+      {ticks.map((lap) => (
+        <g key={lap}>
+          <line className="lapchart__tick" x1={x(lap)} x2={x(lap)} y1={top} y2={h - bottom} />
+          <text className="lapchart__axis" x={x(lap)} y={h - 8} textAnchor="middle">
+            {lap}
+          </text>
+        </g>
+      ))}
+      <line className="lapchart__now" x1={x(currentLap)} x2={x(currentLap)} y1={top - 4} y2={h - bottom + 4} />
+      {series.map((s) => {
+        const active = focus === null ? true : focus === s.driver.number;
+        const fav = s.driver.code === favoriteCode;
+        return (
+          <g key={s.driver.number} className={`lapchart__series${active ? '' : ' is-dim'}${fav ? ' is-fav' : ''}`} onClick={() => onFocus(focus === s.driver.number ? null : s.driver.number)} style={{ cursor: 'pointer' }}>
+            <polyline className="lapchart__line" points={s.points.map(([lap, pos]) => `${x(lap).toFixed(1)},${y(pos).toFixed(1)}`).join(' ')} style={{ stroke: s.driver.colour }} />
+            {s.points[0] && (
+              <text className="lapchart__code" x={left - 6} y={y(s.points[0][1]) + 3} textAnchor="end">
+                {s.driver.code}
+              </text>
+            )}
+            <text className="lapchart__code" x={w - right + 6} y={y(s.final) + 3}>
+              {s.driver.code}
+            </text>
+          </g>
+        );
+      })}
+    </svg>
+  );
+}
 
 interface RaceReplayProps {
   race: F1Race;
@@ -67,6 +150,9 @@ export function RaceReplay({ race, favoriteCode }: RaceReplayProps) {
   const resource = useLoaded((signal) => getRaceReplay(race.season, race.raceStart, signal), [race.season, race.raceStart]);
   const model = resource.data;
   const { t, setT, playing, setPlaying, speed, setSpeed } = useReplayClock(model);
+  const [replayView, setReplayView] = useState<ReplayView>('track');
+  const [focus, setFocus] = useState<number | null>(null);
+  const lapChart = useMemo(() => (model ? buildLapChart(model) : []), [model]);
 
   const view = useMemo(() => {
     if (!model) return null;
@@ -128,10 +214,80 @@ export function RaceReplay({ race, favoriteCode }: RaceReplayProps) {
         {flagKind !== 'clear' && <span className={`tag replay__flag replay__flag--${flagKind}`}>{FLAG_LABEL[flagKind]}</span>}
       </div>
 
-      {model.track.points.length > 1 ? (
-        <TrackMapSvg points={model.track.points} width={model.track.width} height={model.track.height} cars={cars} tone={flagKind} label={`${model.circuit} track map with car positions`} />
-      ) : (
-        <p className="meta">No track trace for this race yet — the order and lap counter still replay below.</p>
+      <div className="replay__views">
+        <Segmented options={VIEWS} value={replayView} onChange={(v) => setReplayView(v as ReplayView)} ariaLabel="Replay view" size="sm" />
+      </div>
+
+      {replayView === 'track' &&
+        (model.track.points.length > 1 ? (
+          <TrackMapSvg points={model.track.points} width={model.track.width} height={model.track.height} cars={cars} tone={flagKind} label={`${model.circuit} track map with car positions`} />
+        ) : (
+          <p className="meta">No track trace for this race yet — the order and lap counter still replay below.</p>
+        ))}
+
+      {replayView === 'chart' && (
+        <div className="lapchart__wrap">
+          <LapChart series={lapChart} totalLaps={model.totalLaps} currentLap={view.lap} focus={focus} favoriteCode={favoriteCode} onFocus={setFocus} />
+          <p className="meta">Position after every lap. Tap a line to isolate a driver; the accent marker follows the scrubber.</p>
+        </div>
+      )}
+
+      {replayView === 'strategy' && (
+        <ol className="strategy" aria-label="Tyre strategy by driver">
+          {view.order.map(({ driver }) => {
+            const stints = model.stints[driver.number] ?? [];
+            const driverPits = model.pits.filter((p) => p[1] === driver.number);
+            return (
+              <li key={driver.number} className={`strategy__row${driver.code === favoriteCode ? ' lrow--fav' : ''}`}>
+                <span className="lrow__code">{driver.code}</span>
+                <span className="strategy__track">
+                  {stints.map((s, i) => {
+                    const lapsRun = s.lapEnd - s.lapStart + 1;
+                    const width = (lapsRun / model.totalLaps) * 100;
+                    return (
+                      <span
+                        key={i}
+                        className="strategy__stint"
+                        style={{ left: `${((s.lapStart - 1) / model.totalLaps) * 100}%`, width: `${width}%`, background: COMPOUND[s.compound]?.colour ?? 'var(--fg-3)' }}
+                        title={`${s.compound}: laps ${s.lapStart}–${s.lapEnd}`}
+                      >
+                        {width > 9 ? `${COMPOUND[s.compound]?.short ?? '?'} ${lapsRun}` : ''}
+                      </span>
+                    );
+                  })}
+                  {driverPits.map((p, i) => (
+                    <span key={i} className="strategy__pit" style={{ left: `${(p[2] / model.totalLaps) * 100}%` }} aria-hidden="true" />
+                  ))}
+                  <span className="strategy__now" style={{ left: `${(view.lap / model.totalLaps) * 100}%` }} aria-hidden="true" />
+                </span>
+              </li>
+            );
+          })}
+        </ol>
+      )}
+
+      {replayView === 'pits' && (
+        <ol className="lboard" aria-label="Pit stops">
+          <li className="lrow lrow--head lrow--pit" aria-hidden="true">
+            <span>Lap</span>
+            <span />
+            <span>Drv</span>
+            <span>Stop</span>
+            <span>Race time</span>
+          </li>
+          {model.pits.map((p, i) => {
+            const driver = model.drivers.find((d) => d.number === p[1]);
+            return (
+              <li key={i} className={`lrow lrow--pit${p[0] > t ? ' lrow--future' : ''}${driver?.code === favoriteCode ? ' lrow--fav' : ''}`}>
+                <span className="lrow__pos num">L{p[2]}</span>
+                <span className="lrow__bar" style={{ background: driver?.colour }} aria-hidden="true" />
+                <span className="lrow__code">{driver?.code ?? p[1]}</span>
+                <span className="num">{p[3] != null ? `${p[3].toFixed(1)} s` : '–'}</span>
+                <span className="num lrow__gap">+{formatDuration(Math.max(0, p[0] - model.start))}</span>
+              </li>
+            );
+          })}
+        </ol>
       )}
 
       <div className="replay__controls">

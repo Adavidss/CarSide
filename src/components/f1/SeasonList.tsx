@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import type { F1Race } from '@/models/f1';
 import { getCircuitMeta } from '@/services/f1/circuitMeta';
 import { formatMonthDay, formatTime, formatWeekday } from '@/utils/dates';
@@ -24,7 +25,9 @@ export function SeasonList({ races, currentRound, now }: SeasonListProps) {
               <Flag country={meta.country} title={race.country} />
               <span style={{ minWidth: 0 }}>
                 <span className="round__name" style={{ display: 'block' }}>
-                  {race.name}
+                  <Link to={`/f1/round/${race.round}`} className="round__link">
+                    {race.name}
+                  </Link>
                   {race.sprintWeekend && (
                     <span className="tag" style={{ marginLeft: 8 }}>
                       Sprint

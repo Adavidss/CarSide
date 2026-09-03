@@ -16,6 +16,8 @@ import { SectionHeading } from '@/components/ui/SectionHeading';
 import { Skeleton } from '@/components/ui/Skeleton';
 import { Freshness } from '@/components/ui/Freshness';
 import { LocationLine } from '@/components/location/LocationLine';
+import { Photo } from '@/components/media/Photo';
+import { useDailyCar } from '@/hooks/useWiki';
 
 export function HomePage() {
   const now = useNow(1000);
@@ -48,6 +50,7 @@ export function HomePage() {
     [pool, window.nextWeekendStart],
   );
   const nextUp = pickNextUp(pool, now);
+  const frame = useDailyCar();
   const nextRace = races ? findNextRace(races, now) : undefined;
   const loading = schedule.status === 'loading' || events.status === 'loading';
   const largerRadius = appConfig.radiusOptions.find((r) => r > settings.radiusMiles);
@@ -131,6 +134,13 @@ export function HomePage() {
               <Timeline items={nextWeekendItems} now={now} weather={weather} />
             </section>
           )}
+
+          {(frame.data || frame.status === 'loading') && (
+            <section className="section frame">
+              <SectionHeading title="The frame" meta="One car worth a look, daily" />
+              <Photo photo={frame.data} loading={frame.status === 'loading'} />
+            </section>
+          )}
         </div>
 
         <aside className="home-grid__aside">
@@ -141,7 +151,7 @@ export function HomePage() {
             ) : nextRace ? (
               <>
                 <p style={{ margin: '4px 0 10px', fontWeight: 600 }}>
-                  {nextRace.name}
+                  <Link to={`/f1/round/${nextRace.round}`}>{nextRace.name}</Link>
                   <span className="meta" style={{ display: 'block', fontWeight: 400 }}>
                     {nextRace.circuitName}
                   </span>

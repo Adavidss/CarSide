@@ -123,6 +123,9 @@ export interface SettingsContextValue {
   toggleDensity(): void;
   revealRound(season: string, round: number): void;
   isRoundRevealed(season: string, round: number): boolean;
+  /** Finer-grained reveals, e.g. "2026:13:grid" for a qualifying result. */
+  revealKey(key: string): void;
+  isKeyRevealed(key: string): boolean;
   resetSettings(): void;
 }
 
@@ -167,6 +170,9 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
           return { ...prev, revealedRounds: [...prev.revealedRounds.slice(-20), key] };
         }),
       isRoundRevealed: (season, round) => settings.revealedRounds.includes(`${season}:${round}`),
+      revealKey: (key) =>
+        setSettings((prev) => (prev.revealedRounds.includes(key) ? prev : { ...prev, revealedRounds: [...prev.revealedRounds.slice(-40), key] })),
+      isKeyRevealed: (key) => settings.revealedRounds.includes(key),
       resetSettings: () => setSettings((prev) => ({ ...defaultSettings(), openf1: prev.openf1, favoriteDriver: prev.favoriteDriver })),
     }),
     [settings, update],

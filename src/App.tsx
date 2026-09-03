@@ -19,11 +19,15 @@ const loadF1 = () => import('@/pages/F1Page');
 const loadEventDetail = () => import('@/pages/EventDetailPage');
 const loadSaved = () => import('@/pages/SavedPage');
 const loadSettings = () => import('@/pages/SettingsPage');
+const loadRound = () => import('@/pages/RoundPage');
+const loadDriver = () => import('@/pages/DriverPage');
 
 const F1Page = lazy(() => loadF1().then((m) => ({ default: m.F1Page })));
 const EventDetailPage = lazy(() => loadEventDetail().then((m) => ({ default: m.EventDetailPage })));
 const SavedPage = lazy(() => loadSaved().then((m) => ({ default: m.SavedPage })));
 const SettingsPage = lazy(() => loadSettings().then((m) => ({ default: m.SettingsPage })));
+const RoundPage = lazy(() => loadRound().then((m) => ({ default: m.RoundPage })));
+const DriverPage = lazy(() => loadDriver().then((m) => ({ default: m.DriverPage })));
 
 function PageFallback() {
   return (
@@ -88,6 +92,8 @@ export function App() {
                 <Routes>
                   <Route path="/" element={<HomePage />} />
                   <Route path="/f1" element={<F1Page />} />
+                  <Route path="/f1/round/:round" element={<RoundPage />} />
+                  <Route path="/f1/driver/:id" element={<DriverPage />} />
                   <Route path="/nearby" element={<NearbyPage />} />
                   <Route path="/nearby/:id" element={<EventDetailPage />} />
                   <Route path="/saved" element={<SavedPage />} />

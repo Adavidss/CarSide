@@ -5,20 +5,26 @@
  */
 import { appConfig } from '@/config/appConfig';
 import type {
+  CircuitWinner,
   ConstructorStanding,
+  DriverRaceResult,
   DriverStanding,
   F1Race,
   F1Session,
   F1WeekendStatus,
+  QualifyingRow,
   RaceResult,
   Standings,
 } from '@/models/f1';
-import { HOUR_MS } from '@/utils/dates';
+import { DAY_MS, HOUR_MS, MINUTE_MS } from '@/utils/dates';
 import { loadWithCache, type Loaded } from '@/services/cache';
 import {
+  fetchCircuitWinners,
   fetchConstructorStandings,
+  fetchDriverSeasonResults,
   fetchDriverStandings,
   fetchLastResult,
+  fetchQualifying,
   fetchSchedule,
   type JolpicaRace,
 } from './jolpica';
@@ -37,7 +43,7 @@ async function bundledSchedule(): Promise<F1Race[] | undefined> {
 
 export function getSchedule(signal?: AbortSignal): Promise<Loaded<F1Race[]>> {
   return loadWithCache<F1Race[]>({
-    key: `f1:schedule:${SEASON}`,
+    key: `f1:schedule:v2:${SEASON}`,
     ttlMs: 12 * HOUR_MS,
     fetcher: async () => {
       const races = await fetchSchedule(SEASON, signal);
@@ -50,7 +56,7 @@ export function getSchedule(signal?: AbortSignal): Promise<Loaded<F1Race[]>> {
 
 export function getDriverStandings(signal?: AbortSignal): Promise<Loaded<Standings<DriverStanding>>> {
   return loadWithCache({
-    key: `f1:driverStandings:${SEASON}`,
+    key: `f1:driverStandings:v2:${SEASON}`,
     ttlMs: 2 * HOUR_MS,
     fetcher: () => fetchDriverStandings(SEASON, signal),
   });
@@ -69,6 +75,31 @@ export function getLastResult(signal?: AbortSignal): Promise<Loaded<RaceResult |
     key: `f1:lastResult:${SEASON}`,
     ttlMs: 2 * HOUR_MS,
     fetcher: () => fetchLastResult(SEASON, signal),
+  });
+}
+
+export function getDriverSeasonResults(driverId: string, signal?: AbortSignal): Promise<Loaded<DriverRaceResult[]>> {
+  return loadWithCache({
+    key: `f1:driverResults:${SEASON}:${driverId}`,
+    ttlMs: 2 * HOUR_MS,
+    fetcher: () => fetchDriverSeasonResults(SEASON, driverId, signal),
+  });
+}
+
+/** Qualifying rows, or null before they are published (re-checked every few minutes). */
+export function getQualifying(season: string, round: number, signal?: AbortSignal): Promise<Loaded<QualifyingRow[] | null>> {
+  return loadWithCache({
+    key: `f1:qualifying:${season}:${round}`,
+    ttlMs: 5 * MINUTE_MS,
+    fetcher: async () => fetchQualifying(season, round, signal),
+  });
+}
+
+export function getCircuitWinners(circuitId: string, signal?: AbortSignal): Promise<Loaded<CircuitWinner[]>> {
+  return loadWithCache({
+    key: `f1:circuitWinners:${circuitId}`,
+    ttlMs: 30 * DAY_MS,
+    fetcher: () => fetchCircuitWinners(circuitId, 6, signal),
   });
 }
 

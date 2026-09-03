@@ -33,6 +33,8 @@ export interface F1Race {
   latitude?: number;
   longitude?: number;
   wikipediaUrl?: string;
+  /** Wikipedia article for the circuit (photos, background). */
+  circuitUrl?: string;
   sessions: F1Session[];
   /** Convenience: the race session start, ISO UTC. */
   raceStart: string;
@@ -52,8 +54,46 @@ export interface DriverStanding {
   givenName: string;
   familyName: string;
   nationality?: string;
+  /** Wikipedia article (portrait, bio). */
+  url?: string;
   constructorId: string;
   constructorName: string;
+}
+
+export interface DriverRaceResult {
+  round: number;
+  raceName: string;
+  circuitId: string;
+  date: string;
+  position: number;
+  grid?: number;
+  status: string;
+  points: number;
+  constructorId: string;
+}
+
+export interface QualifyingRow {
+  position: number;
+  driverId: string;
+  code: string;
+  givenName: string;
+  familyName: string;
+  constructorId: string;
+  constructorName: string;
+  q1?: string;
+  q2?: string;
+  q3?: string;
+}
+
+export interface CircuitWinner {
+  season: string;
+  raceName: string;
+  driverId: string;
+  code: string;
+  familyName: string;
+  constructorId: string;
+  constructorName: string;
+  time?: string;
 }
 
 export interface ConstructorStanding {

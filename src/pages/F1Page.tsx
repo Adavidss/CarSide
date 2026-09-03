@@ -2,7 +2,8 @@ import { Suspense, lazy, useMemo } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { appConfig } from '@/config/appConfig';
 import { useNow } from '@/hooks/useNow';
-import { useConstructorStandings, useDriverStandings, useF1Schedule, useLastResult } from '@/hooks/useF1';
+import { useConstructorStandings, useDriverStandings, useF1Schedule, useLastResult, useQualifying } from '@/hooks/useF1';
+import { teamColor } from '@/services/f1/teamColors';
 import { useSettings } from '@/hooks/useSettings';
 import { findLastCompletedRace, findNextRace, getWeekendStatus } from '@/services/f1';
 import { getCircuitMeta } from '@/services/f1/circuitMeta';
@@ -25,7 +26,7 @@ const LiveTiming = lazy(() => import('@/components/f1/LiveTiming').then((m) => (
 
 export function F1Page() {
   const now = useNow(1000);
-  const { settings, revealRound, isRoundRevealed } = useSettings();
+  const { settings, revealRound, isRoundRevealed, revealKey, isKeyRevealed } = useSettings();
   const schedule = useF1Schedule();
   const drivers = useDriverStandings();
   const constructors = useConstructorStandings();
@@ -51,6 +52,13 @@ export function F1Page() {
     [simKey, params],
   );
   const liveLaps = liveRace ? getCircuitMeta(liveRace.circuitId, liveRace.country).laps : undefined;
+
+  // Starting grid: between the end of qualifying and lights out.
+  const qualiSession = nextRace?.sessions.find((s) => s.key === 'qualifying');
+  const gridWindow = !!nextRace && !!qualiSession && now.getTime() > new Date(qualiSession.end).getTime() && now.getTime() < new Date(nextRace.raceStart).getTime();
+  const qualifying = useQualifying(gridWindow ? nextRace.season : undefined, gridWindow ? nextRace.round : undefined);
+  const gridKey = nextRace ? `${nextRace.season}:${nextRace.round}:grid` : '';
+  const gridHidden = settings.avoidSpoilers && !isKeyRevealed(gridKey);
 
   const result = lastResult.data ?? null;
   const resultsHidden = settings.avoidSpoilers && !!result && !isRoundRevealed(result.season, result.round);
@@ -106,6 +114,51 @@ export function F1Page() {
             <SectionHeading title="Weekend schedule" meta={`${localTimeZoneName(now)} · local time`} />
             <SessionList race={nextRace} now={now} />
           </section>
+
+          {gridWindow && (
+            <section className="section">
+              <SectionHeading title="Starting grid" meta="From qualifying" />
+              {gridHidden ? (
+                <div className="spoiler">
+                  <div>
+                    <div className="spoiler__title">Qualifying complete</div>
+                    <div className="meta">The grid is hidden — spoiler mode is on.</div>
+                  </div>
+                  <button type="button" className="btn btn--accent btn--sm" onClick={() => revealKey(gridKey)}>
+                    <IconEye />
+                    Reveal grid
+                  </button>
+                </div>
+              ) : qualifying.status === 'loading' ? (
+                <Skeleton variant="row" count={4} label="Loading grid" />
+              ) : qualifying.data ? (
+                <ol className="grid-list" aria-label="Starting grid">
+                  {qualifying.data.map((q) => (
+                    <li key={q.driverId} className={`srow${q.position <= 3 ? ' srow--top' : ''}${q.driverId === settings.favoriteDriver?.id ? ' srow--fav' : ''}`}>
+                      <span className="srow__pos num">{q.position}</span>
+                      <span className="srow__name">
+                        <span className="srow__bar" style={{ ['--team' as string]: teamColor(q.constructorId) }} aria-hidden="true" />
+                        <span className="srow__code">{q.code}</span>
+                        <span style={{ minWidth: 0 }}>
+                          <span className="srow__driver" style={{ display: 'block' }}>
+                            <Link to={`/f1/driver/${q.driverId}`} className="srow__link">
+                              {q.givenName} {q.familyName}
+                            </Link>
+                          </span>
+                          <span className="srow__team" style={{ display: 'block' }}>
+                            {q.constructorName}
+                          </span>
+                        </span>
+                      </span>
+                      <span className="srow__pts num">{q.q3 ?? q.q2 ?? q.q1 ?? '–'}</span>
+                    </li>
+                  ))}
+                </ol>
+              ) : (
+                <p className="meta">The grid appears here once qualifying results are published.</p>
+              )}
+            </section>
+          )}
         </>
       ) : (
         <p className="notice">The {races[0]?.season ?? ''} season is complete. Check back when the new calendar is published.</p>

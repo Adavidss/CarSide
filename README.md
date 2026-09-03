@@ -12,8 +12,8 @@ It is a fully static web app (React + TypeScript + Vite) deployed on GitHub Page
 
 | Screen | Purpose |
 | --- | --- |
-| **Home** | *Your automotive weekend.* A **Next Up** hero (the nearest live or upcoming F1 session or local event, with a countdown), then a day-grouped timeline of everything through Sunday, then next weekend. Thursday–Sunday it says *This weekend*; Monday–Wednesday it says *Coming up*. |
-| **F1** | Next Grand Prix with circuit outline, flag, length, laps, race-day forecast and countdown; a **Watch** button into your broadcaster when a session is live or about to start; a **race replay** of the last Grand Prix (cars lapping the track map at their real pace, running order, tyres, safety-car and flag states) built from OpenF1's free post-session data; the full weekend schedule (FP1–Race, sprint sessions when applicable) in your browser's time zone with a **watchability** rating (*Easy watch · Early start · Alarm clock territory · Late night · Absolutely brutal*); last race podium; drivers' and constructors' standings; the season calendar. |
+| **Home** | *Your automotive weekend.* Ends with **The frame**, one of Wikimedia Commons' featured automobile photographs, rotating daily, with its credit. A **Next Up** hero (the nearest live or upcoming F1 session or local event, with a countdown), then a day-grouped timeline of everything through Sunday, then next weekend. Thursday–Sunday it says *This weekend*; Monday–Wednesday it says *Coming up*. |
+| **F1** | Next Grand Prix with circuit outline, flag, length, laps, race-day forecast and countdown; the **starting grid** between qualifying and the race (spoiler-gated); tap any round for a **round page** (circuit photograph, background, opened / first GP, weekend schedule, recent winners) and any driver for a **driver page** (portrait, standing, wins and podiums, every result this season, biography); a **Watch** button into your broadcaster when a session is live or about to start; a **race replay** of the last Grand Prix (cars lapping the track map at their real pace, running order, tyres, safety-car and flag states) built from OpenF1's free post-session data; the full weekend schedule (FP1–Race, sprint sessions when applicable) in your browser's time zone with a **watchability** rating (*Easy watch · Early start · Alarm clock territory · Late night · Absolutely brutal*); last race podium; drivers' and constructors' standings; the season calendar. |
 | **Nearby** | Local automotive events within your radius, filterable by type (Cars & Coffee / Shows / Racing / Track) and range (this weekend / next weekend / 30 / 90 days), as a list or a **map** (distance rings with bearing-placed dots, no tile server). Each row shows a type glyph, date, time, distance, city, admission, setting and a compact forecast. |
 | **Event detail** | Editorial hero, when/where, straight-line distance, forecast at event time, admission, description, source link, Directions (Apple/Google Maps), Add to Calendar (.ics), Save. |
 | **Saved** | Your shortlist, split into upcoming and past. Stored on-device. |
@@ -23,7 +23,7 @@ Other behaviours worth knowing:
 
 - **Spoiler mode** hides race results *and* championship standings until you tap *Reveal*; reveals are remembered per round, so once you've watched a race the standings stay visible until the next one finishes. Schedules are never hidden.
 - **Live timing** — during any session (from 30 minutes before to 30 minutes after, OpenF1's live window) the F1 page becomes a timing screen when an OpenF1 supporter token is connected: gaps or intervals, last lap with purple/green/yellow mini-sectors, best lap, tyre compound and age, pit stops, cars on the GPS track map, safety-car and flag state, track and air temperature, the race-control feed and team radio clips. It polls about 45 times a minute (positions, intervals and GPS every 6 s; laps, stints, pits, race control, weather and radio every 24 s), inside the supporter limit. Without a token the block explains what it needs. `#/f1?livesim=<session key>` drives the same screen from a finished session for testing.
-- **Race replay** — after each Grand Prix, the F1 page replays it from data: every car moves along the circuit trace at its real lap pace; the running order shows lap, last and best lap, tyre and age and pit stops; overtakes tick past as they happen; safety-car, VSC, red and chequered flags come from race control; team radio clips play in sync with the scrubber; and the championship swing appears at the flag. Play, scrub, or speed up to 300×. It sits behind the same spoiler gate as the results.
+- **Race replay** — after each Grand Prix, the F1 page replays it from data: every car moves along the circuit trace at its real lap pace; the running order shows lap, last and best lap, tyre and age and pit stops; overtakes tick past as they happen; safety-car, VSC, red and chequered flags come from race control; team radio clips play in sync with the scrubber; and the championship swing appears at the flag. Four views: **Track**, **Lap chart** (position after every lap, tap a line to isolate a driver), **Strategy** (stints by compound with pit markers) and **Pit stops**. Play, scrub, or speed up to 300×. It sits behind the same spoiler gate as the results.
 - **Title race** — championship maths from the standings and the remaining calendar (25 + 8 sprint points for drivers, 43 + 15 for constructors): who is still mathematically in it, the gap to the leader, and what the leader needs to clinch.
 - **Your driver** — pick a driver in Settings and they're highlighted in the standings, title race, live timing and replay.
 - **Watching live** — race video is exclusively licensed (Apple TV in the US from 2026, F1 TV elsewhere), so CarSide does not embed a stream. Pick your service in Settings → Formula 1 → *Where you watch* and the Race Day block on Home and the F1 page shows a one-tap **Watch** button (a universal link that opens the app on iPhone) plus F1's free live timing page. Live timing data itself is behind OpenF1's paid tier, which a static site cannot use.
@@ -76,6 +76,7 @@ How the static-hosting constraints are handled:
 
 | Data | Source | Notes |
 | --- | --- | --- |
+| Circuit and driver photographs, article extracts, the daily featured car | [Wikipedia REST API](https://en.wikipedia.org/api/rest_v1/) and [Wikimedia Commons API](https://commons.wikimedia.org/w/api.php) | CC-licensed or public-domain images with the author and licence shown under every picture; summaries cached 7 days, image metadata 30 days. |
 | Race replays and live timing (laps, positions, intervals, stints, pits, race control, team radio, weather, GPS) | [OpenF1 API](https://openf1.org/) | Finished sessions are free; live data needs the user's own supporter token, sent as a Bearer header from the browser and stored only on their device (see Settings). A replay is ten requests, reduced to a ~70 KB model cached for 30 days. |
 | F1 schedule, session times, standings, results | [Jolpica F1 API](https://api.jolpi.ca/) (Ergast successor) | Cached 12 h (schedule) / 2 h (standings, results). A bundled snapshot of the current season (`src/data/f1-schedule-fallback.json`) is used only if the API is unreachable and nothing is cached; it is ignored once the season year changes. |
 | Circuit outlines, lengths | [bacinger/f1-circuits](https://github.com/bacinger/f1-circuits) (MIT) | Converted to compact SVG paths by `scripts/build-circuits.mjs`. |
@@ -217,7 +218,7 @@ src/
   hooks/          useSettings, useSaved, useLocationPanel, useResource, useNow, useF1,
                   useEvents, useWeather
   models/         CarEvent / EventProvider, F1 types, settings, weather, location
-  pages/          Home, F1, Nearby, EventDetail, Saved, Settings, NotFound
+  pages/          Home, F1, Round, Driver, Nearby, EventDetail, Saved, Settings, NotFound
   services/
     cache.ts      localStorage cache with TTL + stale fallback (loadWithCache)
     http.ts       fetchJson with timeout
@@ -225,6 +226,7 @@ src/
                   normalize.ts, circuitMeta.ts, teamColors.ts, attribution.ts, index.ts
     events/       registry.ts, dedupe.ts, recurrence.ts, providers/{curated,remoteFeed}.ts
     weather/      openMeteo.ts
+    wiki.ts       Wikipedia summaries and media lists, Commons image credits, daily featured car
     geocoding/    nominatim.ts, openMeteoGeocoder.ts, zippopotam.ts, index.ts
   styles/         tokens.css, base.css, components.css, pages.css
   utils/          dates, zonedTime, timeline (merge/NextUp), distance, ics, calendar,
@@ -263,4 +265,4 @@ Concretely, the system in `src/styles/tokens.css` is:
 
 ## Credits
 
-Circuit outlines derived from [bacinger/f1-circuits](https://github.com/bacinger/f1-circuits) (MIT, © Tomislav Bacinger). F1 data via the community-run [Jolpica](https://github.com/jolpica/jolpica-f1) API; race replay data via [OpenF1](https://openf1.org/). Weather by [Open-Meteo](https://open-meteo.com/). Geocoding © OpenStreetMap contributors. Fonts: Barlow and Barlow Condensed (SIL Open Font License) via Fontsource.
+Circuit outlines derived from [bacinger/f1-circuits](https://github.com/bacinger/f1-circuits) (MIT, © Tomislav Bacinger). F1 data via the community-run [Jolpica](https://github.com/jolpica/jolpica-f1) API; race replay and live timing data via [OpenF1](https://openf1.org/). Photographs from Wikipedia and Wikimedia Commons contributors under their stated licences. Weather by [Open-Meteo](https://open-meteo.com/). Geocoding © OpenStreetMap contributors. Fonts: Barlow and Barlow Condensed (SIL Open Font License) via Fontsource.

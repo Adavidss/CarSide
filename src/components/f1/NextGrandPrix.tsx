@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import type { F1Race, F1WeekendStatus } from '@/models/f1';
 import { findCurrentSession, isSessionLive } from '@/services/f1';
 import { getCircuitMeta } from '@/services/f1/circuitMeta';
@@ -47,7 +48,11 @@ export function NextGrandPrix({ race, now, status, totalRounds }: NextGrandPrixP
           </span>
           <span className="label label--accent">{STATUS_LABEL[status]}</span>
         </div>
-        <h2 className="gp__name">{race.name}</h2>
+        <h2 className="gp__name">
+          <Link to={`/f1/round/${race.round}`} className="gp__link">
+            {race.name}
+          </Link>
+        </h2>
         <p className="gp__circuit">
           {race.circuitName} · {race.locality}, {race.country}
         </p>

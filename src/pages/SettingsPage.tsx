@@ -307,6 +307,11 @@ export function SettingsPage() {
           <p>
             <strong>Circuits</strong> — {circuitAttribution}
           </p>
+          <p>
+            <strong>Photographs</strong> — circuit and driver pictures come from Wikipedia articles and the daily frame from Wikimedia Commons'
+            featured automobile photographs. Each image shows its photographer and licence (CC BY, CC BY-SA or public domain) and links to the file
+            page.
+          </p>
           <p>{appConfig.f1.disclaimer}</p>
           <p>
             <a className="link" href={appConfig.repoUrl} target="_blank" rel="noreferrer">
