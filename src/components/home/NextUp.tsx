@@ -23,8 +23,9 @@ interface NextUpProps {
 }
 
 /**
- * The single most relevant upcoming thing, given hero treatment through
- * typography and a countdown — not a card.
+ * The single most relevant upcoming thing, given hero treatment through typography
+ * and a countdown — not a card. Reads top-to-bottom on a phone: what, when, how long,
+ * then the actions. On wider screens the countdown moves to the right column.
  */
 export function NextUp({ item, now, weather }: NextUpProps) {
   const live = isLive(item, now);
@@ -36,16 +37,16 @@ export function NextUp({ item, now, weather }: NextUpProps) {
     const meta = getCircuitMeta(race.circuitId, race.country);
     return (
       <section className="nextup" aria-labelledby="nextup-title">
-        <div>
+        <div className="nextup__main">
           <div className="nextup__label">
             {live ? <span className="live-dot" aria-hidden="true" /> : null}
             <span className="label label--accent">{live ? 'Live now' : 'Next up'}</span>
             <span className="tag">F1</span>
           </div>
-          <h2 id="nextup-title" className="nextup__title" style={{ marginTop: 10 }}>
+          <h2 id="nextup-title" className="nextup__title">
             {race.name}
           </h2>
-          <p className="nextup__meta" style={{ marginTop: 10 }}>
+          <p className="nextup__meta">
             <strong>{session.label}</strong>
             <span aria-hidden="true">·</span>
             <span>{dayLabel}</span>
@@ -59,15 +60,6 @@ export function NextUp({ item, now, weather }: NextUpProps) {
               {race.locality}
             </span>
           </p>
-          <div className="nextup__actions">
-            <Link to="/f1" className="btn btn--sm">
-              F1 weekend
-            </Link>
-            <button type="button" className="btn btn--ghost btn--sm" onClick={() => downloadSessionIcs(race, session)}>
-              <IconCalendar />
-              Add to calendar
-            </button>
-          </div>
         </div>
         <div className="nextup__aside">
           {live ? (
@@ -83,6 +75,15 @@ export function NextUp({ item, now, weather }: NextUpProps) {
           )}
           <StatusPill tone={watch.tone} label={watch.label} title={watch.note} />
         </div>
+        <div className="nextup__actions">
+          <Link to="/f1" className="btn btn--sm">
+            F1 weekend
+          </Link>
+          <button type="button" className="btn btn--ghost btn--sm" onClick={() => downloadSessionIcs(race, session)}>
+            <IconCalendar />
+            Add to calendar
+          </button>
+        </div>
       </section>
     );
   }
@@ -94,17 +95,17 @@ export function NextUp({ item, now, weather }: NextUpProps) {
 
   return (
     <section className="nextup" aria-labelledby="nextup-title">
-      <div>
+      <div className="nextup__main">
         <div className="nextup__label">
           {live ? <span className="live-dot" aria-hidden="true" /> : null}
           <span className="label label--accent">{live ? 'Happening now' : 'Next up'}</span>
           <span className="tag">{eventTypeLabel(event.type)}</span>
         </div>
-        <h2 id="nextup-title" className="nextup__title" style={{ marginTop: 10 }}>
+        <h2 id="nextup-title" className="nextup__title">
           <Link to={detailPath}>{event.title}</Link>
         </h2>
-        {event.subtitle && <p className="trow__sub" style={{ marginTop: 6 }}>{event.subtitle}</p>}
-        <p className="nextup__meta" style={{ marginTop: 10 }}>
+        {event.subtitle && <p className="nextup__sub">{event.subtitle}</p>}
+        <p className="nextup__meta">
           <strong>{multiDay ? formatDateSpan(item.start, item.end!) : dayLabel}</strong>
           {!item.dateOnly && (
             <>
@@ -127,18 +128,6 @@ export function NextUp({ item, now, weather }: NextUpProps) {
             </>
           )}
         </p>
-        <div className="nextup__actions">
-          <Link to={detailPath} className="btn btn--sm">
-            Details
-          </Link>
-          {directions && (
-            <a className="btn btn--ghost btn--sm" href={directions} target="_blank" rel="noreferrer">
-              <IconDirections />
-              Directions
-            </a>
-          )}
-          <SaveButton event={event} showLabel />
-        </div>
       </div>
       <div className="nextup__aside">
         {live ? (
@@ -158,6 +147,18 @@ export function NextUp({ item, now, weather }: NextUpProps) {
           </>
         )}
         <WeatherBadge weather={weather} />
+      </div>
+      <div className="nextup__actions">
+        <Link to={detailPath} className="btn btn--sm">
+          Details
+        </Link>
+        {directions && (
+          <a className="btn btn--ghost btn--sm" href={directions} target="_blank" rel="noreferrer">
+            <IconDirections />
+            Directions
+          </a>
+        )}
+        <SaveButton event={event} showLabel />
       </div>
     </section>
   );

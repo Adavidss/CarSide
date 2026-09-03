@@ -85,7 +85,7 @@ export function NearbyPage() {
           <p className="label label--lg">Nearby</p>
           <h1 className="page__title">Car events near you</h1>
         </div>
-        <LocationLine />
+        <LocationLine className="page__context--wide" />
       </header>
 
       <div className="filters">

@@ -14,7 +14,7 @@ It is a fully static web app (React + TypeScript + Vite) deployed on GitHub Page
 | --- | --- |
 | **Home** | *Your automotive weekend.* A **Next Up** hero (the nearest live or upcoming F1 session or local event, with a countdown), then a day-grouped timeline of everything through Sunday, then next weekend. Thursday–Sunday it says *This weekend*; Monday–Wednesday it says *Coming up*. |
 | **F1** | Next Grand Prix with circuit outline, flag, length, laps, race-day forecast and countdown; the full weekend schedule (FP1–Race, sprint sessions when applicable) in your browser's time zone with a **watchability** rating (*Easy watch · Early start · Alarm clock territory · Late night · Absolutely brutal*); last race podium; drivers' and constructors' standings; the season calendar. |
-| **Nearby** | Local automotive events within your radius, filterable by type (Cars & Coffee / Shows / Racing / Track & Autocross) and range (this weekend / next weekend / 30 / 90 days). Each row shows date, time, distance, city, admission, setting and a compact forecast. |
+| **Nearby** | Local automotive events within your radius, filterable by type (Cars & Coffee / Shows / Racing / Track) and range (this weekend / next weekend / 30 / 90 days). Each row shows date, time, distance, city, admission, setting and a compact forecast. |
 | **Event detail** | Editorial hero, when/where, straight-line distance, forecast at event time, admission, description, source link, Directions (Apple/Google Maps), Add to Calendar (.ics), Save. |
 | **Saved** | Your shortlist, split into upcoming and past. Stored on-device. |
 | **Settings** | Location, search radius, **Avoid spoilers**, appearance (system / light / dark), cache reset, and a plain-language list of every data source. |
@@ -26,7 +26,6 @@ Other behaviours worth knowing:
 - **Weather** appears only for events inside Open-Meteo's 16-day horizon and is hidden when unavailable. The verdict (*Good show weather · Rain possible · Rain likely · Hot one · Bundle up*) uses the peak rain chance across the event window.
 - **Freshness** is visible: every network-backed block says *Updated 4 min ago*, *Offline copy … may be out of date*, or *Bundled schedule*.
 - **Installable**: a web manifest and a small app-shell service worker make it a lightweight PWA; the shell loads offline and the last fetched data is served from localStorage.
-- **First run only**: a one-time greeting (this started as a birthday present). It never shows again after dismissal — see [Birthday splash](#birthday-splash).
 
 ---
 
@@ -55,7 +54,7 @@ Requires Node 20.19+ (22 recommended).
 
 Deployment is automated with GitHub Actions — see [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml). On every push to `main` it installs, tests, builds, and publishes `dist/` with `actions/deploy-pages`.
 
-One-time repository setup: **Settings → Pages → Build and deployment → Source: GitHub Actions**. After that, every push deploys automatically to `https://<user>.github.io/CarSide/`.
+The workflow enables Pages itself on its first run (`actions/configure-pages` with `enablement: true`), so pushing to `main` is all it takes. If your organisation restricts that, enable it once by hand: **Settings → Pages → Build and deployment → Source: GitHub Actions**. Every push then deploys to `https://<user>.github.io/CarSide/`.
 
 How the static-hosting constraints are handled:
 
@@ -185,10 +184,6 @@ f1: { season: 'current' },
 
 Users override location and radius in the app; those settings, saved events, spoiler reveals and the theme are persisted in `localStorage` under `carside:*` keys.
 
-### Birthday splash
-
-The one-time first-run greeting is controlled by [`src/config/birthday.ts`](src/config/birthday.ts): change the copy there, or set `enabled: false` to remove it. Dismissal is stored under `carside:first-run-dismissed:v1`; bump the key to show it once more, or delete the file and the `<BirthdaySplash />` line in `src/App.tsx` to remove the feature entirely.
-
 ---
 
 ## Project structure
@@ -205,7 +200,7 @@ src/
     location/     LocationForm, LocationPanel (header popover), LocationLine
     ui/           SectionHeading, Segmented, Switch, StatusPill, Skeleton, Freshness
     icons/        Inline SVG icon set
-  config/         appConfig.ts, birthday.ts
+  config/         appConfig.ts
   data/           events.json (curated), circuits.json (generated), f1-schedule-fallback.json
   hooks/          useSettings, useSaved, useLocationPanel, useResource, useNow, useF1,
                   useEvents, useWeather

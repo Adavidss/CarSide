@@ -77,6 +77,13 @@ button {
   padding: 0;
 }
 
+/* iOS: no grey tap flash, no 300 ms double-tap delay. */
+a,
+button {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
 img,
 svg {
   display: block;

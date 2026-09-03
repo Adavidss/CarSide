@@ -28,6 +28,17 @@ interface OpenMeteoLocation {
 
 const TTL = HOUR_MS;
 
+/** One quiet retry — Open-Meteo occasionally returns a transient 5xx. */
+async function fetchForecastJson<T>(url: string, signal?: AbortSignal): Promise<T> {
+  try {
+    return await fetchJson<T>(url, { signal, timeoutMs: 10_000 });
+  } catch (err) {
+    if (signal?.aborted) throw err;
+    await new Promise((resolve) => window.setTimeout(resolve, 800));
+    return fetchJson<T>(url, { signal, timeoutMs: 10_000 });
+  }
+}
+
 /** Group nearby events into one forecast point (~1 km grid). */
 export function forecastKey(point: GeoPoint): string {
   return `${point.latitude.toFixed(2)},${point.longitude.toFixed(2)}`;
@@ -64,7 +75,7 @@ export async function getForecasts(points: GeoPoint[], signal?: AbortSignal): Pr
       `&hourly=temperature_2m,precipitation_probability,weather_code` +
       `&temperature_unit=fahrenheit&timeformat=unixtime&timezone=UTC&forecast_days=${appConfig.weatherForecastDays}`;
     try {
-      const data = await fetchJson<OpenMeteoLocation | OpenMeteoLocation[]>(url, { signal, timeoutMs: 10_000 });
+      const data = await fetchForecastJson<OpenMeteoLocation | OpenMeteoLocation[]>(url, signal);
       const list = Array.isArray(data) ? data : [data];
       list.forEach((location, index) => {
         const key = keys[index];

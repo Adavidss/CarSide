@@ -16,9 +16,9 @@ interface TimelineRowProps {
   item: TimelineItem;
   now: Date;
   weather?: EventWeather | null;
-  /** Compact variant hides the aside actions (used in narrow lists). */
+  /** Compact variant hides the status column and actions (used in narrow lists). */
   compact?: boolean;
-  /** Extra action rendered in the aside (e.g. a Remove button on the Saved page). */
+  /** Replaces the default action (e.g. a Remove button on the Saved page). */
   extraAction?: React.ReactNode;
 }
 
@@ -47,6 +47,11 @@ function TimeCell({ item }: { item: TimelineItem }) {
   );
 }
 
+/**
+ * One row of the merged timeline. Phone-first grid: time | title + meta | action,
+ * with the status (watchability or forecast) on a second line under the title.
+ * From tablet width up the status becomes its own column, timing-screen style.
+ */
 export function TimelineRow({ item, now, weather, compact = false, extraAction }: TimelineRowProps) {
   const live = isLive(item, now);
   const past = !live && (item.end ?? item.start).getTime() < now.getTime() && !(item.dateOnly && isSameDay(item.start, now));
@@ -71,8 +76,8 @@ export function TimelineRow({ item, now, weather, compact = false, extraAction }
           </div>
         </div>
         {!compact && (
-          <div className="trow__aside">
-            {!past && <StatusPill tone={watch.tone} label={watch.label} title={watch.note} />}
+          <>
+            <div className="trow__status">{!past && <StatusPill tone={watch.tone} label={watch.label} title={watch.note} />}</div>
             <div className="trow__actions">
               <button
                 type="button"
@@ -84,7 +89,7 @@ export function TimelineRow({ item, now, weather, compact = false, extraAction }
                 <IconCalendar />
               </button>
             </div>
-          </div>
+          </>
         )}
       </li>
     );
@@ -111,12 +116,10 @@ export function TimelineRow({ item, now, weather, compact = false, extraAction }
         </div>
       </div>
       {!compact && (
-        <div className="trow__aside">
-          {!past && <WeatherBadge weather={weather} showVerdict={false} />}
-          <div className="trow__actions">
-            {extraAction ?? <SaveButton event={event} />}
-          </div>
-        </div>
+        <>
+          <div className="trow__status">{!past && <WeatherBadge weather={weather} showVerdict={false} />}</div>
+          <div className="trow__actions">{extraAction ?? <SaveButton event={event} />}</div>
+        </>
       )}
     </li>
   );

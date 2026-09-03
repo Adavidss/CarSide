@@ -4,7 +4,6 @@ import { SettingsProvider } from '@/hooks/useSettings';
 import { SavedProvider } from '@/hooks/useSaved';
 import { LocationPanelProvider, useLocationPanel } from '@/hooks/useLocationPanel';
 import { AppShell } from '@/components/layout/AppShell';
-import { BirthdaySplash } from '@/components/BirthdaySplash';
 import { HomePage } from '@/pages/HomePage';
 import { F1Page } from '@/pages/F1Page';
 import { NearbyPage } from '@/pages/NearbyPage';
@@ -46,7 +45,6 @@ export function App() {
                 <Route path="*" element={<NotFoundPage />} />
               </Routes>
             </AppShell>
-            <BirthdaySplash />
           </HashRouter>
         </LocationPanelProvider>
       </SavedProvider>

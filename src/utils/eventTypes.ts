@@ -53,7 +53,7 @@ export const EVENT_GROUP_OPTIONS: Array<{ value: EventGroup; label: string }> = 
   { value: 'meets', label: 'Cars & Coffee' },
   { value: 'shows', label: 'Shows' },
   { value: 'motorsport', label: 'Racing' },
-  { value: 'track', label: 'Track & Autocross' },
+  { value: 'track', label: 'Track' },
 ];
 
 export function settingLabel(setting: 'outdoor' | 'indoor' | 'mixed' | undefined): string | undefined {

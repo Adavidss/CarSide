@@ -2,11 +2,11 @@ import { useSettings } from '@/hooks/useSettings';
 import { useLocationPanel } from '@/hooks/useLocationPanel';
 
 /** "Morrisville, NC 27560 · 50 mi · Change" for page headers. */
-export function LocationLine({ prefix }: { prefix?: string }) {
+export function LocationLine({ prefix, className }: { prefix?: string; className?: string }) {
   const { settings } = useSettings();
   const { openPanel } = useLocationPanel();
   return (
-    <p className="page__context">
+    <p className={className ? `page__context ${className}` : 'page__context'}>
       {prefix && (
         <>
           <span>{prefix}</span>

@@ -16,7 +16,7 @@ export function WeatherBadge({ weather, showVerdict = true }: WeatherBadgeProps)
       <span className="wx__label">{snapshot.label}</span>
       {showVerdict && (
         <>
-          <span aria-hidden="true">·</span>
+          <span className="wx__sep" aria-hidden="true">·</span>
           <span className="wx__verdict">{verdict.label}</span>
         </>
       )}

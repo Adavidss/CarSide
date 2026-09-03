@@ -60,14 +60,14 @@ export function HomePage() {
           <p className="label label--lg">Your automotive weekend</p>
           <h1 className="page__title">{formatDateLong(now)}</h1>
         </div>
-        <LocationLine />
+        <LocationLine className="page__context--wide" />
       </header>
 
       {nextUp ? (
         <NextUp item={nextUp} now={now} weather={nextUp.kind === 'event' ? weather.get(nextUp.id) : undefined} />
       ) : loading ? (
         <section className="nextup" aria-busy="true">
-          <div>
+          <div className="nextup__main">
             <Skeleton variant="text" width="30%" />
             <div style={{ height: 12 }} />
             <Skeleton variant="title" width="70%" />
@@ -75,12 +75,12 @@ export function HomePage() {
         </section>
       ) : (
         <section className="nextup">
-          <div>
+          <div className="nextup__main">
             <span className="label label--accent">Next up</span>
-            <h2 className="nextup__title" style={{ marginTop: 10 }}>
+            <h2 className="nextup__title">
               A quiet stretch
             </h2>
-            <p className="nextup__meta" style={{ marginTop: 10 }}>
+            <p className="nextup__meta">
               Nothing scheduled within {settings.radiusMiles} mi through {formatDateSpan(window.nextWeekendStart, window.nextWeekendEnd)}.
             </p>
           </div>

@@ -37,9 +37,6 @@ export const appConfig = {
     disclaimer:
       'CarSide is an independent fan project and is not affiliated with, endorsed by, or connected to Formula 1, the FIA, or Formula One Licensing B.V.',
   },
-
-  /** Controlled in src/config/birthday.ts; kept here so it is discoverable. */
-  birthdaySplashEnabled: true,
 } as const;
 
 export type RadiusOption = (typeof appConfig.radiusOptions)[number];

@@ -4,7 +4,7 @@ import { useNow } from '@/hooks/useNow';
 import { useConstructorStandings, useDriverStandings, useF1Schedule, useLastResult } from '@/hooks/useF1';
 import { useSettings } from '@/hooks/useSettings';
 import { findLastCompletedRace, findNextRace, getWeekendStatus } from '@/services/f1';
-import { localTimeZoneId, localTimeZoneName } from '@/utils/dates';
+import { localTimeZoneName } from '@/utils/dates';
 import { NextGrandPrix } from '@/components/f1/NextGrandPrix';
 import { SessionList } from '@/components/f1/SessionList';
 import { LastRace } from '@/components/f1/LastRace';
@@ -44,9 +44,7 @@ export function F1Page() {
           <h1 className="page__title">{nextRace ? (status === 'in-progress' ? 'Race weekend' : 'Next race weekend') : 'Season'}</h1>
         </div>
         <p className="page__context">
-          <span>
-            Times in {localTimeZoneName(now)} · {localTimeZoneId()}
-          </span>
+          <span>Times in {localTimeZoneName(now)}</span>
           <span aria-hidden="true">·</span>
           <span>Spoilers {settings.avoidSpoilers ? 'hidden' : 'shown'}</span>
           <span aria-hidden="true">·</span>

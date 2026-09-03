@@ -604,6 +604,24 @@
   display: block;
 }
 
+.facts .fact__value {
+  min-width: 0;
+}
+
+.facts .wx {
+  flex-wrap: wrap;
+  white-space: normal;
+}
+
+/* When the badge wraps, the verdict takes its own line without a dangling dot. */
+.facts .wx .wx__sep {
+  display: none;
+}
+
+.facts .wx__verdict {
+  flex-basis: 100%;
+}
+
 .event-actions {
   margin-top: var(--s5);
 }
@@ -648,6 +666,11 @@
 .settings__body {
   display: grid;
   gap: var(--s3);
+}
+
+.settings__body > .segmented {
+  justify-self: start;
+  max-width: 100%;
 }
 
 .settings__row {
