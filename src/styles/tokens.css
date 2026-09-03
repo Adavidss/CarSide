@@ -1,0 +1,130 @@
+/* ============================================================================
+   CarSide design tokens
+   Charcoal, warm off-white, neutral greys and ONE signal-orange accent.
+   Shapes are square-ish (2–6px), rules are hairlines, emphasis comes from
+   typography and alignment — not from cards, gradients or shadows.
+   ========================================================================== */
+
+:root {
+  color-scheme: light dark;
+
+  /* Type */
+  --font-display: 'Barlow Condensed', 'Arial Narrow', 'Roboto Condensed', system-ui, sans-serif;
+  --font-body: 'Barlow', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  --text-xs: 0.75rem;   /* 12 */
+  --text-sm: 0.8125rem; /* 13 */
+  --text-base: 1rem;    /* 16 */
+  --text-md: 1.0625rem; /* 17 */
+  --text-lg: 1.25rem;   /* 20 */
+  --text-xl: 1.625rem;  /* 26 */
+  --text-2xl: 2.25rem;  /* 36 */
+  --text-3xl: 3rem;     /* 48 */
+  --tracking-label: 0.08em;
+
+  /* Spacing (4px base) */
+  --s1: 4px;
+  --s2: 8px;
+  --s3: 12px;
+  --s4: 16px;
+  --s5: 24px;
+  --s6: 32px;
+  --s7: 48px;
+  --s8: 64px;
+  --gutter: 16px;
+  --content-max: 1120px;
+  --header-h: 56px;
+  --bottom-nav-h: 58px;
+
+  /* Shape */
+  --radius-1: 2px;
+  --radius-2: 4px;
+  --radius-3: 6px;
+
+  /* Light palette */
+  --bg: #f4f3ef;
+  --bg-elev: #fbfaf7;
+  --bg-sunken: #ebe9e2;
+  --bg-inverse: #17181a;
+  --fg: #17181a;
+  --fg-2: #4d4f54;
+  --fg-3: #75777d;
+  --fg-inverse: #f4f3ef;
+  --rule: #d9d6ce;
+  --rule-soft: #e6e3dc;
+  --rule-strong: #17181a;
+  --accent: #e0491b;
+  --accent-text: #b8390f;
+  --accent-soft: rgba(224, 73, 27, 0.1);
+  --ok: #2e8b57;
+  --warn: #b7820a;
+  --late: #d2601a;
+  --bad: #c0392b;
+  --focus: #e0491b;
+  --shadow-popover: 0 10px 30px rgba(23, 24, 26, 0.14);
+  --skeleton: #e4e1d9;
+  --skeleton-shine: #f0eee8;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --bg: #121314;
+    --bg-elev: #1a1b1d;
+    --bg-sunken: #0c0d0e;
+    --bg-inverse: #f1efe9;
+    --fg: #ecebe6;
+    --fg-2: #b6b4ae;
+    --fg-3: #85847f;
+    --fg-inverse: #121314;
+    --rule: #2c2d30;
+    --rule-soft: #222325;
+    --rule-strong: #ecebe6;
+    --accent: #ff6a3d;
+    --accent-text: #ff7f58;
+    --accent-soft: rgba(255, 106, 61, 0.14);
+    --ok: #4fb87a;
+    --warn: #e0a72c;
+    --late: #f27b36;
+    --bad: #e35f52;
+    --focus: #ff6a3d;
+    --shadow-popover: 0 12px 32px rgba(0, 0, 0, 0.5);
+    --skeleton: #222325;
+    --skeleton-shine: #2c2d30;
+  }
+}
+
+:root[data-theme='dark'] {
+  --bg: #121314;
+  --bg-elev: #1a1b1d;
+  --bg-sunken: #0c0d0e;
+  --bg-inverse: #f1efe9;
+  --fg: #ecebe6;
+  --fg-2: #b6b4ae;
+  --fg-3: #85847f;
+  --fg-inverse: #121314;
+  --rule: #2c2d30;
+  --rule-soft: #222325;
+  --rule-strong: #ecebe6;
+  --accent: #ff6a3d;
+  --accent-text: #ff7f58;
+  --accent-soft: rgba(255, 106, 61, 0.14);
+  --ok: #4fb87a;
+  --warn: #e0a72c;
+  --late: #f27b36;
+  --bad: #e35f52;
+  --focus: #ff6a3d;
+  --shadow-popover: 0 12px 32px rgba(0, 0, 0, 0.5);
+  --skeleton: #222325;
+  --skeleton-shine: #2c2d30;
+}
+
+@media (min-width: 720px) {
+  :root {
+    --gutter: 24px;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --gutter: 32px;
+  }
+}

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>CarSide — Racing. Shows. Weekends.</title>
+    <meta name="description" content="CarSide is a low-friction automotive weekend companion: Formula 1 sessions in your local time, nearby car shows and Cars & Coffee events, and one timeline for the weekend." />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f4f3ef" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121314" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="CarSide" />
+    <link rel="icon" href="/icons/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <script>
+      // Apply the persisted theme before first paint to avoid a flash of the wrong scheme.
+      (function () {
+        try {
+          var raw = localStorage.getItem('carside:settings:v1');
+          var theme = raw ? (JSON.parse(raw).theme || 'system') : 'system';
+          if (theme === 'light' || theme === 'dark') {
+            document.documentElement.setAttribute('data-theme', theme);
+          }
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <noscript>CarSide needs JavaScript to load race schedules and nearby events.</noscript>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
