@@ -319,6 +319,12 @@ export const IconList = (p: IconProps) => (
   </Icon>
 );
 
+export const IconShare = (p: IconProps) => (
+  <Icon {...p}>
+    <path d="M12 3v12M8 7l4-4 4 4M5 13v6h14v-6" />
+  </Icon>
+);
+
 export const IconFlag = (p: IconProps) => (
   <Icon {...p}>
     <path d="M5 21V4h12l-2 4 2 4H5" />

@@ -54,6 +54,8 @@ export interface CarEvent {
   source: EventSource;
   /** Generated from a recurrence rule rather than a confirmed calendar entry. */
   recurring?: boolean;
+  /** Human description of the rule, e.g. "First Saturday monthly · 8:00 – 11:00 AM". */
+  recurrenceText?: string;
   /** Organiser schedules drift — nudge the user to confirm before driving out. */
   confirmWithOrganizer?: boolean;
   verifiedOn?: string;

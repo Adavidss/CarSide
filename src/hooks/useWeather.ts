@@ -5,10 +5,12 @@ import type { GeoPoint } from '@/models/location';
 import type { WeatherSnapshot, WeatherVerdict } from '@/models/weather';
 import {
   forecastKey,
+  getDailyOutlook,
   getForecasts,
   maxPrecipitationProbability,
   snapshotAt,
   weatherVerdict,
+  type DailyOutlook,
   type HourlyForecast,
 } from '@/services/weather/openMeteo';
 import { DAY_MS, HOUR_MS } from '@/utils/dates';
@@ -124,4 +126,27 @@ export function usePointWeather(point: GeoPoint | undefined, when: Date | undefi
     const windowMax = maxPrecipitationProbability(forecast, new Date(whenMs), new Date(whenMs + 2 * HOUR_MS));
     return { snapshot, verdict: weatherVerdict(snapshot, windowMax) };
   }, [forecast, whenMs]);
+}
+
+/** Daily outlook for the selected location (seven days), refreshed hourly. */
+export function useDailyOutlook(point: GeoPoint | undefined): DailyOutlook[] | null {
+  const [days, setDays] = useState<DailyOutlook[] | null>(null);
+  const lat = point?.latitude;
+  const lon = point?.longitude;
+  useEffect(() => {
+    if (lat == null || lon == null) {
+      setDays(null);
+      return;
+    }
+    const controller = new AbortController();
+    getDailyOutlook({ latitude: lat, longitude: lon }, controller.signal)
+      .then((d) => {
+        if (!controller.signal.aborted) setDays(d);
+      })
+      .catch(() => {
+        /* decorative */
+      });
+    return () => controller.abort();
+  }, [lat, lon]);
+  return days;
 }

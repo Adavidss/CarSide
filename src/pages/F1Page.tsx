@@ -18,7 +18,8 @@ import { SeasonList } from '@/components/f1/SeasonList';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { Skeleton } from '@/components/ui/Skeleton';
 import { Freshness } from '@/components/ui/Freshness';
-import { IconEye } from '@/components/icons/Icons';
+import { IconCalendar, IconEye } from '@/components/icons/Icons';
+import { downloadSeasonIcs } from '@/utils/calendar';
 import { circuitAttribution } from '@/services/f1/attribution';
 
 const RaceReplay = lazy(() => import('@/components/f1/RaceReplay').then((m) => ({ default: m.RaceReplay })));
@@ -246,6 +247,15 @@ export function F1Page() {
         <section className="section">
           <SectionHeading title={`${races[0].season} season`} meta={`${races.length} rounds`} />
           <SeasonList races={races} currentRound={nextRace?.round} now={now} />
+          {nextRace && (
+            <div className="section__foot">
+              <button type="button" className="btn btn--sm" onClick={() => downloadSeasonIcs(races, now)}>
+                <IconCalendar />
+                Add remaining races to calendar
+              </button>
+              <span>One .ics with every Grand Prix still to come, in your local time.</span>
+            </div>
+          )}
         </section>
       )}
 

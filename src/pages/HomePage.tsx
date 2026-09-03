@@ -9,7 +9,7 @@ import { useSettings } from '@/hooks/useSettings';
 import { useLocationPanel } from '@/hooks/useLocationPanel';
 import { findNextRace, isSessionLive } from '@/services/f1';
 import { buildTimeline, pickNextUp } from '@/utils/timeline';
-import { dayKey, formatDateLong, formatDateSpan, formatTime, formatWeekday, getWeekendWindow, startOfDay } from '@/utils/dates';
+import { addDays, dayKey, formatDateLong, formatDateSpan, formatTime, formatWeekday, getWeekendWindow, startOfDay } from '@/utils/dates';
 import { NextUp } from '@/components/home/NextUp';
 import { Timeline } from '@/components/events/Timeline';
 import { SectionHeading } from '@/components/ui/SectionHeading';
@@ -18,6 +18,7 @@ import { Freshness } from '@/components/ui/Freshness';
 import { LocationLine } from '@/components/location/LocationLine';
 import { Photo } from '@/components/media/Photo';
 import { useDailyCar } from '@/hooks/useWiki';
+import { WeekendOutlook } from '@/components/home/WeekendOutlook';
 
 export function HomePage() {
   const now = useNow(1000);
@@ -65,6 +66,8 @@ export function HomePage() {
         </div>
         <LocationLine className="page__context--wide" />
       </header>
+
+      <WeekendOutlook point={settings.location} days={[window.weekendStart, addDays(window.weekendStart, 1), window.weekendEnd]} />
 
       {nextUp ? (
         <NextUp item={nextUp} now={now} weather={nextUp.kind === 'event' ? weather.get(nextUp.id) : undefined} />

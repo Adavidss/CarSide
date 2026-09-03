@@ -159,3 +159,63 @@ export function weatherVerdict(snapshot: WeatherSnapshot, precipitationWindowMax
   if (snapshot.kind === 'fog') return { label: 'Foggy start', tone: 'warn' };
   return { label: 'Good show weather', tone: 'ok' };
 }
+
+/* ---------- daily outlook (weekend planning) ---------- */
+
+export interface DailyOutlook {
+  /** Local calendar date "YYYY-MM-DD". */
+  date: string;
+  code: number;
+  kind: WeatherKind;
+  label: string;
+  high: number;
+  low: number;
+  precipitationProbability: number;
+}
+
+interface OpenMeteoDaily {
+  daily: {
+    time: string[];
+    weather_code: number[];
+    temperature_2m_max: number[];
+    temperature_2m_min: number[];
+    precipitation_probability_max: Array<number | null>;
+  };
+}
+
+/** Seven-day daily forecast for a point, cached for an hour. */
+export async function getDailyOutlook(point: GeoPoint, signal?: AbortSignal): Promise<DailyOutlook[]> {
+  const key = `weather:daily:${forecastKey(point)}`;
+  const cached = readCache<DailyOutlook[]>(key);
+  if (cached && Date.now() - cached.savedAt < TTL) return cached.value;
+  const url =
+    `https://api.open-meteo.com/v1/forecast?latitude=${point.latitude.toFixed(3)}&longitude=${point.longitude.toFixed(3)}` +
+    `&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max` +
+    `&temperature_unit=fahrenheit&timezone=auto&forecast_days=7`;
+  try {
+    const data = await fetchForecastJson<OpenMeteoDaily>(url, signal);
+    const days = data.daily.time.map((date, i) => {
+      const code = data.daily.weather_code[i] ?? 3;
+      const { kind, label } = describeWeatherCode(code);
+      return {
+        date,
+        code,
+        kind,
+        label,
+        high: Math.round(data.daily.temperature_2m_max[i]),
+        low: Math.round(data.daily.temperature_2m_min[i]),
+        precipitationProbability: data.daily.precipitation_probability_max[i] ?? 0,
+      };
+    });
+    writeCache(key, days);
+    return days;
+  } catch (err) {
+    if (cached) return cached.value;
+    throw err;
+  }
+}
+
+/** A dry, mild day — the kind you take the roof off for. */
+export function isTopDownDay(day: DailyOutlook): boolean {
+  return day.high >= 62 && day.high <= 88 && day.precipitationProbability <= 20 && !['rain', 'drizzle', 'storm', 'snow'].includes(day.kind);
+}

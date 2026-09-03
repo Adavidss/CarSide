@@ -2656,3 +2656,58 @@
 .grid-list {
   border-top: 1px solid var(--rule-strong);
 }
+
+/* ---------- weekend outlook strip ---------- */
+
+.outlook {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s2) var(--s5);
+  margin: calc(-1 * var(--s3)) 0 var(--s5);
+  padding-bottom: var(--s3);
+  border-bottom: 1px solid var(--rule);
+}
+
+.outlook__day {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--fg-2);
+}
+
+.outlook__name {
+  color: var(--fg-3);
+  letter-spacing: 0.08em;
+  font-size: 12px;
+}
+
+.outlook__icon {
+  width: 18px;
+  height: 18px;
+  stroke-width: 1.7;
+  color: var(--fg-2);
+}
+
+.outlook__temp {
+  color: var(--fg);
+  font-size: 16px;
+}
+
+.outlook__rain {
+  font-size: 12px;
+  color: var(--fg-3);
+}
+
+.outlook__tag {
+  margin-left: 2px;
+}
+
+[data-density='compact'] .outlook {
+  margin-top: calc(-1 * var(--s2));
+  padding-bottom: var(--s2);
+}

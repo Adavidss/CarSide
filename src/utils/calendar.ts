@@ -56,3 +56,14 @@ export function downloadWeekendIcs(race: F1Race): void {
     ),
   );
 }
+
+/** Every remaining Grand Prix (race sessions only) in one calendar file. */
+export function downloadSeasonIcs(races: F1Race[], now: Date): void {
+  const remaining = races.filter((race) => new Date(race.raceEnd).getTime() > now.getTime());
+  const events = remaining.flatMap((race) => {
+    const session = race.sessions.find((s) => s.key === 'race');
+    return session ? [sessionToIcs(race, session)] : [];
+  });
+  if (!events.length) return;
+  downloadIcs(icsFilename(`F1 ${remaining[0].season} remaining races`), buildIcs(events, `F1 ${remaining[0].season}`));
+}

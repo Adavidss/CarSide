@@ -5,7 +5,14 @@
  */
 import type { CarEvent, CuratedEventEntry, CuratedFeed, EventProvider, EventSearchContext } from '@/models/events';
 import feed from '@/data/events.json';
-import { expandRecurrence } from '../recurrence';
+import { describeRecurrence, expandRecurrence } from '../recurrence';
+
+function clockLabel(hhmm: string): string {
+  const [h, m] = hhmm.split(':').map(Number);
+  const period = h >= 12 ? 'PM' : 'AM';
+  const hour12 = h % 12 === 0 ? 12 : h % 12;
+  return `${hour12}:${String(m ?? 0).padStart(2, '0')} ${period}`;
+}
 
 export const CURATED_PROVIDER_ID = 'curated';
 
@@ -58,6 +65,7 @@ export function expandCuratedFeed(
           start: occurrence.start.toISOString(),
           end: occurrence.end?.toISOString(),
           recurring: true,
+          recurrenceText: `${describeRecurrence(entry.recurrence)} · ${clockLabel(entry.recurrence.startTime)}${entry.recurrence.endTime ? ` – ${clockLabel(entry.recurrence.endTime)}` : ''}`,
           confirmWithOrganizer: entry.confirmWithOrganizer ?? true,
         });
       }

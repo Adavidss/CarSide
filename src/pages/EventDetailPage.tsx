@@ -4,6 +4,9 @@ import { usePointWeather } from '@/hooks/useWeather';
 import { useNow } from '@/hooks/useNow';
 import { formatDateLong, formatDateSpan, formatMonthDay, formatTimeRange, formatWeekday, isSameDay, HOUR_MS } from '@/utils/dates';
 import { formatMiles } from '@/utils/distance';
+import { estimateDriveMinutes, leaveBy } from '@/utils/drive';
+import { lightNote, sunTimes } from '@/utils/sun';
+import { formatTime } from '@/utils/dates';
 import { eventTypeIcon, eventTypeLabel, settingLabel } from '@/utils/eventTypes';
 import { openStreetMapUrl } from '@/utils/maps';
 import { EventActions } from '@/components/events/EventActions';
@@ -58,6 +61,10 @@ export function EventDetailPage() {
   const Glyph = eventTypeIcon(event.type);
   const multiDay = end && !isSameDay(start, end);
   const past = (end ?? start).getTime() < now.getTime() && !(dateOnly && isSameDay(start, now));
+  const driveMinutes = event.distanceMiles !== undefined ? estimateDriveMinutes(event.distanceMiles) : undefined;
+  const departure = !past && !dateOnly && event.distanceMiles !== undefined ? leaveBy(start, event.distanceMiles) : undefined;
+  const sun = event.latitude != null && event.longitude != null ? sunTimes(start, event.latitude, event.longitude) : null;
+  const light = dateOnly ? null : lightNote(start, sun);
   const whenLine = multiDay
     ? `${formatDateSpan(start, end)}${event.timeTbd ? ' · times TBA' : event.allDay ? '' : ` · from ${formatTimeRange(start)}`}`
     : event.timeTbd
@@ -111,6 +118,7 @@ export function EventDetailPage() {
           <dt className="label">When</dt>
           <dd className="fact__value">
             {whenLine}
+            {event.recurrenceText && <span className="meta">Repeats: {event.recurrenceText}</span>}
             {event.confirmWithOrganizer && <span className="meta">Confirm the date with the organizer before heading out.</span>}
           </dd>
         </div>
@@ -125,8 +133,32 @@ export function EventDetailPage() {
           <div className="fact">
             <dt className="label">Distance</dt>
             <dd className="fact__value">
-              <span className="num">{formatMiles(event.distanceMiles)}</span>
-              <span className="meta">Straight-line from your location</span>
+              <span className="num">
+                {formatMiles(event.distanceMiles)}
+                {driveMinutes !== undefined && ` · ≈${driveMinutes} min drive`}
+              </span>
+              <span className="meta">Straight-line distance; drive time is an estimate</span>
+            </dd>
+          </div>
+        )}
+        {departure && (
+          <div className="fact">
+            <dt className="label">Leave by</dt>
+            <dd className="fact__value">
+              <span className="num">{formatTime(departure)}</span>
+              <span className="meta">To arrive ten minutes before {formatTime(start)}</span>
+            </dd>
+          </div>
+        )}
+        {sun && (
+          <div className="fact">
+            <dt className="label">Light</dt>
+            <dd className="fact__value">
+              <span className="num">
+                Sunrise {formatTime(sun.sunrise)} · Sunset {formatTime(sun.sunset)}
+              </span>
+              {light?.kind === 'morning' && <span className="meta">Golden hour until about {formatTime(light.until)} — bring the camera.</span>}
+              {light?.kind === 'evening' && <span className="meta">Golden hour from about {formatTime(light.from)}.</span>}
             </dd>
           </div>
         )}

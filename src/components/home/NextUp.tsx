@@ -19,6 +19,7 @@ import { directionsHref } from '@/components/events/EventActions';
 import { SessionProgress } from '@/components/f1/SessionProgress';
 import { WatchButton } from '@/components/f1/WatchButton';
 import { HOUR_MS } from '@/utils/dates';
+import { leaveBy } from '@/utils/drive';
 
 // Circuit geometry ships with the F1 chunk; load it lazily so Home's first paint stays small.
 const CircuitOutline = lazy(() => import('@/components/f1/CircuitOutline').then((m) => ({ default: m.CircuitOutline })));
@@ -146,6 +147,12 @@ export function NextUp({ item, now, weather }: NextUpProps) {
             <>
               <span aria-hidden="true">·</span>
               <span className="num">{formatMiles(event.distanceMiles)}</span>
+            </>
+          )}
+          {!live && !item.dateOnly && event.distanceMiles !== undefined && (
+            <>
+              <span aria-hidden="true">·</span>
+              <span className="num">Leave by {formatTime(leaveBy(item.start, event.distanceMiles))}</span>
             </>
           )}
         </p>
