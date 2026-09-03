@@ -13,7 +13,7 @@ It is a fully static web app (React + TypeScript + Vite) deployed on GitHub Page
 | Screen | Purpose |
 | --- | --- |
 | **Home** | *Your automotive weekend.* A **Next Up** hero (the nearest live or upcoming F1 session or local event, with a countdown), then a day-grouped timeline of everything through Sunday, then next weekend. Thursday–Sunday it says *This weekend*; Monday–Wednesday it says *Coming up*. |
-| **F1** | Next Grand Prix with circuit outline, flag, length, laps, race-day forecast and countdown; a **Watch** button into your broadcaster when a session is live or about to start; the full weekend schedule (FP1–Race, sprint sessions when applicable) in your browser's time zone with a **watchability** rating (*Easy watch · Early start · Alarm clock territory · Late night · Absolutely brutal*); last race podium; drivers' and constructors' standings; the season calendar. |
+| **F1** | Next Grand Prix with circuit outline, flag, length, laps, race-day forecast and countdown; a **Watch** button into your broadcaster when a session is live or about to start; a **race replay** of the last Grand Prix (cars lapping the track map at their real pace, running order, tyres, safety-car and flag states) built from OpenF1's free post-session data; the full weekend schedule (FP1–Race, sprint sessions when applicable) in your browser's time zone with a **watchability** rating (*Easy watch · Early start · Alarm clock territory · Late night · Absolutely brutal*); last race podium; drivers' and constructors' standings; the season calendar. |
 | **Nearby** | Local automotive events within your radius, filterable by type (Cars & Coffee / Shows / Racing / Track) and range (this weekend / next weekend / 30 / 90 days), as a list or a **map** (distance rings with bearing-placed dots, no tile server). Each row shows a type glyph, date, time, distance, city, admission, setting and a compact forecast. |
 | **Event detail** | Editorial hero, when/where, straight-line distance, forecast at event time, admission, description, source link, Directions (Apple/Google Maps), Add to Calendar (.ics), Save. |
 | **Saved** | Your shortlist, split into upcoming and past. Stored on-device. |
@@ -22,6 +22,7 @@ It is a fully static web app (React + TypeScript + Vite) deployed on GitHub Page
 Other behaviours worth knowing:
 
 - **Spoiler mode** hides race results *and* championship standings until you tap *Reveal*; reveals are remembered per round, so once you've watched a race the standings stay visible until the next one finishes. Schedules are never hidden.
+- **Race replay** — after each Grand Prix, the F1 page replays it from data: every car moves along the circuit trace at its real lap pace, the running order and tyre compounds follow the timing feed, and safety-car, VSC, red and chequered flags come from race control. Play, scrub, or speed up to 300×. It sits behind the same spoiler gate as the results.
 - **Watching live** — race video is exclusively licensed (Apple TV in the US from 2026, F1 TV elsewhere), so CarSide does not embed a stream. Pick your service in Settings → Formula 1 → *Where you watch* and the Race Day block on Home and the F1 page shows a one-tap **Watch** button (a universal link that opens the app on iPhone) plus F1's free live timing page. Live timing data itself is behind OpenF1's paid tier, which a static site cannot use.
 - **Compact mode** — the lines button in the header (or Settings → Density) switches to a quick-read layout: one line per event with the temperature and a short watchability tag, a slimmer Next Up, no secondary copy. It persists per device.
 - **Add to Calendar** generates `.ics` files entirely in the browser — one session, the full F1 weekend, or a local event.
@@ -72,6 +73,7 @@ How the static-hosting constraints are handled:
 
 | Data | Source | Notes |
 | --- | --- | --- |
+| Race replays (laps, positions, stints, race control, one reference-lap GPS trace) | [OpenF1 API](https://openf1.org/) | Free for sessions that have ended (real-time data is a paid tier a static site cannot use). Six requests per race, reduced to a compact model cached for 30 days. |
 | F1 schedule, session times, standings, results | [Jolpica F1 API](https://api.jolpi.ca/) (Ergast successor) | Cached 12 h (schedule) / 2 h (standings, results). A bundled snapshot of the current season (`src/data/f1-schedule-fallback.json`) is used only if the API is unreachable and nothing is cached; it is ignored once the season year changes. |
 | Circuit outlines, lengths | [bacinger/f1-circuits](https://github.com/bacinger/f1-circuits) (MIT) | Converted to compact SVG paths by `scripts/build-circuits.mjs`. |
 | Weather | [Open-Meteo](https://open-meteo.com/) | Hourly, 16 days, batched per ~1 km grid cell, cached 1 h. |
@@ -216,7 +218,8 @@ src/
   services/
     cache.ts      localStorage cache with TTL + stale fallback (loadWithCache)
     http.ts       fetchJson with timeout
-    f1/           jolpica.ts (provider), normalize.ts, circuitMeta.ts, teamColors.ts, index.ts
+    f1/           jolpica.ts (provider), openf1.ts (replay model), watch.ts (broadcasters),
+                  normalize.ts, circuitMeta.ts, teamColors.ts, attribution.ts, index.ts
     events/       registry.ts, dedupe.ts, recurrence.ts, providers/{curated,remoteFeed}.ts
     weather/      openMeteo.ts
     geocoding/    nominatim.ts, openMeteoGeocoder.ts, zippopotam.ts, index.ts
@@ -257,4 +260,4 @@ Concretely, the system in `src/styles/tokens.css` is:
 
 ## Credits
 
-Circuit outlines derived from [bacinger/f1-circuits](https://github.com/bacinger/f1-circuits) (MIT, © Tomislav Bacinger). F1 data via the community-run [Jolpica](https://github.com/jolpica/jolpica-f1) API. Weather by [Open-Meteo](https://open-meteo.com/). Geocoding © OpenStreetMap contributors. Fonts: Barlow and Barlow Condensed (SIL Open Font License) via Fontsource.
+Circuit outlines derived from [bacinger/f1-circuits](https://github.com/bacinger/f1-circuits) (MIT, © Tomislav Bacinger). F1 data via the community-run [Jolpica](https://github.com/jolpica/jolpica-f1) API; race replay data via [OpenF1](https://openf1.org/). Weather by [Open-Meteo](https://open-meteo.com/). Geocoding © OpenStreetMap contributors. Fonts: Barlow and Barlow Condensed (SIL Open Font License) via Fontsource.

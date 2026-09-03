@@ -1,3 +1,4 @@
+import { Suspense, lazy } from 'react';
 import { Link } from 'react-router-dom';
 import { appConfig } from '@/config/appConfig';
 import { useNow } from '@/hooks/useNow';
@@ -15,6 +16,8 @@ import { Skeleton } from '@/components/ui/Skeleton';
 import { Freshness } from '@/components/ui/Freshness';
 import { IconEye } from '@/components/icons/Icons';
 import { circuitAttribution } from '@/services/f1/attribution';
+
+const RaceReplay = lazy(() => import('@/components/f1/RaceReplay').then((m) => ({ default: m.RaceReplay })));
 
 export function F1Page() {
   const now = useNow(1000);
@@ -90,6 +93,11 @@ export function F1Page() {
           ) : (
             <Skeleton variant="row" count={3} label="Loading results" />
           )}
+          {result && !resultsHidden && lastRace && (
+            <Suspense fallback={<Skeleton variant="row" count={2} label="Loading race replay" />}>
+              <RaceReplay race={lastRace} />
+            </Suspense>
+          )}
         </section>
       )}
 
@@ -156,7 +164,7 @@ export function F1Page() {
       )}
 
       <p className="meta" style={{ marginTop: 32 }}>
-        {appConfig.f1.disclaimer} Schedule, standings and results from the Jolpica F1 API. {circuitAttribution}
+        {appConfig.f1.disclaimer} Schedule, standings and results from the Jolpica F1 API; race replays from the OpenF1 API. {circuitAttribution}
       </p>
     </div>
   );

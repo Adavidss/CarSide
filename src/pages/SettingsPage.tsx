@@ -163,7 +163,11 @@ export function SettingsPage() {
             <a className="link" href="https://api.jolpi.ca/" target="_blank" rel="noreferrer">
               Jolpica F1 API
             </a>
-            , converted to your local time zone.
+            , converted to your local time zone. Race replays are built from the{' '}
+            <a className="link" href="https://openf1.org/" target="_blank" rel="noreferrer">
+              OpenF1 API
+            </a>{' '}
+            once a session has ended.
           </p>
           <p>
             <strong>Local events</strong> —{' '}
