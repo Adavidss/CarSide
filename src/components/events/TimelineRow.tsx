@@ -77,7 +77,7 @@ export function TimelineRow({ item, now, weather, compact = false, extraAction }
         </div>
         {!compact && (
           <>
-            <div className="trow__status">{!past && <StatusPill tone={watch.tone} label={watch.label} title={watch.note} />}</div>
+            <div className="trow__status">{!past && <StatusPill tone={watch.tone} label={watch.label} shortLabel={watch.shortLabel} title={watch.note} />}</div>
             <div className="trow__actions">
               <button
                 type="button"

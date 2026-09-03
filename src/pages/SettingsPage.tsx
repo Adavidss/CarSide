@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { appConfig } from '@/config/appConfig';
 import { useSettings } from '@/hooks/useSettings';
 import { useSaved } from '@/hooks/useSaved';
-import type { ThemePreference } from '@/models/settings';
+import type { Density, ThemePreference } from '@/models/settings';
 import { clearAllCaches } from '@/services/cache';
 import { providers } from '@/services/events/registry';
 import { curatedFeed } from '@/services/events/providers/curated';
@@ -12,6 +12,10 @@ import { Segmented } from '@/components/ui/Segmented';
 import { Switch } from '@/components/ui/Switch';
 
 const RADIUS_OPTIONS = appConfig.radiusOptions.map((miles) => ({ value: miles, label: `${miles} mi` }));
+const DENSITY_OPTIONS: Array<{ value: Density; label: string }> = [
+  { value: 'comfortable', label: 'Comfortable' },
+  { value: 'compact', label: 'Compact' },
+];
 const THEME_OPTIONS: Array<{ value: ThemePreference; label: string }> = [
   { value: 'system', label: 'System' },
   { value: 'light', label: 'Light' },
@@ -19,7 +23,7 @@ const THEME_OPTIONS: Array<{ value: ThemePreference; label: string }> = [
 ];
 
 export function SettingsPage() {
-  const { settings, setRadius, setAvoidSpoilers, setTheme, resetSettings } = useSettings();
+  const { settings, setRadius, setAvoidSpoilers, setTheme, setDensity, resetSettings } = useSettings();
   const { saved } = useSaved();
   const [cleared, setCleared] = useState<number | null>(null);
 
@@ -64,6 +68,25 @@ export function SettingsPage() {
         <h2 className="settings__title">Appearance</h2>
         <div className="settings__body">
           <Segmented options={THEME_OPTIONS} value={settings.theme} onChange={setTheme} ariaLabel="Appearance" />
+          <div>
+            <p className="label" style={{ marginBottom: 6 }}>
+              Density
+            </p>
+            <Segmented options={DENSITY_OPTIONS} value={settings.density} onChange={setDensity} ariaLabel="Density" />
+          </div>
+          <p className="settings__hint">
+            Compact puts each event on one line and shrinks Next Up for a quick scan at a show. The lines button in the header toggles it too.
+          </p>
+        </div>
+      </section>
+
+      <section className="settings__group">
+        <h2 className="settings__title">On your iPhone</h2>
+        <div className="settings__body">
+          <p className="settings__hint" style={{ maxWidth: '64ch' }}>
+            Add CarSide to your Home Screen for a full-screen app with its own icon: open this page in Safari, tap <strong>Share</strong>, then{' '}
+            <strong>Add to Home Screen</strong>. Schedules and the last forecasts stay available offline.
+          </p>
         </div>
       </section>
 
@@ -89,7 +112,7 @@ export function SettingsPage() {
           </div>
           <div className="settings__row">
             <span>
-              Reset location, radius, spoiler and appearance settings
+              Reset location, radius, spoiler, density and appearance settings
               <span className="settings__hint" style={{ display: 'block' }}>
                 Saved events ({saved.length}) are kept.
               </span>

@@ -1,7 +1,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
 import { appConfig } from '@/config/appConfig';
 import type { UserLocation } from '@/models/location';
-import type { Settings, ThemePreference } from '@/models/settings';
+import type { Density, Settings, ThemePreference } from '@/models/settings';
 
 /** Also read by the inline script in index.html to apply the theme before first paint. */
 export const SETTINGS_STORAGE_KEY = 'carside:settings:v1';
@@ -12,6 +12,7 @@ function defaultSettings(): Settings {
     radiusMiles: appConfig.defaultRadiusMiles,
     avoidSpoilers: false,
     theme: 'system',
+    density: 'comfortable',
     revealedRounds: [],
   };
 }
@@ -34,6 +35,7 @@ function loadSettings(): Settings {
         typeof parsed.radiusMiles === 'number' && parsed.radiusMiles > 0 ? parsed.radiusMiles : defaults.radiusMiles,
       avoidSpoilers: typeof parsed.avoidSpoilers === 'boolean' ? parsed.avoidSpoilers : defaults.avoidSpoilers,
       theme: parsed.theme === 'light' || parsed.theme === 'dark' ? parsed.theme : 'system',
+      density: parsed.density === 'compact' ? 'compact' : 'comfortable',
       revealedRounds: Array.isArray(parsed.revealedRounds)
         ? parsed.revealedRounds.filter((r): r is string => typeof r === 'string')
         : [],
@@ -65,12 +67,21 @@ function applyTheme(theme: ThemePreference): void {
   });
 }
 
+/** Also applied by the inline script in index.html before first paint. */
+function applyDensity(density: Density): void {
+  const root = document.documentElement;
+  if (density === 'compact') root.setAttribute('data-density', 'compact');
+  else root.removeAttribute('data-density');
+}
+
 export interface SettingsContextValue {
   settings: Settings;
   setLocation(location: UserLocation): void;
   setRadius(miles: number): void;
   setAvoidSpoilers(value: boolean): void;
   setTheme(theme: ThemePreference): void;
+  setDensity(density: Density): void;
+  toggleDensity(): void;
   revealRound(season: string, round: number): void;
   isRoundRevealed(season: string, round: number): boolean;
   resetSettings(): void;
@@ -89,6 +100,10 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
     applyTheme(settings.theme);
   }, [settings.theme]);
 
+  useEffect(() => {
+    applyDensity(settings.density);
+  }, [settings.density]);
+
   const update = useCallback((patch: Partial<Settings>) => {
     setSettings((prev) => ({ ...prev, ...patch }));
   }, []);
@@ -100,6 +115,9 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
       setRadius: (radiusMiles) => update({ radiusMiles }),
       setAvoidSpoilers: (avoidSpoilers) => update({ avoidSpoilers }),
       setTheme: (theme) => update({ theme }),
+      setDensity: (density) => update({ density }),
+      toggleDensity: () =>
+        setSettings((prev) => ({ ...prev, density: prev.density === 'compact' ? 'comfortable' : 'compact' })),
       revealRound: (season, round) =>
         setSettings((prev) => {
           const key = `${season}:${round}`;

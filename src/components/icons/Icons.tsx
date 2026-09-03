@@ -134,6 +134,12 @@ export const IconEye = (p: IconProps) => (
   </Icon>
 );
 
+export const IconDensity = (p: IconProps) => (
+  <Icon {...p}>
+    <path d="M4 5.5h16M4 10h16M4 14.5h16M4 19h16" />
+  </Icon>
+);
+
 export const IconFlag = (p: IconProps) => (
   <Icon {...p}>
     <path d="M5 21V4h12l-2 4 2 4H5" />

@@ -17,15 +17,16 @@ It is a fully static web app (React + TypeScript + Vite) deployed on GitHub Page
 | **Nearby** | Local automotive events within your radius, filterable by type (Cars & Coffee / Shows / Racing / Track) and range (this weekend / next weekend / 30 / 90 days). Each row shows date, time, distance, city, admission, setting and a compact forecast. |
 | **Event detail** | Editorial hero, when/where, straight-line distance, forecast at event time, admission, description, source link, Directions (Apple/Google Maps), Add to Calendar (.ics), Save. |
 | **Saved** | Your shortlist, split into upcoming and past. Stored on-device. |
-| **Settings** | Location, search radius, **Avoid spoilers**, appearance (system / light / dark), cache reset, and a plain-language list of every data source. |
+| **Settings** | Location, search radius, **Avoid spoilers**, appearance (system / light / dark), **density** (comfortable / compact), iPhone install steps, cache reset, and a plain-language list of every data source. |
 
 Other behaviours worth knowing:
 
 - **Spoiler mode** hides race results *and* championship standings until you tap *Reveal*; reveals are remembered per round, so once you've watched a race the standings stay visible until the next one finishes. Schedules are never hidden.
+- **Compact mode** — the lines button in the header (or Settings → Density) switches to a quick-read layout: one line per event with the temperature and a short watchability tag, a slimmer Next Up, no secondary copy. It persists per device.
 - **Add to Calendar** generates `.ics` files entirely in the browser — one session, the full F1 weekend, or a local event.
 - **Weather** appears only for events inside Open-Meteo's 16-day horizon and is hidden when unavailable. The verdict (*Good show weather · Rain possible · Rain likely · Hot one · Bundle up*) uses the peak rain chance across the event window.
 - **Freshness** is visible: every network-backed block says *Updated 4 min ago*, *Offline copy … may be out of date*, or *Bundled schedule*.
-- **Installable**: a web manifest and a small app-shell service worker make it a lightweight PWA; the shell loads offline and the last fetched data is served from localStorage.
+- **Installable**: a web manifest and a small app-shell service worker make it a lightweight PWA; the shell loads offline and the last fetched data is served from localStorage. On an iPhone: Safari → Share → **Add to Home Screen**.
 
 ---
 
@@ -44,6 +45,7 @@ npm run preview    # serve dist/ locally at http://localhost:4173/CarSide/
 npm test           # vitest unit tests (dates, recurrence, dedupe, ics, timeline…)
 npm run typecheck  # tsc only
 npm run circuits   # regenerate src/data/circuits.json from the upstream GeoJSON
+npm run icons      # re-render public/icons/*.png from icon.svg (macOS, uses QuickLook)
 ```
 
 Requires Node 20.19+ (22 recommended).
@@ -195,7 +197,7 @@ Users override location and radius in the app; those settings, saved events, spo
 ```text
 src/
   components/
-    brand/        Logo (CSS/SVG mark)
+    brand/        Logo — one open lap (monoline "C") with the start/finish kerb in the accent
     events/       Timeline, TimelineRow, EventActions, SaveButton, WeatherBadge
     f1/           NextGrandPrix, SessionList, StandingsTable, LastRace, SeasonList,
                   CircuitOutline, Countdown, Flag
@@ -237,7 +239,8 @@ Concretely, the system in `src/styles/tokens.css` is:
 - **Colour** — charcoal, warm off-white, neutral greys, and *one* accent: signal orange, used deliberately for the Next Up rule, live indicators, active navigation and primary actions. Light and dark modes are both designed, and dark mode reads like an automotive interface rather than "black plus neon".
 - **Type** — Barlow Condensed for headings, session labels, timing figures and uppercase labels; Barlow for body copy. Countdown digits sit in fixed-width cells so they never jitter. Uppercase is reserved for small labels.
 - **Shape** — 2–6 px corner radii, hairline rules, square indicators and a rocker-style switch. Larger rounding appears nowhere.
-- **Layout** — information is separated by whitespace, rules, typography and alignment. Numbered section rules ("01 THIS WEEKEND"), a coordinate readout in the footer and simplified circuit outlines are the only motifs. Containers are used only when they earn their place (the location popover, the circuit "plate", notices).
+- **Layout** — information is separated by whitespace, rules, typography and alignment. Numbered section rules ("01 THIS WEEKEND"), sticky day headers, a coordinate readout in the footer and simplified circuit outlines are the only motifs. Containers are used only when they earn their place (the location popover, the circuit "plate", notices).
+- **Mark** — the logo is a single monoline lap, open on the right like a "C", with the start/finish kerb in the accent colour. It inherits the text colour in the app; the favicon and home-screen icons put the same mark on a charcoal tile (`npm run icons` regenerates them on macOS).
 - **Density** — designed at iPhone width first (≈390 px): compact bottom navigation, thumb-sized actions beside each row, and the Next Up block reading title → countdown → actions. Tablet and desktop widen the same grids (status becomes its own column, the F1 rail goes sticky) rather than spreading content thinner. Review new screens at phone width before anything else.
 
 **Future design work should preserve this restraint.** Please avoid oversized rounded cards, pill-shaped containers, pastel or purple gradients, glassmorphism, soft drop shadows, decorative blobs, emoji-driven UI, carbon-fibre/checkered-flag textures and other generic "AI dashboard" patterns. If a new screen starts to look like a fintech app, redesign it.

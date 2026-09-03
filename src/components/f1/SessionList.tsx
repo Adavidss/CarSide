@@ -36,7 +36,7 @@ export function SessionList({ race, now }: SessionListProps) {
                 )}
               </span>
               <span className="session__watch">
-                {done ? <span className="meta">Complete</span> : <StatusPill tone={watch.tone} label={watch.label} title={watch.note} />}
+                {done ? <span className="meta">Complete</span> : <StatusPill tone={watch.tone} label={watch.label} shortLabel={watch.shortLabel} title={watch.note} />}
               </span>
               <span className="session__action">
                 <button

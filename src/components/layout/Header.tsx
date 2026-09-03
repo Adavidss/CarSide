@@ -1,7 +1,7 @@
 import { Link, NavLink } from 'react-router-dom';
 import { appConfig } from '@/config/appConfig';
 import { Logo } from '@/components/brand/Logo';
-import { IconChevronDown } from '@/components/icons/Icons';
+import { IconChevronDown, IconDensity } from '@/components/icons/Icons';
 import { useSettings } from '@/hooks/useSettings';
 import { useLocationPanel } from '@/hooks/useLocationPanel';
 import { LocationPanel } from '@/components/location/LocationPanel';
@@ -15,8 +15,11 @@ export const NAV_ITEMS = [
 ] as const;
 
 export function Header() {
-  const { settings } = useSettings();
+  const { settings, toggleDensity } = useSettings();
   const { open, togglePanel } = useLocationPanel();
+  const compact = settings.density === 'compact';
+  // "Morrisville, NC 27560" → "Morrisville" on phones, where the header is tight.
+  const shortLabel = settings.location.label.split(',')[0].trim() || settings.location.label;
 
   return (
     <header className="app-header">
@@ -50,9 +53,21 @@ export function Header() {
           aria-haspopup="dialog"
           aria-label={`Location: ${settings.location.label}, ${settings.radiusMiles} mile radius. Change location`}
         >
-          <span className="header-location__label">{settings.location.label}</span>
+          <span className="header-location__label header-location__label--full">{settings.location.label}</span>
+          <span className="header-location__label header-location__label--short">{shortLabel}</span>
           <span className="header-location__radius">{settings.radiusMiles} mi</span>
           <IconChevronDown className="header-location__chev" />
+        </button>
+
+        <button
+          type="button"
+          className={`header-density${compact ? ' is-active' : ''}`}
+          onClick={toggleDensity}
+          aria-pressed={compact}
+          aria-label={compact ? 'Compact view is on. Switch to comfortable view' : 'Switch to compact view for a quick read'}
+          title={compact ? 'Compact view on' : 'Compact view'}
+        >
+          <IconDensity />
         </button>
       </div>
       {open && <LocationPanel />}

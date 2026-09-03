@@ -715,3 +715,52 @@
 .center-block {
   padding: var(--s7) 0;
 }
+
+/* ---------- compact density ---------- */
+
+[data-density='compact'] .mini,
+[data-density='compact'] .round {
+  padding: 5px 0;
+}
+
+[data-density='compact'] .gp {
+  gap: var(--s4);
+  padding-top: var(--s2);
+}
+
+[data-density='compact'] .gp__name {
+  font-size: clamp(1.6rem, 5vw, 2.5rem);
+}
+
+[data-density='compact'] .gp__facts {
+  margin-top: var(--s4);
+  padding-top: var(--s3);
+}
+
+[data-density='compact'] .gp__outline {
+  display: none;
+}
+
+[data-density='compact'] .session {
+  padding: 6px 0;
+}
+
+[data-density='compact'] .session__label {
+  font-size: 14px;
+}
+
+[data-density='compact'] .session__when {
+  font-size: 16px;
+}
+
+[data-density='compact'] .srow {
+  padding: 4px 0;
+}
+
+[data-density='compact'] .facts {
+  gap: var(--s3) var(--s4);
+}
+
+[data-density='compact'] .event-hero {
+  padding: var(--s4) 0;
+}

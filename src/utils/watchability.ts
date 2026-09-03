@@ -4,16 +4,18 @@ export type WatchabilityTone = 'ok' | 'warn' | 'late' | 'bad';
 export interface Watchability {
   key: WatchabilityKey;
   label: string;
+  /** Short form for compact rows. */
+  shortLabel: string;
   tone: WatchabilityTone;
   note: string;
 }
 
 const LEVELS: Record<WatchabilityKey, Watchability> = {
-  easy: { key: 'easy', label: 'Easy watch', tone: 'ok', note: 'Coffee, not alarms.' },
-  early: { key: 'early', label: 'Early start', tone: 'warn', note: 'One alarm should do it.' },
-  alarm: { key: 'alarm', label: 'Alarm clock territory', tone: 'late', note: 'Set two alarms.' },
-  late: { key: 'late', label: 'Late night', tone: 'warn', note: 'Stay up or catch the replay.' },
-  brutal: { key: 'brutal', label: 'Absolutely brutal', tone: 'bad', note: 'Respect if you make it.' },
+  easy: { key: 'easy', label: 'Easy watch', shortLabel: 'Easy', tone: 'ok', note: 'Coffee, not alarms.' },
+  early: { key: 'early', label: 'Early start', shortLabel: 'Early', tone: 'warn', note: 'One alarm should do it.' },
+  alarm: { key: 'alarm', label: 'Alarm clock territory', shortLabel: 'Alarm', tone: 'late', note: 'Set two alarms.' },
+  late: { key: 'late', label: 'Late night', shortLabel: 'Late', tone: 'warn', note: 'Stay up or catch the replay.' },
+  brutal: { key: 'brutal', label: 'Absolutely brutal', shortLabel: 'Brutal', tone: 'bad', note: 'Respect if you make it.' },
 };
 
 /**

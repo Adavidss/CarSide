@@ -73,7 +73,7 @@ export function NextUp({ item, now, weather }: NextUpProps) {
               <Countdown target={item.start} now={now} size="lg" />
             </>
           )}
-          <StatusPill tone={watch.tone} label={watch.label} title={watch.note} />
+          <StatusPill tone={watch.tone} label={watch.label} shortLabel={watch.shortLabel} title={watch.note} />
         </div>
         <div className="nextup__actions">
           <Link to="/f1" className="btn btn--sm">

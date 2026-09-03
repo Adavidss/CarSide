@@ -99,6 +99,7 @@
   align-items: center;
   gap: 8px;
   height: 36px;
+  min-width: 0;
   padding: 0 10px;
   border: 1px solid var(--rule);
   border-radius: var(--radius-2);
@@ -118,8 +119,64 @@
 }
 
 .header-location__label {
+  min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+/* Phones get the city only ("Morrisville · 50 mi"); wider screens the full label. */
+.header-location__label--short {
+  display: none;
+}
+
+.header-density {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-2);
+  background: var(--bg-elev);
+  color: var(--fg-2);
+  transition:
+    color 120ms ease,
+    border-color 120ms ease;
+}
+
+.header-density:hover {
+  border-color: var(--fg-3);
+  color: var(--fg);
+}
+
+.header-density.is-active {
+  border-color: var(--accent);
+  color: var(--accent-text);
+}
+
+.header-density .icon {
+  width: 18px;
+  height: 18px;
+}
+
+@media (max-width: 719px) {
+  .app-header__inner {
+    gap: var(--s2);
+  }
+
+  .header-location {
+    max-width: 46vw;
+    padding: 0 8px;
+  }
+
+  .header-location__label--full {
+    display: none;
+  }
+
+  .header-location__label--short {
+    display: inline;
+  }
 }
 
 .header-location__radius {
@@ -695,6 +752,10 @@
   white-space: nowrap;
 }
 
+.status__short {
+  display: none;
+}
+
 .status__dot {
   width: 8px;
   height: 8px;
@@ -1082,10 +1143,14 @@
 }
 
 .timeline__dayhead {
+  position: sticky;
+  top: calc(var(--header-h) + env(safe-area-inset-top));
+  z-index: 5;
   display: flex;
   align-items: baseline;
   gap: var(--s3);
-  padding-bottom: var(--s2);
+  padding: var(--s2) 0;
+  background: var(--bg);
   border-bottom: 1px solid var(--rule-strong);
 }
 
@@ -1322,3 +1387,140 @@
   gap: var(--s2) var(--s3);
 }
 
+
+/* ============================================================================
+   Compact density — "quick read" mode (Settings → Density, or the header toggle).
+   One line per event, smaller Next Up, no secondary copy. Toggled via
+   <html data-density="compact">; the default (comfortable) needs no attribute.
+   ========================================================================== */
+
+[data-density='compact'] .app-main {
+  padding-top: var(--s4);
+}
+
+[data-density='compact'] .page__header {
+  gap: var(--s1);
+  margin-bottom: var(--s4);
+}
+
+[data-density='compact'] .page__title {
+  font-size: clamp(1.5rem, 5vw, 2rem);
+}
+
+[data-density='compact'] .section {
+  margin-top: var(--s5);
+}
+
+[data-density='compact'] .section__head {
+  padding-bottom: var(--s2);
+}
+
+[data-density='compact'] .nextup {
+  gap: var(--s2) var(--s5);
+  padding: var(--s3) 0 var(--s4);
+}
+
+[data-density='compact'] .nextup__title {
+  font-size: clamp(1.5rem, 5.5vw, 2.25rem);
+}
+
+[data-density='compact'] .nextup__meta {
+  font-size: 13px;
+}
+
+[data-density='compact'] .nextup__sub,
+[data-density='compact'] .nextup__actions {
+  display: none;
+}
+
+[data-density='compact'] .nextup__aside {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s2) var(--s4);
+}
+
+[data-density='compact'] .countdown--lg,
+[data-density='compact'] .nextup__big {
+  font-size: var(--text-2xl);
+}
+
+[data-density='compact'] .status__label {
+  display: none;
+}
+
+[data-density='compact'] .status__short {
+  display: inline;
+}
+
+[data-density='compact'] .timeline__day + .timeline__day {
+  margin-top: var(--s4);
+}
+
+[data-density='compact'] .timeline__dayname {
+  font-size: var(--text-base);
+}
+
+[data-density='compact'] .trow {
+  grid-template-columns: 58px minmax(0, 1fr) auto auto;
+  grid-template-areas: 'time body status actions';
+  align-items: center;
+  column-gap: var(--s2);
+  row-gap: 0;
+  padding: 7px 0;
+}
+
+[data-density='compact'] .trow__time {
+  font-size: 15px;
+  line-height: 1.2;
+}
+
+[data-density='compact'] .trow__time small {
+  font-size: 10px;
+  margin-top: 0;
+}
+
+[data-density='compact'] .trow__title {
+  font-size: 15px;
+  line-height: 1.2;
+}
+
+[data-density='compact'] .trow__title .tag {
+  height: 16px;
+  padding: 0 4px;
+  font-size: 9.5px;
+}
+
+[data-density='compact'] .trow__sub {
+  display: none;
+}
+
+[data-density='compact'] .trow__meta {
+  display: block;
+  margin-top: 1px;
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+[data-density='compact'] .trow__status {
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+  margin-top: 0;
+}
+
+/* Temperature only in compact rows — the label and separator cost width. */
+[data-density='compact'] .trow__status .wx__label,
+[data-density='compact'] .trow__status .wx > span[aria-hidden] {
+  display: none;
+}
+
+[data-density='compact'] .trow__actions {
+  align-self: center;
+}
+
+[data-density='compact'] .trow__actions .btn--icon.btn--sm {
+  width: 32px;
+  min-height: 32px;
+}

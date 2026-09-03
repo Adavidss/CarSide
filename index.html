@@ -19,9 +19,13 @@
       (function () {
         try {
           var raw = localStorage.getItem('carside:settings:v1');
-          var theme = raw ? (JSON.parse(raw).theme || 'system') : 'system';
+          var settings = raw ? JSON.parse(raw) : {};
+          var theme = settings.theme || 'system';
           if (theme === 'light' || theme === 'dark') {
             document.documentElement.setAttribute('data-theme', theme);
+          }
+          if (settings.density === 'compact') {
+            document.documentElement.setAttribute('data-density', 'compact');
           }
         } catch (e) {}
       })();
