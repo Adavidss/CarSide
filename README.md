@@ -4,7 +4,7 @@
 
 CarSide is a low-friction automotive weekend companion. Open it and you immediately see what's happening soon on four wheels: the next Formula 1 sessions converted to *your* local time, and the car shows, Cars & Coffee meets, track days and race nights near you — merged into one timeline for the weekend.
 
-It is a fully static web app (React + TypeScript + Vite) deployed on GitHub Pages at **https://adavidss.github.io/CarSide/**. No backend, no accounts, no API keys.
+It is a fully static web app (React + TypeScript + Vite) deployed on GitHub Pages at **https://adavidss.github.io/CarSide/** (which redirects to `https://www.kidsdc.org/CarSide/`, the account's custom Pages domain). No backend, no accounts, no API keys.
 
 ---
 
@@ -54,7 +54,7 @@ Requires Node 20.19+ (22 recommended).
 
 Deployment is automated with GitHub Actions — see [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml). On every push to `main` it installs, tests, builds, and publishes `dist/` with `actions/deploy-pages`.
 
-The workflow enables Pages itself on its first run (`actions/configure-pages` with `enablement: true`), so pushing to `main` is all it takes. If your organisation restricts that, enable it once by hand: **Settings → Pages → Build and deployment → Source: GitHub Actions**. Every push then deploys to `https://<user>.github.io/CarSide/`.
+One-time setup: create the Pages site with **GitHub Actions** as the source — either **Settings → Pages → Build and deployment → Source: GitHub Actions**, or `gh api -X POST repos/<user>/CarSide/pages -f build_type=workflow`. The workflow token is not allowed to create the site itself, so this step cannot be automated from the workflow. After that, every push to `main` deploys. The site lives at `https://<user>.github.io/CarSide/`; if the account's user site has a custom domain, GitHub serves the project under that domain instead and redirects the github.io address (for this repository: `https://www.kidsdc.org/CarSide/`).
 
 How the static-hosting constraints are handled:
 
