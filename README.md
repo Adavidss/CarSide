@@ -238,7 +238,7 @@ Concretely, the system in `src/styles/tokens.css` is:
 - **Type** — Barlow Condensed for headings, session labels, timing figures and uppercase labels; Barlow for body copy. Countdown digits sit in fixed-width cells so they never jitter. Uppercase is reserved for small labels.
 - **Shape** — 2–6 px corner radii, hairline rules, square indicators and a rocker-style switch. Larger rounding appears nowhere.
 - **Layout** — information is separated by whitespace, rules, typography and alignment. Numbered section rules ("01 THIS WEEKEND"), a coordinate readout in the footer and simplified circuit outlines are the only motifs. Containers are used only when they earn their place (the location popover, the circuit "plate", notices).
-- **Density** — mobile first with a compact bottom navigation; the desktop layout adds a sticky F1 rail rather than spreading the same content thinner.
+- **Density** — designed at iPhone width first (≈390 px): compact bottom navigation, thumb-sized actions beside each row, and the Next Up block reading title → countdown → actions. Tablet and desktop widen the same grids (status becomes its own column, the F1 rail goes sticky) rather than spreading content thinner. Review new screens at phone width before anything else.
 
 **Future design work should preserve this restraint.** Please avoid oversized rounded cards, pill-shaped containers, pastel or purple gradients, glassmorphism, soft drop shadows, decorative blobs, emoji-driven UI, carbon-fibre/checkered-flag textures and other generic "AI dashboard" patterns. If a new screen starts to look like a fintech app, redesign it.
 
