@@ -4,6 +4,8 @@ import { teamColor } from '@/services/f1/teamColors';
 interface DriverTableProps {
   standings: Standings<DriverStanding>;
   limit?: number;
+  /** Jolpica driverId of the user's driver — highlighted. */
+  favoriteId?: string;
 }
 
 interface ConstructorTableProps {
@@ -15,7 +17,7 @@ function Meter({ points, max, color }: { points: number; max: number; color?: st
   return <span className="srow__meter" style={{ width: `${Math.max(1, (points / max) * 100)}%`, background: color ?? 'var(--fg-3)' }} aria-hidden="true" />;
 }
 
-export function DriverStandingsTable({ standings, limit }: DriverTableProps) {
+export function DriverStandingsTable({ standings, limit, favoriteId }: DriverTableProps) {
   const rows = limit ? standings.entries.slice(0, limit) : standings.entries;
   const max = standings.entries[0]?.points ?? 0;
   return (
@@ -26,7 +28,7 @@ export function DriverStandingsTable({ standings, limit }: DriverTableProps) {
         <span>Pts</span>
       </li>
       {rows.map((d) => (
-        <li key={d.driverId} className={`srow${d.position <= 3 ? ' srow--top' : ''}`}>
+        <li key={d.driverId} className={`srow${d.position <= 3 ? ' srow--top' : ''}${d.driverId === favoriteId ? ' srow--fav' : ''}`}>
           <span className="srow__pos num">{d.position}</span>
           <span className="srow__name">
             <span className="srow__bar" style={{ ['--team' as string]: teamColor(d.constructorId) }} aria-hidden="true" />

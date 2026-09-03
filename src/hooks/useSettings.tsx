@@ -1,7 +1,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
 import { appConfig } from '@/config/appConfig';
 import type { UserLocation } from '@/models/location';
-import type { Density, Settings, ThemePreference, WatchPreference } from '@/models/settings';
+import type { Density, FavoriteDriver, OpenF1Auth, Settings, ThemePreference, WatchPreference } from '@/models/settings';
 
 /** Also read by the inline script in index.html to apply the theme before first paint. */
 export const SETTINGS_STORAGE_KEY = 'carside:settings:v1';
@@ -14,8 +14,29 @@ function defaultSettings(): Settings {
     theme: 'system',
     density: 'comfortable',
     watch: { provider: 'apple-tv' },
+    openf1: null,
+    favoriteDriver: null,
     revealedRounds: [],
   };
+}
+
+function loadOpenF1(value: unknown): OpenF1Auth | null {
+  if (!value || typeof value !== 'object') return null;
+  const v = value as Partial<OpenF1Auth>;
+  if (typeof v.token !== 'string' || !v.token) return null;
+  return {
+    token: v.token,
+    expiresAt: typeof v.expiresAt === 'number' ? v.expiresAt : undefined,
+    email: typeof v.email === 'string' ? v.email : undefined,
+    refreshToken: typeof v.refreshToken === 'string' ? v.refreshToken : undefined,
+  };
+}
+
+function loadFavorite(value: unknown): FavoriteDriver | null {
+  if (!value || typeof value !== 'object') return null;
+  const v = value as Partial<FavoriteDriver>;
+  if (typeof v.id !== 'string' || typeof v.code !== 'string') return null;
+  return { id: v.id, code: v.code, name: typeof v.name === 'string' ? v.name : v.code };
 }
 
 const WATCH_IDS = new Set(['apple-tv', 'f1tv', 'espn', 'sky', 'custom']);
@@ -49,6 +70,8 @@ function loadSettings(): Settings {
       theme: parsed.theme === 'light' || parsed.theme === 'dark' ? parsed.theme : 'system',
       density: parsed.density === 'compact' ? 'compact' : 'comfortable',
       watch: loadWatch(parsed.watch),
+      openf1: loadOpenF1(parsed.openf1),
+      favoriteDriver: loadFavorite(parsed.favoriteDriver),
       revealedRounds: Array.isArray(parsed.revealedRounds)
         ? parsed.revealedRounds.filter((r): r is string => typeof r === 'string')
         : [],
@@ -95,6 +118,8 @@ export interface SettingsContextValue {
   setTheme(theme: ThemePreference): void;
   setDensity(density: Density): void;
   setWatch(watch: WatchPreference): void;
+  setOpenF1(auth: OpenF1Auth | null): void;
+  setFavoriteDriver(driver: FavoriteDriver | null): void;
   toggleDensity(): void;
   revealRound(season: string, round: number): void;
   isRoundRevealed(season: string, round: number): boolean;
@@ -131,6 +156,8 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
       setTheme: (theme) => update({ theme }),
       setDensity: (density) => update({ density }),
       setWatch: (watch) => update({ watch }),
+      setOpenF1: (openf1) => update({ openf1 }),
+      setFavoriteDriver: (favoriteDriver) => update({ favoriteDriver }),
       toggleDensity: () =>
         setSettings((prev) => ({ ...prev, density: prev.density === 'compact' ? 'comfortable' : 'compact' })),
       revealRound: (season, round) =>
@@ -140,7 +167,7 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
           return { ...prev, revealedRounds: [...prev.revealedRounds.slice(-20), key] };
         }),
       isRoundRevealed: (season, round) => settings.revealedRounds.includes(`${season}:${round}`),
-      resetSettings: () => setSettings(defaultSettings()),
+      resetSettings: () => setSettings((prev) => ({ ...defaultSettings(), openf1: prev.openf1, favoriteDriver: prev.favoriteDriver })),
     }),
     [settings, update],
   );

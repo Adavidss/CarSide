@@ -1,10 +1,13 @@
-import { Suspense, lazy } from 'react';
-import { Link } from 'react-router-dom';
+import { Suspense, lazy, useMemo } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
 import { appConfig } from '@/config/appConfig';
 import { useNow } from '@/hooks/useNow';
 import { useConstructorStandings, useDriverStandings, useF1Schedule, useLastResult } from '@/hooks/useF1';
 import { useSettings } from '@/hooks/useSettings';
 import { findLastCompletedRace, findNextRace, getWeekendStatus } from '@/services/f1';
+import { getCircuitMeta } from '@/services/f1/circuitMeta';
+import { LIVE_MARGIN_MS } from '@/services/f1/openf1';
+import { TitleRace } from '@/components/f1/TitleRace';
 import { localTimeZoneName } from '@/utils/dates';
 import { NextGrandPrix } from '@/components/f1/NextGrandPrix';
 import { SessionList } from '@/components/f1/SessionList';
@@ -18,6 +21,7 @@ import { IconEye } from '@/components/icons/Icons';
 import { circuitAttribution } from '@/services/f1/attribution';
 
 const RaceReplay = lazy(() => import('@/components/f1/RaceReplay').then((m) => ({ default: m.RaceReplay })));
+const LiveTiming = lazy(() => import('@/components/f1/LiveTiming').then((m) => ({ default: m.LiveTiming })));
 
 export function F1Page() {
   const now = useNow(1000);
@@ -31,6 +35,22 @@ export function F1Page() {
   const nextRace = findNextRace(races, now);
   const lastRace = findLastCompletedRace(races, now);
   const status = nextRace ? getWeekendStatus(nextRace, now) : 'complete';
+
+  // OpenF1 counts a session as live from 30 min before it starts to 30 min after it ends.
+  const liveRace = useMemo(
+    () =>
+      races.find((r) => r.sessions.some((s) => now.getTime() >= new Date(s.start).getTime() - LIVE_MARGIN_MS && now.getTime() <= new Date(s.end).getTime() + LIVE_MARGIN_MS)),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [races, Math.floor(now.getTime() / 60_000)],
+  );
+  const [params] = useSearchParams();
+  // ?livesim=<openf1 session key>[&speed=N] replays a finished session through the live screen (free tier).
+  const simKey = Number(params.get('livesim'));
+  const simulate = useMemo(
+    () => (Number.isFinite(simKey) && simKey > 0 ? { sessionKey: simKey, speed: Number(params.get('speed')) || 1 } : undefined),
+    [simKey, params],
+  );
+  const liveLaps = liveRace ? getCircuitMeta(liveRace.circuitId, liveRace.country).laps : undefined;
 
   const result = lastResult.data ?? null;
   const resultsHidden = settings.avoidSpoilers && !!result && !isRoundRevealed(result.season, result.round);
@@ -56,6 +76,12 @@ export function F1Page() {
           </Link>
         </p>
       </header>
+
+      {(liveRace || simulate) && (
+        <Suspense fallback={<Skeleton variant="row" count={3} label="Loading live timing" />}>
+          <LiveTiming auth={settings.openf1} enabled simulate={simulate} totalLaps={liveLaps ?? nextRace?.round ? liveLaps : undefined} favoriteCode={settings.favoriteDriver?.code} now={now} />
+        </Suspense>
+      )}
 
       {schedule.status === 'loading' ? (
         <div className="gp">
@@ -95,7 +121,7 @@ export function F1Page() {
           )}
           {result && !resultsHidden && lastRace && (
             <Suspense fallback={<Skeleton variant="row" count={2} label="Loading race replay" />}>
-              <RaceReplay race={lastRace} />
+              <RaceReplay race={lastRace} favoriteCode={settings.favoriteDriver?.code} />
             </Suspense>
           )}
         </section>
@@ -128,7 +154,7 @@ export function F1Page() {
                 Drivers
               </p>
               {drivers.data ? (
-                <DriverStandingsTable standings={drivers.data} />
+                <DriverStandingsTable standings={drivers.data} favoriteId={settings.favoriteDriver?.id} />
               ) : drivers.status === 'error' ? (
                 <p className="meta">Driver standings unavailable ({drivers.error}).</p>
               ) : (
@@ -155,6 +181,13 @@ export function F1Page() {
           </div>
         )}
       </section>
+
+      {drivers.data && !standingsHidden && races.length > 0 && (
+        <section className="section">
+          <SectionHeading title="Title race" meta="Championship maths" />
+          <TitleRace drivers={drivers.data} constructors={constructors.data} races={races} now={now} favoriteId={settings.favoriteDriver?.id} />
+        </section>
+      )}
 
       {races.length > 0 && (
         <section className="section">

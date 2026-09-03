@@ -1831,3 +1831,462 @@
   gap: var(--s2);
   align-items: center;
 }
+
+/* ============================================================================
+   Timing screens: shared track map, live timing, leaderboard rows, feeds, title race
+   ========================================================================== */
+
+.tmap {
+  width: 100%;
+  max-height: 300px;
+  height: auto;
+  padding: var(--s3);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-2);
+  background: var(--bg-elev);
+}
+
+.tmap--sc,
+.tmap--vsc,
+.tmap--yellow {
+  border-color: var(--warn);
+}
+
+.tmap--red {
+  border-color: var(--bad);
+}
+
+.tmap__trace {
+  fill: none;
+  stroke: var(--fg-3);
+  stroke-width: 2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+  opacity: 0.7;
+}
+
+.tmap__sf {
+  fill: var(--accent);
+}
+
+.tmap__car circle {
+  stroke: var(--bg);
+  stroke-width: 0.6;
+}
+
+.tmap__ring {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 0.9;
+}
+
+.tmap__code {
+  font-family: var(--font-display);
+  font-size: 4px;
+  font-weight: 700;
+  fill: var(--fg);
+  letter-spacing: 0.04em;
+  paint-order: stroke;
+  stroke: var(--bg);
+  stroke-width: 0.8;
+}
+
+[data-density='compact'] .tmap {
+  max-height: 220px;
+}
+
+.live {
+  display: grid;
+  gap: var(--s3);
+  padding: var(--s4) 0 var(--s5);
+  margin-bottom: var(--s5);
+  border-top: 2px solid var(--accent);
+  border-bottom: 1px solid var(--rule);
+}
+
+.live--gate {
+  border-top-color: var(--fg);
+}
+
+.live__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s2) var(--s3);
+}
+
+.live__title {
+  font-size: clamp(1.6rem, 5vw, 2.25rem);
+  font-weight: 700;
+}
+
+.live__flag {
+  margin-left: auto;
+}
+
+.live__flag--sc,
+.live__flag--vsc,
+.live__flag--yellow,
+.replay__flag--sc,
+.replay__flag--vsc,
+.replay__flag--yellow {
+  background: var(--warn);
+  border-color: var(--warn);
+  color: #17181a;
+}
+
+.live__flag--red,
+.replay__flag--red {
+  background: var(--bad);
+  border-color: var(--bad);
+  color: #fff;
+}
+
+.live__flag--chequered,
+.replay__flag--chequered {
+  background: var(--fg);
+  border-color: var(--fg);
+  color: var(--bg);
+}
+
+.live__stats {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--s2) var(--s4);
+}
+
+.live__lap {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.live__lap small {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--fg-3);
+}
+
+.live__wx {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s3);
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fg-2);
+}
+
+.live__rain {
+  color: var(--bad);
+}
+
+.live__toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s3);
+}
+
+.live__grid {
+  display: grid;
+  gap: var(--s4);
+}
+
+@media (min-width: 720px) {
+  .live__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--s5);
+  }
+}
+
+/* Leaderboard rows (live + replay) */
+.lboard {
+  border-top: 1px solid var(--rule-strong);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.lrow {
+  display: grid;
+  grid-template-columns: 24px 3px 44px minmax(64px, 1fr) minmax(84px, 1.1fr) minmax(64px, 0.9fr) 48px 24px;
+  align-items: center;
+  gap: 8px;
+  min-width: 420px;
+  padding: 5px 0;
+  border-bottom: 1px solid var(--rule);
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.lrow--head {
+  padding: 4px 0;
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--fg-3);
+  border-bottom-color: var(--rule-strong);
+}
+
+.lrow__pos {
+  color: var(--fg-3);
+  text-align: right;
+}
+
+.lrow__bar {
+  width: 3px;
+  height: 18px;
+  border-radius: 1px;
+}
+
+.lrow__code {
+  letter-spacing: 0.06em;
+}
+
+.lrow__gap,
+.lrow__best {
+  color: var(--fg-2);
+}
+
+.lrow__lap {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.lrow__pits {
+  color: var(--fg-3);
+  text-align: right;
+}
+
+.lrow--fav,
+.srow--fav,
+.swing__row.lrow--fav,
+.trace-row.lrow--fav {
+  background: var(--accent-soft);
+  box-shadow: 0 0 0 6px var(--accent-soft);
+  border-radius: 1px;
+}
+
+/* Mini-sector segments under the last lap */
+.segs {
+  display: flex;
+  gap: 1px;
+  height: 3px;
+}
+
+.segs--empty {
+  height: 3px;
+}
+
+.segs__cell {
+  flex: 1;
+  min-width: 2px;
+  background: var(--rule);
+}
+
+.segs__cell--purple {
+  background: #b13bff;
+}
+
+.segs__cell--green {
+  background: var(--ok);
+}
+
+.segs__cell--yellow {
+  background: var(--warn);
+}
+
+.segs__cell--pit {
+  background: var(--fg-3);
+}
+
+/* Tyre compound + age */
+.tyre {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.tyre__ring {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--rule);
+  border-radius: 50%;
+  font-size: 10px;
+  color: var(--fg-2);
+}
+
+.tyre__age {
+  font-size: 11px;
+  color: var(--fg-3);
+}
+
+/* Race control + radio feeds */
+.feed {
+  border-top: 1px solid var(--rule-strong);
+}
+
+.feed__item {
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+  padding: 6px 0;
+  border-bottom: 1px solid var(--rule);
+  font-size: var(--text-sm);
+  color: var(--fg-2);
+}
+
+.feed__when {
+  flex-shrink: 0;
+  min-width: 44px;
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fg-3);
+}
+
+.feed__driver {
+  flex-shrink: 0;
+  padding: 0 6px;
+  border-left: 3px solid var(--rule);
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.feed__audio {
+  flex: 1;
+  min-width: 0;
+  height: 32px;
+  max-width: 260px;
+}
+
+.replay__ticker--accent {
+  color: var(--accent-text);
+}
+
+/* Championship swing */
+.swing {
+  border-top: 1px solid var(--rule-strong);
+}
+
+.swing__row {
+  display: grid;
+  grid-template-columns: 24px 48px 1fr auto;
+  align-items: center;
+  gap: var(--s3);
+  padding: 6px 0;
+  border-bottom: 1px solid var(--rule);
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Title race */
+.title-race {
+  display: grid;
+  gap: var(--s4);
+}
+
+.title-race__summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s4) var(--s6);
+}
+
+.title-race__note {
+  font-size: var(--text-base);
+  color: var(--fg-2);
+  max-width: 64ch;
+}
+
+.title-race__grid {
+  display: grid;
+  gap: var(--s5);
+}
+
+@media (min-width: 1024px) {
+  .title-race__grid {
+    grid-template-columns: 1.2fr 1fr;
+    gap: var(--s7);
+  }
+}
+
+.title-race ul {
+  border-top: 1px solid var(--rule-strong);
+}
+
+.trace-row {
+  display: grid;
+  grid-template-columns: 3px minmax(0, 1fr) auto auto auto;
+  align-items: center;
+  gap: var(--s3);
+  padding: 7px 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.trace-row--out {
+  opacity: 0.55;
+}
+
+.trace-row__name {
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.trace-row__pts {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.trace-row__gap {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  color: var(--fg-3);
+  min-width: 40px;
+  text-align: right;
+}
+
+.trace-row__tag--out {
+  border-color: transparent;
+  color: var(--fg-3);
+}
+
+/* Settings sub-blocks */
+.settings__sub {
+  display: grid;
+  gap: var(--s3);
+  padding-top: var(--s3);
+  border-top: 1px solid var(--rule);
+}
+
+.settings__details summary {
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent-text);
+}
+
+.locform__row--wrap {
+  flex-wrap: wrap;
+}
+
+.locform__row--wrap .input {
+  flex: 1 1 200px;
+}

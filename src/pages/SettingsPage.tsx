@@ -1,9 +1,11 @@
-import { useState } from 'react';
+import { useState, type FormEvent } from 'react';
 import { appConfig } from '@/config/appConfig';
 import { useSettings } from '@/hooks/useSettings';
 import { useSaved } from '@/hooks/useSaved';
 import type { Density, ThemePreference, WatchProviderId } from '@/models/settings';
 import { WATCH_PROVIDERS, getWatchProvider } from '@/services/f1/watch';
+import { authFromPastedToken, isTokenExpired, loginOpenF1, tokenMinutesLeft } from '@/services/f1/openf1Auth';
+import { useDriverStandings } from '@/hooks/useF1';
 import { clearAllCaches } from '@/services/cache';
 import { providers } from '@/services/events/registry';
 import { curatedFeed } from '@/services/events/providers/curated';
@@ -25,8 +27,47 @@ const THEME_OPTIONS: Array<{ value: ThemePreference; label: string }> = [
 ];
 
 export function SettingsPage() {
-  const { settings, setRadius, setAvoidSpoilers, setTheme, setDensity, setWatch, resetSettings } = useSettings();
+  const { settings, setRadius, setAvoidSpoilers, setTheme, setDensity, setWatch, setOpenF1, setFavoriteDriver, resetSettings } = useSettings();
   const watchProvider = getWatchProvider(settings.watch.provider);
+  const driverStandings = useDriverStandings();
+  const [email, setEmail] = useState(settings.openf1?.email ?? '');
+  const [password, setPassword] = useState('');
+  const [pasted, setPasted] = useState('');
+  const [authBusy, setAuthBusy] = useState(false);
+  const [authError, setAuthError] = useState<string | null>(null);
+  const [authNote, setAuthNote] = useState<string | null>(null);
+  const tokenExpired = isTokenExpired(settings.openf1);
+  const minutesLeft = tokenMinutesLeft(settings.openf1);
+
+  async function connect(event: FormEvent) {
+    event.preventDefault();
+    if (authBusy || !email.trim() || !password) return;
+    setAuthBusy(true);
+    setAuthError(null);
+    setAuthNote(null);
+    try {
+      const auth = await loginOpenF1(email, password);
+      setOpenF1(auth);
+      setPassword('');
+      setAuthNote('Connected. Live timing will use this token during sessions.');
+    } catch (err) {
+      setAuthError(err instanceof Error ? err.message : 'Could not connect to OpenF1.');
+    } finally {
+      setAuthBusy(false);
+    }
+  }
+
+  function savePasted() {
+    setAuthError(null);
+    setAuthNote(null);
+    try {
+      setOpenF1(authFromPastedToken(pasted));
+      setPasted('');
+      setAuthNote('Token saved.');
+    } catch (err) {
+      setAuthError(err instanceof Error ? err.message : 'Invalid token.');
+    }
+  }
   const { saved } = useSaved();
   const [cleared, setCleared] = useState<number | null>(null);
 
@@ -92,6 +133,84 @@ export function SettingsPage() {
             {watchProvider.note} When a session is live or about to start, Home and the F1 page show a one-tap Watch button that opens it. Race
             video is exclusively licensed, so CarSide links to your service rather than embedding a stream.
           </p>
+
+          <div className="settings__sub">
+            <p className="label" style={{ marginBottom: 6 }}>
+              Live timing · OpenF1 supporter account
+            </p>
+            {settings.openf1 && (
+              <div className="settings__row">
+                <span>
+                  Connected{settings.openf1.email ? ` as ${settings.openf1.email}` : ''}
+                  <span className="settings__hint" style={{ display: 'block' }}>
+                    {tokenExpired ? 'Token expired — reconnect before the next session.' : minutesLeft !== null ? `Token valid for about ${minutesLeft} min.` : 'Token saved on this device.'}
+                  </span>
+                </span>
+                <button type="button" className="btn btn--ghost btn--sm" onClick={() => setOpenF1(null)}>
+                  Disconnect
+                </button>
+              </div>
+            )}
+            <form className="locform" onSubmit={connect}>
+              <div className="locform__row locform__row--wrap">
+                <input className="input" type="email" autoComplete="username" placeholder="OpenF1 account email" value={email} onChange={(e) => setEmail(e.target.value)} aria-label="OpenF1 email" />
+                <input className="input" type="password" autoComplete="current-password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} aria-label="OpenF1 password" />
+                <button type="submit" className="btn btn--primary" disabled={authBusy || !email.trim() || !password}>
+                  {authBusy ? 'Connecting…' : settings.openf1 ? 'Reconnect' : 'Connect'}
+                </button>
+              </div>
+            </form>
+            <details className="settings__details">
+              <summary>Paste a token instead</summary>
+              <div className="locform__row" style={{ marginTop: 8 }}>
+                <input className="input" type="text" spellCheck={false} placeholder="eyJ…" value={pasted} onChange={(e) => setPasted(e.target.value)} aria-label="OpenF1 token" />
+                <button type="button" className="btn" onClick={savePasted} disabled={!pasted.trim()}>
+                  Save token
+                </button>
+              </div>
+            </details>
+            {authError && (
+              <p className="locform__error" role="alert">
+                {authError}
+              </p>
+            )}
+            {authNote && !authError && (
+              <p className="meta" role="status">
+                {authNote}
+              </p>
+            )}
+            <p className="settings__hint">
+              Real-time data on OpenF1 is a supporter feature (about €10 a month at{' '}
+              <a className="link" href="https://openf1.org/" target="_blank" rel="noreferrer">
+                openf1.org
+              </a>
+              ); replays of finished sessions are free for everyone. Your email and password go straight to OpenF1 over HTTPS and are never stored —
+              only the returned token is, on this device. Tokens last about an hour, so reconnect shortly before a session.
+            </p>
+          </div>
+
+          <div>
+            <p className="label" style={{ marginBottom: 6 }}>
+              Your driver
+            </p>
+            <select
+              className="select"
+              value={settings.favoriteDriver?.id ?? ''}
+              aria-label="Your driver"
+              onChange={(e) => {
+                const d = driverStandings.data?.entries.find((x) => x.driverId === e.target.value);
+                setFavoriteDriver(d ? { id: d.driverId, code: d.code, name: `${d.givenName} ${d.familyName}` } : null);
+              }}
+            >
+              <option value="">None</option>
+              {driverStandings.data?.entries.map((d) => (
+                <option key={d.driverId} value={d.driverId}>
+                  {d.givenName} {d.familyName} · {d.constructorName}
+                </option>
+              ))}
+            </select>
+            <p className="settings__hint">Highlighted in the standings, the title race, live timing and replays.</p>
+          </div>
         </div>
       </section>
 
